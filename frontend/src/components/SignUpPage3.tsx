@@ -2,7 +2,7 @@ import React from "react";
 import Pineconelogo from "@/images/Pineconelogo";
 import ToLeft from "@/images/ToLeft";
 
-const SignUppage3 = () => {
+const SignUppage3 = ({ back, skip }: any) => {
   return (
     <div className="flex flex-col justify-center items-center gap-[100px] py-[30px] px-[30px]">
       <div className="flex justify-start items-start text-start w-[100%]">
@@ -42,10 +42,16 @@ const SignUppage3 = () => {
           </div>
         </div>
         <div className="flex justify-between">
-          <button className="flex justify-center items-center h-10 w-10 bg-gray-100 rounded-[50%]">
+          <button
+            className="flex justify-center items-center h-10 w-10 bg-gray-100 rounded-[50%]"
+            onClick={back}
+          >
             <ToLeft />
           </button>
-          <button className="bg-gray-200 p-3 rounded-lg text-gray-400">
+          <button
+            className="bg-gray-200 p-3 rounded-lg text-gray-400"
+            onClick={skip}
+          >
             Дараах
           </button>
         </div>
