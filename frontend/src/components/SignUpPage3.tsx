@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import Pineconelogo from "@/images/Pineconelogo";
 import ToLeft from "@/images/ToLeft";
+import { AdminContext } from "./AdminContext";
 
-const SignUppage3 = () => {
+const SignUppage3 = ({ back, next }: any) => {
+  const { data, setData }: any = useContext(AdminContext);
   return (
     <div className="flex flex-col justify-center items-center gap-[100px] py-[30px] px-[30px]">
       <div className="flex justify-start items-start text-start w-[100%]">
@@ -22,6 +24,9 @@ const SignUppage3 = () => {
               type="text"
               placeholder="Хот аймаг"
               className="p-3 border rounded-lg w-full"
+              onChange={(el) =>
+                setData((prev: {}) => ({ ...prev, city: el.target.value }))
+              }
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -30,6 +35,9 @@ const SignUppage3 = () => {
               type="text"
               placeholder="Сум дүүрэг"
               className="p-3 border rounded-lg w-full"
+              onChange={(el) =>
+                setData((prev: {}) => ({ ...prev, district: el.target.value }))
+              }
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -38,14 +46,29 @@ const SignUppage3 = () => {
               type="text"
               placeholder="Хороо"
               className="p-3 border rounded-lg w-full"
+              onChange={(el) =>
+                setData((prev: {}) => ({ ...prev, khoroo: el.target.value }))
+              }
             />
           </div>
         </div>
         <div className="flex justify-between">
-          <button className="flex justify-center items-center h-10 w-10 bg-gray-100 rounded-[50%]">
+          <button
+            className="flex justify-center items-center h-10 w-10 bg-gray-100 rounded-[50%]"
+            onClick={back}
+          >
             <ToLeft />
           </button>
-          <button className="bg-gray-200 p-3 rounded-lg text-gray-400">
+          <button
+            className=" p-3 rounded-lg text-gray-400"
+            style={{
+              backgroundColor:
+                data.city === "" || data.district === "" || data.khoroo === ""
+                  ? "gray"
+                  : "green",
+            }}
+            onClick={next}
+          >
             Дараах
           </button>
         </div>
