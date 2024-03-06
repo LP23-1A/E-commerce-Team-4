@@ -6,6 +6,16 @@ import ExpandMore from "@/images/ExpandMore";
 import Category from "@/images/Category";
 import Dollar from "@/images/Dollar";
 import Calendar from "@/images/Calendar";
+import Delete from "@/images/Delete";
+import Edit from "@/images/edit";
+
+const data = [
+  { product: "test", class: "test", price: 17000, stock: "test", sold: "test", added: "test" },
+  { product: "test", class: "test", price: "test", stock: "test", sold: "test", added: "test" },
+  { product: "test", class: "test", price: "test", stock: "test", sold: "test", added: "test" },
+]
+
+console.log('123123'.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
 
 export default function Product() {
   return (
@@ -62,64 +72,32 @@ export default function Product() {
                 </div>
               </div>
               <div className="flex mt-[24px] w-[1170px] rounded-xl border-[1px] bg-white">
-                <div className="flex">
-                  <div className="grid grid-cols-1">
-                    <div className="w-[68px] py-[12px] px-[24px] border-b-[1px]"><div className="font-semibold text-sm">‎</div></div>
-                    <div>test</div>
-                    <div>test</div>
-                    <div>test</div>
-                    <div>test</div>
-                  </div>
-                  <div className="grid grid-cols-1">
-                    <div className="w-[156.8px] py-[12px] px-[24px] border-b-[1px]"><div className="font-semibold text-sm">Бүтээгдэхүүн</div></div>
-                    <div>test</div>
-                    <div>test</div>
-                    <div>test</div>
-                    <div>test</div>
-                  </div>
-                  <div className="grid grid-cols-1">
-                    <div className="w-[214px] py-[12px] px-[24px] border-b-[1px]"><div className="font-semibold text-sm">Ангилал</div></div>
-                    <div>test</div>
-                    <div>test</div>
-                    <div>test</div>
-                    <div>test</div>
-                  </div>
-                  <div className="grid grid-cols-1">
-                    <div className="w-[156.8px] py-[12px] px-[24px] border-b-[1px]"><div className="font-semibold text-sm">Үнэ</div></div>
-                    <div>test</div>
-                    <div>test</div>
-                    <div>test</div>
-                    <div>test</div>
-                  </div>
-                  <div className="grid grid-cols-1">
-                    <div className="w-[156.8px] py-[12px] px-[24px] border-b-[1px]"><div className="font-semibold text-sm">Үлдэгдэл</div></div>
-                    <div>test</div>
-                    <div>test</div>
-                    <div>test</div>
-                    <div>test</div>
-                  </div>
-                  <div className="grid grid-cols-1">
-                    <div className="w-[156.8px] py-[12px] px-[24px] border-b-[1px]"><div className="font-semibold text-sm">Зарагдсан</div></div>
-                    <div>test</div>
-                    <div>test</div>
-                    <div>test</div>
-                    <div>test</div>
-                  </div>
-                  <div className="grid grid-cols-1">
-                    <div className="w-[156.8px] py-[12px] px-[24px] border-b-[1px]"><div className="font-semibold text-sm">Нэмсэн огноо</div></div>
-                    <div>test</div>
-                    <div>test</div>
-                    <div>test</div>
-                    <div>test</div>
-                  </div>
-                  <div className="grid grid-cols-1">
-                    <div className="w-[104px] py-[12px] px-[24px] border-b-[1px]"><div className="font-semibold text-sm">‎</div></div>
-                    <div>test</div>
-                    <div>test</div>
-                    <div>test</div>
-                    <div>test</div>
-                  </div>
-                </div>
+                <table>
+                  <tr className="">
+                    <th className="w-[68px] py-[12px] px-[24px] border-b-[1px]"><div className="font-semibold text-sm">‎</div></th>
+                    <th className="w-[156.8px] py-[12px] pl-0 pr-[100px] border-b-[1px]"><div className="font-semibold text-sm inline-flex">Бүтээгдэхүүн</div></th>
+                    <th className="w-[214px] py-[12px] pl-0 pr-[100px] border-b-[1px]"><div className="font-semibold text-sm inline-flex">Ангилал</div></th>
+                    <th className="w-[156.8px] py-[12px] pl-0 pr-[100px] border-b-[1px]"><div className="font-semibold text-sm inline-flex">Үнэ</div></th>
+                    <th className="w-[156.8px] py-[12px] pl-0 pr-[100px] border-b-[1px]"><div className="font-semibold text-sm inline-flex">Үлдэгдэл</div></th>
+                    <th className="w-[156.8px] py-[12px] pl-0 pr-[100px] border-b-[1px]"><div className="font-semibold text-sm inline-flex">Зарагдсан</div></th>
+                    <th className="w-[156.8px] py-[12px] pl-0 pr-[100px] border-b-[1px]"><div className="font-semibold text-sm inline-flex">Нэмсэн огноо</div></th>
+                    <th className="w-[104px] py-[12px] px-[24px] border-b-[1px]"><div className="font-semibold text-sm">‎</div></th>
+                  </tr>
+                  {data.map((val, key) => {
+                    return (
+                      <tr className="" key={key}>
+                        <td className="w-[68px] py-[12px] px-[24px] border-b-[1px]"><input type="checkbox" name="" id="" /></td>
+                        <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">{val.product}</td>
+                        <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">{val.class}</td>
+                        <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">{val.price}₮</td>
+                        <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">{val.stock}</td>
+                        <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">{val.sold}</td>
+                        <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">{val.added}</td>
+                        <td className="w-[68px] p-[16px] border-b-[1px]"><div className="justify-center flex"><button className="flex"><Delete/></button><button className="flex"><Edit/></button></div></td>
+                      </tr>
+                    )
+                  })}
+                </table>
               </div>
             </div>
           </div>
