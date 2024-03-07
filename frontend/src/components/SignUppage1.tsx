@@ -17,10 +17,11 @@ export default function SignUppage1({ next }: any) {
   });
   const handler = () => {
     if (!(data.email === "") && !(data.name === "")) {
-      localStorage.setItem("user", JSON.stringify(data));
+      localStorage.setItem("userData", JSON.stringify(data));
       router.push("/adminSignupStep");
     }
   };
+
   return (
     <div className="flex flex-col justify-center items-center gap-[100px] py-[30px] px-[30px]">
       <div className="flex justify-start items-start text-start w-[100%]">
@@ -60,7 +61,9 @@ export default function SignUppage1({ next }: any) {
         <div className="border-t-[2px] border-b-[2px]  border-gray-200 py-[20px] flex flex-col w-[100%] gap-[20px]">
           <button
             className="bg-gray-200 h-[50px] flex justify-center items-center gap-[10px]  rounded-[5px] text-black w-[100%]"
-            onClick={() => loginWithRedirect()}
+            onClick={() => {
+              loginWithRedirect(), next;
+            }}
           >
             <Googlelogo />
             <p>Google-ээр нэвтрэх</p>

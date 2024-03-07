@@ -19,6 +19,7 @@ const page = () => {
   const backSignup = () => {
     router.push("/adminSignup");
   };
+
   return (
     <AdminContextProvider>
       {activeIndex === 0 && <SignUppage2 next={next} back={backSignup} />}

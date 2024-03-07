@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import Pineconelogo from "@/images/Pineconelogo";
 import ToLeft from "@/images/ToLeft";
 import { AdminContext } from "./AdminContext";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const SignUppage2 = ({ next, back }: any) => {
   const { data, setData }: any = useContext(AdminContext);
+
   return (
     <div className="flex flex-col justify-center items-center gap-[100px] py-[30px] px-[30px]">
       <div className="flex justify-start items-start text-start w-[100%]">
@@ -41,9 +43,9 @@ const SignUppage2 = ({ next, back }: any) => {
             <ToLeft />
           </button>
           <button
-            className=" p-3 rounded-lg text-gray-400"
+            className=" p-3 rounded-lg text-white "
             style={{
-              backgroundColor: data.shopInformation === "" ? "gray" : "green",
+              backgroundColor: data.shopInformation === "" ? "gray" : "black",
             }}
             onClick={next}
           >

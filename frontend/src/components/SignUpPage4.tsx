@@ -3,14 +3,21 @@ import Pineconelogo from "@/images/Pineconelogo";
 import ToLeft from "@/images/ToLeft";
 import { AdminContext } from "./AdminContext";
 import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useRouter } from "next/navigation";
 const BASE_URL = "http://localhost:8000/admin";
 const SignUppage4 = ({ back }: any) => {
   const { data, setData }: any = useContext(AdminContext);
+  const router = useRouter();
+  const userData = JSON.parse(localStorage.getItem("userData") as string);
+  const { user }: any = useAuth0();
+  console.log(userData);
+
   const createAdmin = async () => {
     try {
       const createAdmin = await axios.post(BASE_URL, {
-        email: data.email,
-        name: data.name,
+        email: userData.email | user.email,
+        name: userData.name | user.nickname,
         shopInformation: data.shopInformation,
         city: data.city,
         district: data.district,
@@ -18,11 +25,16 @@ const SignUppage4 = ({ back }: any) => {
         exprience: data.exprience,
         product: data.product,
       });
-      console.log(createAdmin, "created");
+      console.log("created", data, createAdmin);
+      localStorage.removeItem("userData");
+      router.push("/");
     } catch (error) {
       console.log(error);
     }
   };
+  {
+  }
+  console.log(JSON.stringify(user));
 
   return (
     <div className="flex flex-col justify-center items-center gap-[100px] py-[30px] px-[30px]">
@@ -73,10 +85,10 @@ const SignUppage4 = ({ back }: any) => {
             <ToLeft />
           </button>
           <button
-            className=" p-3 rounded-lg text-gray-400"
+            className=" p-3 rounded-lg text-white"
             style={{
               backgroundColor:
-                data.exprience === "" || data.product === "" ? "gray" : "green",
+                data.exprience === "" || data.product === "" ? "gray" : "black",
             }}
             onClick={createAdmin}
           >

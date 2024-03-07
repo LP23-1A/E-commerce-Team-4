@@ -60,12 +60,12 @@ const SignUppage3 = ({ back, next }: any) => {
             <ToLeft />
           </button>
           <button
-            className=" p-3 rounded-lg text-gray-400"
+            className=" p-3 rounded-lg text-white"
             style={{
               backgroundColor:
                 data.city === "" || data.district === "" || data.khoroo === ""
                   ? "gray"
-                  : "green",
+                  : "black",
             }}
             onClick={next}
           >
