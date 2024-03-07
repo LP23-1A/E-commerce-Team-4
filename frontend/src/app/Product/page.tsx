@@ -1,3 +1,4 @@
+"use client"
 import Navbar from "@/components/Navbar";
 import AsideBar from "@/components/AsideBar";
 import Tab from "@/components/Tab"
@@ -7,17 +8,50 @@ import Category from "@/images/Category";
 import Dollar from "@/images/Dollar";
 import Calendar from "@/images/Calendar";
 import Delete from "@/images/Delete";
-import Edit from "@/images/edit";
-
-const data = [
-  { product: "test", class: "test", price: 17000, stock: "test", sold: "test", added: "test" },
-  { product: "test", class: "test", price: "test", stock: "test", sold: "test", added: "test" },
-  { product: "test", class: "test", price: "test", stock: "test", sold: "test", added: "test" },
+import Edit from "@/images/Edit";
+import { stringify } from "querystring";
+import { Tiro_Bangla } from "next/font/google";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { get } from "http";
+const API ="http://localhost:8000/products/product"
+const productid = [
+  {
+    image: "image",
+    name: "Laptop цүнх"
+  }
 ]
+// const data = [
+//   { product: "test", class: "Эмэгтэй", price: "19,000₮", stock: 76, sold: 30, added: "2024-01-10" },
 
-console.log('123123'.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))
+
+//   { product: "test", class: "test", price: "test", stock: "test", sold: "test", added: "test" },
+//   { product: "test", class: "test", price: "test", stock: "test", sold: "test", added: "test" },
+// ]
+
+const number = 3500
+
+console.log(number.toLocaleString());
 
 export default function Product() {
+  const [data, setData] = useState([])
+  const getAllData = async () => {
+    try {
+      const get = await axios.get(API)
+      const res = get.data.Response
+      setData(res)
+      
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+  useEffect(() => {
+    getAllData()
+  }, [])
+  console.log(data);
+  
   return (
     <div className="w-[1480px] mx-[auto]">
         <Navbar></Navbar>
@@ -29,12 +63,14 @@ export default function Product() {
               <Tab>Ангилал</Tab>
             </div>
             <div className="p-[24px] gap-[24px]">
-              <button className="bg-[#121316] rounded-lg w-[280px] h-[48px] ]">
-                <div className="flex gap-[4px] justify-center align-middle items-center h-[24px]">
-                  <PlusIcon></PlusIcon>
-                  <div className="text-white font-semibold text-base/[20px] tracking-[-0.3px]">Бүтээгдэхүүн нэмэх</div>
-                </div>
-              </button>
+              <a href="/addProduct">
+                <button className="bg-[#121316] rounded-lg w-[280px] h-[48px] ]">
+                  <div className="flex gap-[4px] justify-center align-middle items-center h-[24px]">
+                    <PlusIcon></PlusIcon>
+                    <div className="text-white font-semibold text-base/[20px] tracking-[-0.3px]">Бүтээгдэхүүн нэмэх</div>
+                  </div>
+                </button>
+              </a>
               <div className="w-[1170px] h-[40px] justify-between mt-[24px] flex">
                 <div className="flex gap-[13px]">
                   <button className="bg-white h-[40px] rounded-lg border-[1px]">
@@ -73,28 +109,34 @@ export default function Product() {
               </div>
               <div className="flex mt-[24px] w-[1170px] rounded-xl border-[1px] bg-white">
                 <table>
-                  <tr className="">
-                    <th className="w-[68px] py-[12px] px-[24px] border-b-[1px]"><div className="font-semibold text-sm">‎</div></th>
-                    <th className="w-[156.8px] py-[12px] pl-0 pr-[100px] border-b-[1px]"><div className="font-semibold text-sm inline-flex">Бүтээгдэхүүн</div></th>
-                    <th className="w-[214px] py-[12px] pl-0 pr-[100px] border-b-[1px]"><div className="font-semibold text-sm inline-flex">Ангилал</div></th>
-                    <th className="w-[156.8px] py-[12px] pl-0 pr-[100px] border-b-[1px]"><div className="font-semibold text-sm inline-flex">Үнэ</div></th>
-                    <th className="w-[156.8px] py-[12px] pl-0 pr-[100px] border-b-[1px]"><div className="font-semibold text-sm inline-flex">Үлдэгдэл</div></th>
-                    <th className="w-[156.8px] py-[12px] pl-0 pr-[100px] border-b-[1px]"><div className="font-semibold text-sm inline-flex">Зарагдсан</div></th>
-                    <th className="w-[156.8px] py-[12px] pl-0 pr-[100px] border-b-[1px]"><div className="font-semibold text-sm inline-flex">Нэмсэн огноо</div></th>
-                    <th className="w-[104px] py-[12px] px-[24px] border-b-[1px]"><div className="font-semibold text-sm">‎</div></th>
-                  </tr>
-                  {data.map((val, key) => {
+                  <tbody>
+                    <tr className="">
+                      <th className="w-[68px] py-[12px] px-[24px] border-b-[1px]"><div className="font-semibold text-sm">‎</div></th>
+                      <th className="w-[156.8px] py-[12px] pl-0 pr-[100px] border-b-[1px]"><div className="font-semibold text-sm inline-flex">Бүтээгдэхүүн</div></th>
+                      <th className="w-[214px] py-[12px] pl-0 pr-[100px] border-b-[1px]"><div className="font-semibold text-sm inline-flex">Ангилал</div></th>
+                      <th className="w-[156.8px] py-[12px] pl-0 pr-[100px] border-b-[1px]"><div className="font-semibold text-sm inline-flex">Үнэ</div></th>
+                      <th className="w-[156.8px] py-[12px] pl-0 pr-[100px] border-b-[1px]"><div className="font-semibold text-sm inline-flex">Үлдэгдэл</div></th>
+                      <th className="w-[156.8px] py-[12px] pl-0 pr-[100px] border-b-[1px]"><div className="font-semibold text-sm inline-flex">Зарагдсан</div></th>
+                      <th className="w-[156.8px] py-[12px] pl-0 pr-[100px] border-b-[1px]"><div className="font-semibold text-sm inline-flex">Нэмсэн огноо</div></th>
+                      <th className="w-[104px] py-[12px] px-[24px] border-b-[1px]"><div className="font-semibold text-sm">‎</div></th>
+                    </tr>
+                  </tbody>
+                  
+                  {data.map((val:any, key) => {
                     return (
-                      <tr className="" key={key}>
-                        <td className="w-[68px] py-[12px] px-[24px] border-b-[1px]"><input type="checkbox" name="" id="" /></td>
-                        <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">{val.product}</td>
-                        <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">{val.class}</td>
-                        <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">{val.price}₮</td>
-                        <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">{val.stock}</td>
-                        <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">{val.sold}</td>
-                        <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">{val.added}</td>
-                        <td className="w-[68px] p-[16px] border-b-[1px]"><div className="justify-center flex"><button className="flex"><Delete/></button><button className="flex"><Edit/></button></div></td>
-                      </tr>
+                      <tbody>
+                        <tr className="" key={key}>
+                          <td className="w-[68px] py-[12px] px-[24px] border-b-[1px]"><input type="checkbox" name="" id="" /></td>
+                          <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]"><div className="flex gap-[8px] align-items"><img src={val.images} className="w-[40px] h-[40px] rounded-[50%] mt-[3px]"/><div className="column"><p>{val.productName}</p> <p>{val.categoryId}</p></div></div></td>
+                          <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">{val.tag}</td>
+                          <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">{(val.price).toLocaleString()}₮</td>
+                          <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">{val.qty}</td>
+                          <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">{val.sold}</td>
+                          <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]"><p>{(val.createdAt).slice(0, 10)}</p></td>
+                          <td className="w-[68px] p-[16px] border-b-[1px]"><div className="justify-center flex"><button className="flex"><Delete/></button><button className="flex"><Edit/></button></div></td>
+                        </tr>
+                      </tbody>
+                      
                     )
                   })}
                 </table>
