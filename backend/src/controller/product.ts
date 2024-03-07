@@ -72,6 +72,16 @@ const getAllProduct = async (req: Request, res: Response) => {
     }
 }
 
+const getProduct = async (req: Request, res: Response) => {
+    try {
+        const getId = req.params.id;
+        const Response = await ProductModel.findOne({ _id: getId })
+        res.status(200).send({ success: true, Response })
+    } catch (error) {
+        res.status(500).send({ success: false, error })
+    }
+}
+
 const deleteById = async (req: Request, res: Response) => {
     try {
         const deleteId = req.params.id;
@@ -85,12 +95,12 @@ const deleteById = async (req: Request, res: Response) => {
 const updateById = async (req: Request, res: Response) => {
     try {
         const updateProduct = req.params.id;
-        const { name } = req.body;
-        const Response = await ProductModel.findByIdAndUpdate(updateProduct, { name })
+        const { productName, categoryId, price, qty, thumbnails, images, coupon, salePercent, description, viewsCount, tag, residual, sold, mainCate, subCate } = req.body;
+        const Response = await ProductModel.findByIdAndUpdate(updateProduct, { productName, categoryId, price, qty, thumbnails, images, coupon, salePercent, description, viewsCount, tag, residual, sold, mainCate, subCate })
         res.status(200).send({ success: true, Response })
     } catch (error) {
         res.status(500).send({ success: false, error })
     }
 }
 
-export { createProduct, getAllProduct, deleteById, updateById }
+export { createProduct, getAllProduct, deleteById, updateById, getProduct }
