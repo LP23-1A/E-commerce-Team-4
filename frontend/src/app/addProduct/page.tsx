@@ -22,7 +22,7 @@ const page = () => {
 
     const createProduct = async () => {
         try {
-            const res = await axios.post('http://localhost:8000/products', { ...input })
+            const res = await axios.post('http://localhost:8000/products/product', { ...input })
             console.log(res);
         } catch (error) {
             console.log(error);
