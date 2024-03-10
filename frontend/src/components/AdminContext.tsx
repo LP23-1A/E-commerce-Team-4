@@ -2,7 +2,7 @@ import React, { createContext, useState } from "react";
 export const AdminContext = createContext({});
 const AdminContextProvider = ({ children }: any) => {
   const [data, setData] = useState({
-    eamil: "",
+    email: "",
     name: "",
     shopInformation: "",
     city: "",

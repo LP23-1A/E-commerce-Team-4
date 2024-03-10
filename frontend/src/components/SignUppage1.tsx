@@ -52,7 +52,7 @@ export default function SignUppage1({ next }: any) {
           />
         </div>
         <button
-          className="bg-black text-white w-[100%] h-[50px] rounded-[5px] flex justify-end gap-[150px] px-2 items-center"
+          className="bg-black text-white w-[100%] h-[50px] rounded-[5px] flex justify-end gap-[150px] px-2 items-center hover:scale-95"
           onClick={handler}
         >
           <p>Дараах </p>
@@ -60,7 +60,7 @@ export default function SignUppage1({ next }: any) {
         </button>
         <div className="border-t-[2px] border-b-[2px]  border-gray-200 py-[20px] flex flex-col w-[100%] gap-[20px]">
           <button
-            className="bg-gray-200 h-[50px] flex justify-center items-center gap-[10px]  rounded-[5px] text-black w-[100%]"
+            className="bg-gray-200 h-[50px] flex justify-center items-center gap-[10px]  rounded-[5px] text-black w-[100%] hover:scale-95 "
             onClick={() => {
               loginWithRedirect(), next;
             }}
@@ -69,14 +69,14 @@ export default function SignUppage1({ next }: any) {
             <p>Google-ээр нэвтрэх</p>
           </button>
           <button
-            className="bg-gray-200 h-[50px] flex justify-center items-center gap-[10px]  rounded-[5px] text-black w-[100%]"
+            className="bg-gray-200 h-[50px] flex justify-center items-center gap-[10px]  rounded-[5px] text-black w-[100%] hover:scale-95"
             onClick={() => loginWithRedirect()}
           >
             <Microsoftlogo />
             <p>Microsoft-оор нэвтрэх</p>
           </button>
           <button
-            className="bg-gray-200 h-[50px] flex justify-center items-center gap-[10px]  rounded-[5px] text-black w-[100%]"
+            className="bg-gray-200 h-[50px] flex justify-center items-center gap-[10px]  rounded-[5px] text-black w-[100%] hover:scale-95"
             onClick={() => loginWithRedirect()}
           >
             <Applelogo />

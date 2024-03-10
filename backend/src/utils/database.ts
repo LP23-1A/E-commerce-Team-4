@@ -3,8 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 const connectDatabase = async () => {
   try {
-    const MONGODB_URL =
-      "mongodb+srv://pineconeteam4:PineTeam4@e-commerce.50jehis.mongodb.net/?retryWrites=true&w=majority&appName=e-commerce";
+    const MONGODB_URL: any = process.env.MONGODB_URI;
     await mongoose.connect(MONGODB_URL);
     console.log("connect");
   } catch (error: unknown) {

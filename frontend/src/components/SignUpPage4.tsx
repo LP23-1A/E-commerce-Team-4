@@ -11,13 +11,11 @@ const SignUppage4 = ({ back }: any) => {
   const router = useRouter();
   const userData = JSON.parse(localStorage.getItem("userData") as string);
   const { user }: any = useAuth0();
-  console.log(userData);
-
   const createAdmin = async () => {
     try {
       const createAdmin = await axios.post(BASE_URL, {
-        email: userData.email | user.email,
-        name: userData.name | user.nickname,
+        email: userData.email || user.email,
+        name: userData.name || user.nickname,
         shopInformation: data.shopInformation,
         city: data.city,
         district: data.district,
@@ -85,7 +83,7 @@ const SignUppage4 = ({ back }: any) => {
             <ToLeft />
           </button>
           <button
-            className=" p-3 rounded-lg text-white"
+            className=" p-3 rounded-lg text-white hover:scale-90"
             style={{
               backgroundColor:
                 data.exprience === "" || data.product === "" ? "gray" : "black",
