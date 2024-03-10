@@ -53,12 +53,12 @@ export default function Product() {
   console.log(data);
   
   return (
-    <div className="w-[1480px] mx-[auto]">
+    <div className=" ">
         <Navbar></Navbar>
         <div className="border-black flex">
           <AsideBar></AsideBar>
-          <div className="bg-[#ECEDF0]">
-            <div className="flex bg-[#ECEDF0] w-[1218px] gap-[10px] h-[56px] align-middle border-b-[1px] border-black-100">
+          <div className="bg-[#ECEDF0] w-[auto]">
+            <div className="flex bg-[#ECEDF0] w-[auto] gap-[10px] h-[56px] align-middle border-b-[1px] border-black-100">
               <Tab>Бүтээгдэхүүн</Tab>
               <Tab>Ангилал</Tab>
             </div>
