@@ -36,7 +36,9 @@ const page = () => {
             <AsideBar />
             <div className='bg-[#FEFEFE] h-14 w-full'>
                 <div className='flex gap-10 items-center'>
-                    <button className='flex h-14 w-14 items-center justify-center'><ToLeft /></button>
+                    <a href='/Product'>
+                        <button className='flex h-14 w-14 items-center justify-center'><ToLeft /></button>
+                    </a>
                     <h1 className='text-xl'>Бүтээгдэхүүн нэмэх</h1>
                 </div>
                 <div className='flex bg-[#F0F0F0] w-full h-screen p-9 flex-col'>
