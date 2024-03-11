@@ -6,6 +6,7 @@ import Plus from '@/images/Plus'
 import ToLeft from '@/images/ToLeft'
 import React, { useState } from 'react'
 import axios from 'axios'
+import Modal from '@/components/Modal'
 const page = () => {
     const [ input, setInput ] = useState({
         productName: '',
@@ -19,6 +20,10 @@ const page = () => {
         mainCate: '',
         subCate: '',
     });
+    const [ open, setOpen ] = useState(false)
+    const openModal = () => {
+      setOpen(!open)
+    }
 
     const createProduct = async () => {
         try {
@@ -117,13 +122,14 @@ const page = () => {
                         </div>
                     </div>
                     <div className='flex gap-5 items-start justify-end mt-3'>
-                        <button className='border p-3 px-5 text-black bg-white rounded-lg'>Ноорог</button>
+                        <button className='border p-3 px-5 text-black bg-white rounded-lg' onClick={openModal}>Ноорог</button>
                         <button className='border p-3 px-5 text-white bg-black rounded-lg' onClick={createProduct}>Нийтлэх</button>
                     </div>
                 </div>
             </div>
         </div>
       </div>
+      { open && (<Modal />)}
     </div>
   )
 }
