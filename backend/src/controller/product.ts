@@ -65,8 +65,8 @@ const createProduct = async (req: Request, res: Response) => {
 
 const getAllProduct = async (req: Request, res: Response) => {
     try {
-        const Response = await ProductModel.find()
-        res.status(200).send({ success: true, Response })
+        const getAll = await ProductModel.find()
+        res.status(200).send({ success: true, getAll })
     } catch (error) {
         res.status(500).send({ success: false, error })
     }
