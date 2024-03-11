@@ -5,6 +5,11 @@ import { AdminContext } from "./AdminContext";
 
 const SignUppage2 = ({ next, back }: any) => {
   const { data, setData }: any = useContext(AdminContext);
+  const handleNext = () => {
+    if (data.shopInformation !== "") {
+      next();
+    }
+  };
   return (
     <div className="flex flex-col justify-center items-center gap-[100px] py-[30px] px-[30px]">
       <div className="flex justify-start items-start text-start w-[100%]">
@@ -41,11 +46,11 @@ const SignUppage2 = ({ next, back }: any) => {
             <ToLeft />
           </button>
           <button
-            className=" p-3 rounded-lg text-gray-400"
+            className=" p-3 rounded-lg text-white hover:scale-90"
             style={{
-              backgroundColor: data.shopInformation === "" ? "gray" : "green",
+              backgroundColor: data.shopInformation === "" ? "gray" : "black",
             }}
-            onClick={next}
+            onClick={handleNext}
           >
             Дараах
           </button>
