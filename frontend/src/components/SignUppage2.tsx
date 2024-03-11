@@ -6,7 +6,11 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const SignUppage2 = ({ next, back }: any) => {
   const { data, setData }: any = useContext(AdminContext);
-
+  const handleNext = () => {
+    if (data.shopInformation !== "") {
+      next();
+    }
+  };
   return (
     <div className="flex flex-col justify-center items-center gap-[100px] py-[30px] px-[30px]">
       <div className="flex justify-start items-start text-start w-[100%]">
@@ -47,7 +51,7 @@ const SignUppage2 = ({ next, back }: any) => {
             style={{
               backgroundColor: data.shopInformation === "" ? "gray" : "black",
             }}
-            onClick={next}
+            onClick={handleNext}
           >
             Дараах
           </button>

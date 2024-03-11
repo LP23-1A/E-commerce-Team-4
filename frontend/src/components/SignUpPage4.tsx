@@ -14,8 +14,8 @@ const SignUppage4 = ({ back }: any) => {
   const createAdmin = async () => {
     try {
       const createAdmin = await axios.post(BASE_URL, {
-        email: userData.email || user.email,
-        name: userData.name || user.nickname,
+        email: user?.email ?? userData?.email,
+        name: user?.nickname ?? userData?.name,
         shopInformation: data.shopInformation,
         city: data.city,
         district: data.district,
@@ -23,17 +23,12 @@ const SignUppage4 = ({ back }: any) => {
         exprience: data.exprience,
         product: data.product,
       });
-      console.log("created", data, createAdmin);
       localStorage.removeItem("userData");
       router.push("/");
     } catch (error) {
       console.log(error);
     }
   };
-  {
-  }
-  console.log(JSON.stringify(user));
-
   return (
     <div className="flex flex-col justify-center items-center gap-[100px] py-[30px] px-[30px]">
       <div className="flex justify-start items-start text-start w-[100%]">
