@@ -76,4 +76,14 @@ const updateOrder = async (req: Request, res: Response) => {
     res.status(500).send({ success: false, error });
   }
 };
-export { createOrder, getOneOrder, getAllOrder, updateOrder };
+
+const deleteOrder = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    const deleteOrder = await OrderModel.findByIdAndDelete(id);
+    res.status(200).send({ success: true, deleteOrder });
+  } catch (error) {
+    res.status(500).send({ success: false, error });
+  }
+};
+export { createOrder, getOneOrder, getAllOrder, updateOrder, deleteOrder };
