@@ -1,5 +1,4 @@
 "use client";
-import Logo from "@/images/Logo";
 import Pineconelogo from "@/images/Pineconelogo";
 import React, { useContext, useState } from "react";
 import Applelogo from "../images/Applelogo";

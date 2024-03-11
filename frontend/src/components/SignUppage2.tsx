@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import Pineconelogo from "@/images/Pineconelogo";
 import ToLeft from "@/images/ToLeft";
 import { AdminContext } from "./AdminContext";
-import { useAuth0 } from "@auth0/auth0-react";
 
 const SignUppage2 = ({ next, back }: any) => {
   const { data, setData }: any = useContext(AdminContext);
