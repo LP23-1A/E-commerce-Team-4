@@ -7,6 +7,7 @@ type OrderType = {
   amountToBePaid: Number;
   coupon: String;
   description: String;
+  orderDetail: [];
 };
 
 const createOrder = async (req: Request, res: Response) => {
@@ -18,6 +19,7 @@ const createOrder = async (req: Request, res: Response) => {
       amountToBePaid,
       coupon,
       description,
+      orderDetail,
     }: Required<OrderType> = req.body;
     const create = await OrderModel.create({
       orderNumber: orderNumber,
@@ -26,6 +28,7 @@ const createOrder = async (req: Request, res: Response) => {
       amountToBePaid: amountToBePaid,
       coupon: coupon,
       description: description,
+      orderDetail: orderDetail,
     });
     res.status(201).send({ success: true, create });
   } catch (error) {

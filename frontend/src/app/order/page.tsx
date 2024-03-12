@@ -5,24 +5,38 @@ import UserOrder from "@/components/UserOrder";
 import Calendar from "@/images/Calendar";
 import ExpandMore from "@/images/ExpandMore";
 import Search from "@/images/Search";
+import { month } from "@/utils/Month";
 import { orderStatus } from "@/utils/OrderStatus";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { json } from "stream/consumers";
 import useSWR from "swr";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const API = "http://localhost:8000/order";
 const page = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [activeButton, setActiveButton] = useState(1);
+  const [activeButton, setActiveButton] = useState<string | any>(1);
   const { data, error, isLoading } = useSWR(API, fetcher);
+  const router = useRouter();
 
   const handleStatus = (index: number) => {
     setActiveIndex(index);
   };
-  let a: any = [];
+  let filterData = data?.getAllOrder.filter((e: any) => {
+    if (activeButton == 1) {
+      return e.createdAt.slice(9, 10) == activeButton;
+    } else if (activeButton == 7) {
+      return e.createdAt.slice(9, 10) < activeButton;
+    } else if (activeButton == 0) {
+    }
+  });
   const handleButton = (index: number) => {
     setActiveButton(index);
   };
-
+  const handler = (id: number) => {
+    router.push("/orderDetail");
+    localStorage.setItem("orderId", JSON.stringify(id));
+  };
   return (
     <div>
       <Navbar />
@@ -70,18 +84,26 @@ const page = () => {
                 >
                   7 Хоног
                 </button>
-                <button
+                <select
                   style={{
                     backgroundColor: activeButton === 30 ? "green" : "",
                     color: activeButton === 30 ? "white" : "",
                   }}
-                  onClick={() => handleButton(30)}
                   className="flex p-2 bg-white justify-center items-center rounded gap-2"
                 >
-                  <Calendar />
-                  <span>Сарааар</span>
-                  <ExpandMore />
-                </button>
+                  <option>
+                    <Calendar />
+                    <span>Сарааар</span>
+                    <ExpandMore />
+                  </option>
+                  {month.map((e, ind) => {
+                    return (
+                      <option onClick={() => handleButton(ind + 1)} key={ind}>
+                        {e.name}
+                      </option>
+                    );
+                  })}
+                </select>
               </div>
               <div className="flex py-2 px-6 bg-white gap-2 w-[360px] rounded">
                 <Search />
@@ -104,20 +126,19 @@ const page = () => {
                 </table>
               </div>
               <div className="bg-white rounded-xl px-4 flex flex-col ">
-                {data?.getAllOrder
-                  .filter((e: any) => e.createdAt.slice(9, 10) >= activeButton)
-                  .map((el: any) => {
-                    return (
-                      <UserOrder
-                        key={el._id}
-                        orderNumber={el.orderNumber}
-                        date={el.createdAt.slice(0, 10)}
-                        time={el.createdAt.slice(11, 16)}
-                        status={el.status}
-                        price={el.amountPaid}
-                      />
-                    );
-                  })}
+                {filterData?.map((el: any) => {
+                  return (
+                    <UserOrder
+                      key={el._id}
+                      orderNumber={el.orderNumber}
+                      date={el.createdAt.slice(0, 10)}
+                      time={el.createdAt.slice(11, 16)}
+                      status={el.status}
+                      price={el.amountPaid}
+                      onclick={() => handler(el._id)}
+                    />
+                  );
+                })}
               </div>
             </div>
           </div>

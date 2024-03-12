@@ -9,6 +9,7 @@ type props = {
   time: String;
   price: string;
   status: String;
+  onclick: () => void;
 };
 const UserOrder: React.FC<props> = ({
   orderNumber,
@@ -16,11 +17,8 @@ const UserOrder: React.FC<props> = ({
   time,
   price,
   status,
+  onclick,
 }) => {
-  const router = useRouter();
-  const handler = () => {
-    router.push("/orderDetail");
-  };
   return (
     <div className="py-2">
       <tr className="flex items-center text-black">
@@ -39,7 +37,7 @@ const UserOrder: React.FC<props> = ({
         </td>
         <td
           className="w-[200px] text-[14px] pl-24 cursor-pointer"
-          onClick={handler}
+          onClick={onclick}
         >
           <Right />
         </td>

@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
-type OrderStatus = "Ordered" | "PreperingToShip" | "Shiped" | "Delivered";
 const OrderSchema = new mongoose.Schema({
   orderNumber: String,
   status: {
-    type: ["Ordered", "PreperingToShip", "Shiped", "Delivered"],
+    type: String,
+    enum: ["Ordered", "PreperingToShip", "Shiped", "Delivered"],
     default: "Ordered",
   },
   phoneNumber: String,
@@ -18,7 +18,12 @@ const OrderSchema = new mongoose.Schema({
     default: 0,
   },
   description: String,
-  details: [],
+  details: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "product",
+    },
+  ],
   createdAt: {
     type: Date,
     default: () => Date.now(),
