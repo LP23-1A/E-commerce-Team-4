@@ -7,13 +7,11 @@ import Down from "@/images/Down";
 import axios from "axios";
 const API = "http://localhost:8000/order/one";
 const page = () => {
-  const orderId = localStorage.getItem("orderId") as string;
-  console.log(orderId);
-
+  const orderId = JSON.parse(localStorage.getItem("orderId") as string);
   const [data, setData] = useState<string[] | any>([]);
   const getOrderData = async () => {
     try {
-      const get = await axios.post(API, { id: orderId });
+      const get = await axios.post(API, { _id: orderId.id });
       setData(get.data.getOneOrder);
     } catch (error) {
       console.log(error);
@@ -23,7 +21,7 @@ const page = () => {
 
   useEffect(() => {
     getOrderData();
-    // localStorage.removeItem("orderId");
+    localStorage.removeItem("orderId");
   }, []);
 
   return (

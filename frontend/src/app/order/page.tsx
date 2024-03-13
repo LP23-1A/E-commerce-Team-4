@@ -14,8 +14,10 @@ import useSWR from "swr";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const API = "http://localhost:8000/order";
 const page = () => {
+  const birthDay = new Date();
+  const today: number = birthDay.getDate();
   const [activeIndex, setActiveIndex] = useState(0);
-  const [activeButton, setActiveButton] = useState<string | any>(1);
+  const [activeButton, setActiveButton] = useState<string | any>(today);
   const { data, error, isLoading } = useSWR(API, fetcher);
   const router = useRouter();
 
@@ -23,19 +25,20 @@ const page = () => {
     setActiveIndex(index);
   };
   let filterData = data?.getAllOrder.filter((e: any) => {
-    if (activeButton == 1) {
-      return e.createdAt.slice(9, 10) == activeButton;
-    } else if (activeButton == 7) {
-      return e.createdAt.slice(9, 10) < activeButton;
-    } else if (activeButton == 0) {
+    if (activeButton == today) {
+      return e.createdAt.slice(8, 10) == activeButton;
+    } else if (activeButton == today - 6) {
+      return e.createdAt.slice(8, 10) > activeButton;
     }
   });
+  console.log(filterData, activeButton);
+
   const handleButton = (index: number) => {
     setActiveButton(index);
   };
   const handler = (id: number) => {
     router.push("/orderDetail");
-    localStorage.setItem("orderId", JSON.stringify(id));
+    localStorage.setItem("orderId", JSON.stringify({ id }));
   };
   return (
     <div>
@@ -65,11 +68,11 @@ const page = () => {
                 <button
                   className="p-2 bg-white rounded"
                   style={{
-                    backgroundColor: activeButton === 1 ? "green" : "",
-                    color: activeButton === 1 ? "white" : "",
+                    backgroundColor: activeButton === today ? "green" : "",
+                    color: activeButton === today ? "white" : "",
                   }}
                   value={0}
-                  onClick={() => handleButton(1)}
+                  onClick={() => handleButton(today)}
                 >
                   Өнөөдөр
                 </button>
@@ -77,10 +80,10 @@ const page = () => {
                   className="p-2 bg-white rounded"
                   value={1}
                   style={{
-                    backgroundColor: activeButton === 7 ? "green" : "",
-                    color: activeButton === 7 ? "white" : "",
+                    backgroundColor: activeButton === today - 6 ? "green" : "",
+                    color: activeButton === today - 6 ? "white" : "",
                   }}
-                  onClick={() => handleButton(7)}
+                  onClick={() => handleButton(today - 6)}
                 >
                   7 Хоног
                 </button>
@@ -92,9 +95,10 @@ const page = () => {
                   className="flex p-2 bg-white justify-center items-center rounded gap-2"
                 >
                   <option>
-                    <Calendar />
+                    {/* <Calendar />
                     <span>Сарааар</span>
-                    <ExpandMore />
+                    <ExpandMore /> */}
+                    Сараар
                   </option>
                   {month.map((e, ind) => {
                     return (
