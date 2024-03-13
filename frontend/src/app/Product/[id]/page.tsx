@@ -9,11 +9,8 @@ import Dollar from "@/images/Dollar";
 import Calendar from "@/images/Calendar";
 import Delete from "@/images/Delete";
 import Edit from "@/images/Edit";
-import { stringify } from "querystring";
-import { Tiro_Bangla } from "next/font/google";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { get } from "http";
 const API = "http://localhost:8000/products/product";
 const productid = [
   {
@@ -21,17 +18,7 @@ const productid = [
     name: "Laptop цүнх",
   },
 ];
-// const data = [
-//   { product: "test", class: "Эмэгтэй", price: "19,000₮", stock: 76, sold: 30, added: "2024-01-10" },
-
-//   { product: "test", class: "test", price: "test", stock: "test", sold: "test", added: "test" },
-//   { product: "test", class: "test", price: "test", stock: "test", sold: "test", added: "test" },
-// ]
-
 const number = 3500;
-
-console.log(number.toLocaleString());
-
 export default function Product() {
   const [data, setData] = useState([]);
   const getAllData = async () => {
@@ -46,15 +33,14 @@ export default function Product() {
   useEffect(() => {
     getAllData();
   }, []);
-  console.log(data);
 
   return (
     <div className=" ">
       <Navbar></Navbar>
-      <div className="border-black flex">
+      <div className="border-black flex w-[1440px] m-auto">
         <AsideBar></AsideBar>
-        <div className="bg-[#ECEDF0] w-[auto]">
-          <div className="flex bg-[#ECEDF0] w-[auto] gap-[10px] h-[56px] align-middle border-b-[1px] border-black-100">
+        <div className="bg-[#ECEDF0] w-full">
+          <div className="flex bg-[#ECEDF0] gap-[10px] h-[56px] align-middle border-b-[1px] border-black-100">
             <Tab>Бүтээгдэхүүн</Tab>
             <Tab>Ангилал</Tab>
           </div>
@@ -69,7 +55,7 @@ export default function Product() {
                 </div>
               </button>
             </a>
-            <div className="w-[1170px] h-[40px] justify-between mt-[24px] flex">
+            <div className="w-full h-[40px] justify-between mt-[24px] flex">
               <div className="flex gap-[13px]">
                 <button className="bg-white h-[40px] rounded-lg border-[1px]">
                   <div className="flex mx-[11px] gap-[4px]">
@@ -159,53 +145,54 @@ export default function Product() {
                   </tr>
                 </tbody>
 
-                {data.map((val: any, key) => {
-                  return (
-                    <tbody>
-                      <tr className="" key={key}>
-                        <td className="w-[68px] py-[12px] px-[24px] border-b-[1px]">
-                          <input type="checkbox" name="" id="" />
-                        </td>
-                        <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                          <div className="flex gap-[8px] align-items">
-                            <img
-                              src={val.images}
-                              className="w-[40px] h-[40px] rounded-[50%] mt-[3px]"
-                            />
-                            <div className="column">
-                              <p>{val.productName}</p> <p>{val.categoryId}</p>
+                {data &&
+                  data.map((val: any, key) => {
+                    return (
+                      <tbody>
+                        <tr className="" key={key}>
+                          <td className="w-[68px] py-[12px] px-[24px] border-b-[1px]">
+                            <input type="checkbox" name="" id="" />
+                          </td>
+                          <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
+                            <div className="flex gap-[8px] align-items">
+                              <img
+                                src={val.images}
+                                className="w-[40px] h-[40px] rounded-[50%] mt-[3px]"
+                              />
+                              <div className="column">
+                                <p>{val.productName}</p> <p>{val.categoryId}</p>
+                              </div>
                             </div>
-                          </div>
-                        </td>
-                        <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                          {val.tag}
-                        </td>
-                        <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                          {val.price.toLocaleString()}₮
-                        </td>
-                        <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                          {val.qty}
-                        </td>
-                        <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                          {val.sold}
-                        </td>
-                        <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                          <p>{val.createdAt.slice(0, 10)}</p>
-                        </td>
-                        <td className="w-[68px] p-[16px] border-b-[1px]">
-                          <div className="justify-center flex">
-                            <button className="flex">
-                              <Delete />
-                            </button>
-                            <button className="flex">
-                              <Edit />
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  );
-                })}
+                          </td>
+                          <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
+                            {val.tag}
+                          </td>
+                          <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
+                            {val.price.toLocaleString()}₮
+                          </td>
+                          <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
+                            {val.qty}
+                          </td>
+                          <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
+                            {val.sold}
+                          </td>
+                          <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
+                            <p>{val.createdAt.slice(0, 10)}</p>
+                          </td>
+                          <td className="w-[68px] p-[16px] border-b-[1px]">
+                            <div className="justify-center flex">
+                              <button className="flex">
+                                <Delete />
+                              </button>
+                              <button className="flex">
+                                <Edit />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    );
+                  })}
               </table>
             </div>
           </div>
