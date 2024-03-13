@@ -1,9 +1,14 @@
-import Loading from "@/components/Loading";
+"use client";
+import React, { useState } from "react";
+import SignUppage1 from "@/components/SignUppage1";
+import AdminContextProvider from "@/components/AdminContext";
 
-export default function Home() {
+const Home = () => {
   return (
-    <div>
-      <p>hello</p>
-    </div>
+    <AdminContextProvider>
+      <SignUppage1 />
+    </AdminContextProvider>
   );
-}
+};
+
+export default Home;

@@ -7,6 +7,11 @@ const OrderSchema = new mongoose.Schema({
     default: "Ordered",
   },
   phoneNumber: String,
+  userId: {
+    type: mongoose.Schema.ObjectId,
+    ref: "user",
+    require: true,
+  },
   deliveryDate: {
     type: Date,
     default: () => Date.now(),
@@ -18,12 +23,12 @@ const OrderSchema = new mongoose.Schema({
     default: 0,
   },
   description: String,
-  details: [
-    {
-      type: mongoose.Types.ObjectId,
-      ref: "product",
-    },
-  ],
+  details: {
+    type: mongoose.Types.ObjectId,
+    ref: "product",
+    require: true,
+  },
+
   createdAt: {
     type: Date,
     default: () => Date.now(),
@@ -33,5 +38,5 @@ const OrderSchema = new mongoose.Schema({
     default: () => Date.now(),
   },
 });
-const OrderModel = mongoose.model("order", OrderSchema);
+const OrderModel = mongoose.model("orde", OrderSchema);
 export { OrderModel };

@@ -17,7 +17,7 @@ export default function SignUppage1({ next }: any) {
   const handler = () => {
     if (data.email !== "" && data.name !== "") {
       localStorage.setItem("userData", JSON.stringify(data));
-      router.push("/adminSignupStep");
+      router.push("/signupStep");
     }
   };
 

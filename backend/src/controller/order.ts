@@ -2,12 +2,13 @@ import { Request, Response } from "express";
 import { OrderModel } from "../model/order";
 type OrderType = {
   orderNumber: String;
+  userId: string;
   phoneNumber: String;
   amountPaid: Number;
   amountToBePaid: Number;
   coupon: String;
   description: String;
-  orderDetail: [];
+  details: [];
 };
 
 const createOrder = async (req: Request, res: Response) => {
@@ -15,20 +16,22 @@ const createOrder = async (req: Request, res: Response) => {
     const {
       orderNumber,
       phoneNumber,
+      userId,
       amountPaid,
       amountToBePaid,
       coupon,
       description,
-      orderDetail,
+      details,
     }: Required<OrderType> = req.body;
     const create = await OrderModel.create({
       orderNumber: orderNumber,
       phoneNumber: phoneNumber,
+      userId: userId,
       amountPaid: amountPaid,
       amountToBePaid: amountToBePaid,
       coupon: coupon,
       description: description,
-      orderDetail: orderDetail,
+      details: details,
     });
     res.status(201).send({ success: true, create });
   } catch (error) {
@@ -48,7 +51,9 @@ const getOneOrder = async (req: Request, res: Response) => {
 
 const getAllOrder = async (req: Request, res: Response) => {
   try {
-    const getAllOrder = await OrderModel.find();
+    const getAllOrder = await OrderModel.find()
+      .populate("userId")
+      .populate("details");
     res.status(200).send({ success: true, getAllOrder });
   } catch (error) {
     res.status(500).send({ success: false, error });

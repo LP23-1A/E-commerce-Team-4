@@ -9,7 +9,7 @@ import dotnev from "dotenv";
 dotnev.config();
 connectDatabase();
 
-const PORT = 8000;
+const PORT = 8001;
 const app = express();
 
 app.use(cors({ origin: "*" }));

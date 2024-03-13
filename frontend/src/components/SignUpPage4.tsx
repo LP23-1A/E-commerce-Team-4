@@ -26,14 +26,16 @@ const SignUppage4 = ({ back }: any) => {
         exprience: data.exprience,
         product: data.product,
       });
+      console.log(createUser);
+
       if (createUser) {
         if (data.exprience !== "" && data.product !== "") {
           localStorage.removeItem("userData");
           localStorage.setItem(
             "id",
-            JSON.stringify(createUser.data.createUser._id) as string
+            JSON.stringify(createUser.data.createAdmin._id) as string
           );
-          router.push(`dashboard/${createUser.data.createUser._id}`);
+          router.push(`/dashboard/${createUser.data.createAdmin._id}`);
         }
       }
     } catch (error) {

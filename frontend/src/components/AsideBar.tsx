@@ -5,23 +5,21 @@ import { data } from "@/utils/Sidebar";
 
 const AsideBar = () => {
   const router = useRouter();
-
   const [active, setActive] = useState(0);
   const id = JSON.parse(localStorage.getItem("id") as string);
 
   const handler = (index: number) => {
     setActive(index);
   };
-  useEffect(() => {
-    if (active === 1) {
-      router.push(`/order/${id}`);
-    } else if (active === 2) {
-      router.push(`/income/${id}`);
-    } else if (active === 3) {
-      router.push(`/Product/${id}`);
-    }
-  }, [active]);
   console.log(active);
+
+  if (active === 1) {
+    router.push(`/order/${id}`);
+  } else if (active === 2) {
+    router.push(`/income/${id}`);
+  } else if (active === 3) {
+    router.push(`/Product/${id}`);
+  }
 
   return (
     <div className="flex flex-col pt-4 gap-3 bg-white h-screen w-80">
@@ -29,7 +27,7 @@ const AsideBar = () => {
         return (
           <button
             className="flex items-center gap-6 text-xl py-2   "
-            style={{ backgroundColor: index == active ? "grey" : "" }}
+            style={{ backgroundColor: index === active ? "grey" : "" }}
             onClick={() => handler(index)}
           >
             {e.icon}
