@@ -66,9 +66,18 @@ const page = () => {
                             <div className='w-[540px] h-52 bg-white rounded-xl p-6 gap-2 flex flex-col'>
                                 <h1 className='font-semibold text-xl'>Бүтээгдэхүүн зураг</h1>
                                 <div className='flex gap-6 justify-start items-center h-full'>
-                                    <div className='flex justify-center items-center h-[124px] w-[124px] border border-dashed rounded-xl'><Img /></div>
-                                    <div className='flex justify-center items-center h-[124px] w-[124px] border border-dashed rounded-xl'><Img /></div>
-                                    <div className='flex justify-center items-center h-[124px] w-[124px] border border-dashed rounded-xl'><Img /></div>
+                                    <div className='flex items-center justify-center'>
+                                        <input type="image" src="" alt="" className='flex justify-center items-center h-[124px] w-[124px] border border-dashed rounded-xl relative'/>
+                                        <div className='absolute'><Img /></div>
+                                    </div>
+                                    <div className='flex items-center justify-center'>
+                                        <input type="image" src="" alt="" className='flex justify-center items-center h-[124px] w-[124px] border border-dashed rounded-xl relative'/>
+                                        <div className='absolute'><Img /></div>
+                                    </div>
+                                    <div className='flex items-center justify-center'>
+                                        <input type="image" src="" alt="" className='flex justify-center items-center h-[124px] w-[124px] border border-dashed rounded-xl relative'/>
+                                        <div className='absolute'><Img /></div>
+                                    </div>
                                     <button className='h-10 w-10 rounded-[50%] bg-gray-200 flex justify-center items-center left-3'><Plus /></button>
                                 </div>
                             </div>
