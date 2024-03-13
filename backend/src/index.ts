@@ -3,7 +3,13 @@ import cors from "cors";
 import { connectDatabase } from "./utils/database";
 import { admin } from "./router/admin";
 import { product } from "./router/product";
+
 import { order } from "./router/order";
+
+import dotnev from "dotenv"
+
+dotnev.config()
+
 
 connectDatabase();
 

@@ -6,6 +6,7 @@ import Plus from '@/images/Plus'
 import ToLeft from '@/images/ToLeft'
 import React, { useState } from 'react'
 import axios from 'axios'
+import Modal from '@/components/Modal'
 const page = () => {
     const [ input, setInput ] = useState({
         productName: '',
@@ -19,17 +20,21 @@ const page = () => {
         mainCate: '',
         subCate: '',
     });
-
+    const [ open, setOpen ] = useState(false);
+    const openModal = () => {
+    }
+    
     const createProduct = async () => {
         try {
             const res = await axios.post('http://localhost:8000/products/product', { ...input })
             console.log(res);
+            setOpen(!open)
         } catch (error) {
             console.log(error);
         }
     }
   return (
-    <div className='flex flex-col mx-auto'>
+    <div className='flex flex-col mx-auto relative'>
       <Navbar />
       <div className='flex flex-col mx-auto w-[1440px]'>
         <div className='flex w-[1440px] mx-auto'>
@@ -123,6 +128,7 @@ const page = () => {
                 </div>
             </div>
         </div>
+        { open && ( <Modal createProduct={createProduct}/>)}
       </div>
     </div>
   )
