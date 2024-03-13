@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Pineconelogo from "@/images/Pineconelogo";
 import ToLeft from "@/images/ToLeft";
 import { AdminContext } from "./AdminContext";
@@ -8,12 +8,15 @@ import { useRouter } from "next/navigation";
 const BASE_URL = "http://localhost:8000/admin";
 const SignUppage4 = ({ back }: any) => {
   const { data, setData }: any = useContext(AdminContext);
+  const [error, setError] = useState("");
   const router = useRouter();
   const userData = JSON.parse(localStorage.getItem("userData") as string);
   const { user }: any = useAuth0();
-  const createAdmin = async () => {
+  console.log(user);
+
+  const createUser = async () => {
     try {
-      const createAdmin = await axios.post(BASE_URL, {
+      const createUser = await axios.post(BASE_URL, {
         email: user?.email ?? userData?.email,
         name: user?.nickname ?? userData?.name,
         shopInformation: data.shopInformation,
@@ -23,17 +26,32 @@ const SignUppage4 = ({ back }: any) => {
         exprience: data.exprience,
         product: data.product,
       });
-      localStorage.removeItem("userData");
-      router.push("/");
+      if (createUser) {
+        if (data.exprience !== "" && data.product !== "") {
+          localStorage.removeItem("userData");
+          router.push(`dashboard/${createUser.data.createUser._id}`);
+        }
+      }
     } catch (error) {
+      setError("not unique email");
       console.log(error);
     }
   };
+
   return (
     <div className="flex flex-col justify-center items-center gap-[100px] py-[30px] px-[30px]">
       <div className="flex justify-start items-start text-start w-[100%]">
         <Pineconelogo />
       </div>
+      {error && (
+        <div className="border px-6 py-1 bg-red-600 text-white rounded-xl flex gap-2 items-center">
+          <p className="border w-6 h-6 flex justify-center items-center  rounded-3xl bg-red-800">
+            x
+          </p>
+          <p>not unique email</p>
+        </div>
+      )}
+
       <ul className="steps w-[900px]">
         <li className="step step-neutral">Дэлгүүрийн нэр</li>
         <li className="step step-neutral">Бүс нутаг</li>
@@ -83,7 +101,7 @@ const SignUppage4 = ({ back }: any) => {
               backgroundColor:
                 data.exprience === "" || data.product === "" ? "gray" : "black",
             }}
-            onClick={createAdmin}
+            onClick={createUser}
           >
             Дараах
           </button>

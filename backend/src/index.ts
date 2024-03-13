@@ -1,11 +1,11 @@
 import express from "express";
 import cors from "cors";
 import { connectDatabase } from "./utils/database";
-import { admin } from "./router/admin";
+import { admin } from "./router/auth";
 import { product } from "./router/product";
-import dotnev from "dotenv"
+import dotnev from "dotenv";
 
-dotnev.config()
+dotnev.config();
 
 connectDatabase();
 
