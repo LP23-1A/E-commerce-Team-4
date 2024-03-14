@@ -3,13 +3,16 @@ import AsideBar from "@/components/AsideBar";
 import Carddata from "@/components/Carddata";
 import Example from "@/components/Chart";
 import DashboardEmpty from "@/components/EmptyDashboard";
+import Loading from "@/components/Loading";
 import Navbar from "@/components/Navbar";
 import axios from "axios";
-import React from "react";
+import React, { useEffect, useState } from "react";
 const URL = "http://localhost:8000/products/product";
 
 const page = () => {
   const [data, setData] = React.useState([]);
+  const [loading, setLoading] = useState(false);
+
   const handler = async () => {
     try {
       const { data } = await axios.get(URL);
@@ -22,11 +25,17 @@ const page = () => {
   React.useEffect(() => {
     handler();
   }, []);
-  console.log(data);
-
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
+  });
   return (
     <div>
-      {data.length > 0 ? (
+      {loading === true ? (
+        <Loading />
+      ) : (
         <div>
           <Navbar />
           <div className="flex w-[1440px] m-auto">
@@ -100,8 +109,6 @@ const page = () => {
             </div>
           </div>
         </div>
-      ) : (
-        <DashboardEmpty />
       )}
     </div>
   );

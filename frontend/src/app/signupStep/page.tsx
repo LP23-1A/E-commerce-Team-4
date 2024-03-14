@@ -16,7 +16,7 @@ const page = () => {
     setTimeout(() => {
       setLoading(false);
       setActiveIndex(activeIndex + 1);
-    }, 2000);
+    }, 1000);
   };
   const back = () => {
     setActiveIndex(activeIndex - 1);

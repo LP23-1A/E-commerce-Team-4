@@ -5,7 +5,7 @@ import {
   getUser,
   updateUser,
 } from "../controller/auth";
-const admin = express.Router();
-admin.route("/").post(createUser).get(getUser);
-admin.route("/:id").put(updateUser).delete(deleteUser);
-export { admin };
+const user = express.Router();
+user.route("/").post(createUser).get(getUser);
+user.route("/:id").put(updateUser).delete(deleteUser);
+export { user };

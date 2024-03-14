@@ -8,21 +8,26 @@ export const data = [
   {
     icon: <Board />,
     name: "Хяналтын самбар",
+    slug: "/adminDashboard",
   },
   {
     icon: <Order />,
     name: "Захиалга",
+    slug: "/order",
   },
   {
     icon: <Income />,
     name: "Орлого",
+    slug: "/income",
   },
   {
     icon: <Product />,
     name: "Бүтээгдэхүүн",
+    slug: "/Product",
   },
   {
     icon: <Settings />,
     name: "Тохиргоо",
+    slug: "/settings",
   },
 ];

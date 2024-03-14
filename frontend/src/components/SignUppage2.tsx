@@ -5,18 +5,17 @@ import { AdminContext } from "./AdminContext";
 import Loading from "./Loading";
 
 const SignUppage2 = ({ next, back }: any) => {
-  const { data, setData }: any = useContext(AdminContext);
+  const { formDataRef }: any = useContext(AdminContext);
   const [loading, setLoading] = useState(false);
-  const handleNext = () => {
-    if (data.shopInformation !== "") {
-      next();
-    }
+  const handleOnChange = (field: string, value: string | number) => {
+    formDataRef.current = { ...formDataRef.current, [field]: value };
   };
+
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 1000);
   }, []);
 
   return (
@@ -42,11 +41,8 @@ const SignUppage2 = ({ next, back }: any) => {
                   type="text"
                   placeholder="Дэлгүүрийн нэр"
                   className="p-3 border rounded-lg w-full"
-                  onChange={(el) =>
-                    setData((prev: {}) => ({
-                      ...prev,
-                      shopInformation: el.target.value,
-                    }))
+                  onChange={(e) =>
+                    handleOnChange("shopInformation", e.target.value)
                   }
                 />
               </div>
@@ -59,12 +55,8 @@ const SignUppage2 = ({ next, back }: any) => {
                 <ToLeft />
               </button>
               <button
-                className=" p-3 rounded-lg text-white hover:scale-90"
-                style={{
-                  backgroundColor:
-                    data.shopInformation === "" ? "gray" : "black",
-                }}
-                onClick={handleNext}
+                className=" p-3 rounded-lg text-white hover:scale-90 bg-black"
+                onClick={next}
               >
                 Дараах
               </button>

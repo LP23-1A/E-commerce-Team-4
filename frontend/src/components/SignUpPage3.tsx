@@ -4,11 +4,10 @@ import ToLeft from "@/images/ToLeft";
 import { AdminContext } from "./AdminContext";
 
 const SignUppage3 = ({ back, next }: any) => {
-  const { data, setData }: any = useContext(AdminContext);
-  const nextHandler = () => {
-    if (data.city !== "" && data.district !== "" && data.khoroo !== "") {
-      next();
-    }
+  const { formDataRef }: any = useContext(AdminContext);
+
+  const handleOnChange = (field: string, value: string | number) => {
+    formDataRef.current = { ...formDataRef.current, [field]: value };
   };
   return (
     <div className="flex flex-col justify-center items-center gap-[100px] py-[30px] px-[30px]">
@@ -29,9 +28,7 @@ const SignUppage3 = ({ back, next }: any) => {
               type="text"
               placeholder="Хот аймаг"
               className="p-3 border rounded-lg w-full"
-              onChange={(el) =>
-                setData((prev: {}) => ({ ...prev, city: el.target.value }))
-              }
+              onChange={(e) => handleOnChange("city", e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -40,9 +37,7 @@ const SignUppage3 = ({ back, next }: any) => {
               type="text"
               placeholder="Сум дүүрэг"
               className="p-3 border rounded-lg w-full"
-              onChange={(el) =>
-                setData((prev: {}) => ({ ...prev, district: el.target.value }))
-              }
+              onChange={(e) => handleOnChange("district", e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -51,9 +46,7 @@ const SignUppage3 = ({ back, next }: any) => {
               type="text"
               placeholder="Хороо"
               className="p-3 border rounded-lg w-full"
-              onChange={(el) =>
-                setData((prev: {}) => ({ ...prev, khoroo: el.target.value }))
-              }
+              onChange={(e) => handleOnChange("khoroo", e.target.value)}
             />
           </div>
         </div>
@@ -65,14 +58,8 @@ const SignUppage3 = ({ back, next }: any) => {
             <ToLeft />
           </button>
           <button
-            className=" p-3 rounded-lg text-white hover:scale-90"
-            style={{
-              backgroundColor:
-                data.city === "" || data.district === "" || data.khoroo === ""
-                  ? "gray"
-                  : "black",
-            }}
-            onClick={nextHandler}
+            className=" p-3 rounded-lg text-white hover:scale-90 bg-black"
+            onClick={next}
           >
             Дараах
           </button>
