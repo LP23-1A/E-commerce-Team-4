@@ -8,6 +8,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Modal from "@/components/Modal";
 import Loading from "@/components/Loading";
+
+type SignedUrls = {
+    uploadUrls: string[];
+    accessUrls: string[];
+  };
+
 const page = () => {
   const [input, setInput] = useState({
     productName: "",
@@ -28,8 +34,18 @@ const page = () => {
       const res = await axios.post("http://localhost:8000/products/product", {
         ...input,
       });
+      const requestUrl = ``;
+      const response = await fetch(requestUrl, {
+          method: 'GET',
+          cache: 'no-cache',
+          headers: {
+              'Content-type': 'application/json'
+          }
+      })
+      const data = await response.json();
+      setOpen(!open)
       console.log(res);
-      setOpen(!open);
+      return data as SignedUrls;
     } catch (error) {
       console.log(error);
     }
