@@ -41,7 +41,7 @@ export default function Product() {
     setTimeout(() => {
       setLoading(false);
     }, 500);
-  });
+  },[]);
   return (
     <div className=" ">
       {loading === true ? (
