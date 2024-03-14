@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "@types/react": "^18.2.62",
-    "swr": "^2.2.5"
-  }
-}

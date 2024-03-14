@@ -1,7 +1,17 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useRef, useState } from "react";
 export const AdminContext = createContext({});
 const AdminContextProvider = ({ children }: any) => {
-  const [data, setData] = useState({
+  // const [data, setData] = useState({
+  //   email: "",
+  //   name: "",
+  //   shopInformation: "",
+  //   city: "",
+  //   district: "",
+  //   khoroo: "",
+  //   exprience: "",
+  //   product: "",
+  // });
+  const formDataRef = useRef({
     email: "",
     name: "",
     shopInformation: "",
@@ -11,9 +21,8 @@ const AdminContextProvider = ({ children }: any) => {
     exprience: "",
     product: "",
   });
-
   return (
-    <AdminContext.Provider value={{ data, setData }}>
+    <AdminContext.Provider value={{ formDataRef }}>
       {children}
     </AdminContext.Provider>
   );

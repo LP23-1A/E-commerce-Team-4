@@ -2,42 +2,45 @@ import React, { useContext, useState } from "react";
 import Pineconelogo from "@/images/Pineconelogo";
 import ToLeft from "@/images/ToLeft";
 import { AdminContext } from "./AdminContext";
-import axios from "axios";
+import axios, { formToJSON } from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useRouter } from "next/navigation";
-const BASE_URL = "http://localhost:8000/admin";
+const BASE_URL = "http://localhost:8000/user";
 const SignUppage4 = ({ back }: any) => {
-  const { data, setData }: any = useContext(AdminContext);
+  const { formDataRef }: any = useContext(AdminContext);
   const [error, setError] = useState("");
   const router = useRouter();
   const userData = JSON.parse(localStorage.getItem("userData") as string);
   const { user }: any = useAuth0();
   console.log(user);
+  console.log(formDataRef);
 
   const createUser = async () => {
     try {
       const createUser = await axios.post(BASE_URL, {
         email: user?.email ?? userData?.email,
         name: user?.nickname ?? userData?.name,
-        shopInformation: data.shopInformation,
-        city: data.city,
-        district: data.district,
-        khoroo: data.khoroo,
-        exprience: data.exprience,
-        product: data.product,
+        shopInformation: formDataRef.current.shopInformation,
+        city: formDataRef.current.city,
+        district: formDataRef.current.district,
+        khoroo: formDataRef.current.khoroo,
+        exprience: formDataRef.current.exprience,
+        product: formDataRef.current.product,
       });
+      console.log(createUser);
+
       if (createUser) {
-        if (data.exprience !== "" && data.product !== "") {
-          localStorage.removeItem("userData");
-          router.push(`dashboard/${createUser.data.createUser._id}`);
-        }
+        localStorage.removeItem("userData");
+        router.push("/adminDashboard");
       }
     } catch (error) {
       setError("not unique email");
       console.log(error);
     }
   };
-
+  const handleOnChange = (field: string, value: string | number) => {
+    formDataRef.current = { ...formDataRef.current, [field]: value };
+  };
   return (
     <div className="flex flex-col justify-center items-center gap-[100px] py-[30px] px-[30px]">
       <div className="flex justify-start items-start text-start w-[100%]">
@@ -69,9 +72,7 @@ const SignUppage4 = ({ back }: any) => {
               type="text"
               placeholder="Та борлуулалт хийж байсан туршлагатай юу?"
               className="p-3 border rounded-lg w-full"
-              onChange={(el) =>
-                setData((prev: {}) => ({ ...prev, exprience: el.target.value }))
-              }
+              onChange={(e) => handleOnChange("exprience", e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -82,9 +83,7 @@ const SignUppage4 = ({ back }: any) => {
               type="text"
               placeholder="Та ямар төрлийн бүтээгдэхүүн борлуулах вэ?"
               className="p-3 border rounded-lg w-full"
-              onChange={(el) =>
-                setData((prev: {}) => ({ ...prev, product: el.target.value }))
-              }
+              onChange={(e) => handleOnChange("product", e.target.value)}
             />
           </div>
         </div>
@@ -96,11 +95,7 @@ const SignUppage4 = ({ back }: any) => {
             <ToLeft />
           </button>
           <button
-            className=" p-3 rounded-lg text-white hover:scale-90"
-            style={{
-              backgroundColor:
-                data.exprience === "" || data.product === "" ? "gray" : "black",
-            }}
+            className=" p-3 rounded-lg text-white hover:scale-90 bg-black"
             onClick={createUser}
           >
             Дараах
