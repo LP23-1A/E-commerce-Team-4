@@ -31,7 +31,7 @@ const page = () => {
     setTimeout(() => {
       setLoading(false);
     }, 500);
-  });
+  },[]);
   return (
     <div>
       {loading === true ? (
