@@ -20,16 +20,34 @@ const page = () => {
     residual: "",
     mainCate: "",
     subCate: "",
+    images: null
   });
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+  const [images, setImages] = useState<File[] | undefined>()
   const createProduct = async () => {
     try {
-      const res = await axios.post("http://localhost:8000/products/product", {
-        ...input,
-      });
+        const signedUrls = await axios.get('/api/upload-image');
+        
+        console.log(signedUrls);
+        
+        Promise.all([signedUrls].map((url, index) => {
+            return axios.put(url.data.uploadUrls, input.images, {
+                headers: {
+                    // 'Content-Type': (images[index] as File).type,
+                    'Content-Type': "multipart/form-data"
+                }
+            });
+        }))
+        const res = await axios.post("http://localhost:8000/products/product", {
+        //   productName:input.productName,
+        //  images:input.images
+            ...input
+        });
       console.log(res);
-      setOpen(!open);
+      
+    // 
+    //   setOpen(!open);
     } catch (error) {
       console.log(error);
     }
@@ -80,15 +98,15 @@ const page = () => {
                         <h1 className="font-semibold text-xl">Бүтээгдэхүүн зураг</h1>
                         <div className="flex gap-6 justify-start items-center h-full">
                           <div className="flex items-center justify-center">
-                            <input type="image" src="" alt="" className="flex justify-center items-center h-[124px] w-[124px] border border-dashed rounded-xl relative"/>
+                            <input type="file" src="" alt="" className="flex justify-center items-center h-[124px] w-[124px] border border-dashed rounded-xl relative" multiple onChange={(e) => setInput((prev):any => ({ ...prev, images: e.target.files }))}/>
                             <div className="absolute"><Img /></div>
                           </div>
                           <div className="flex items-center justify-center">
-                            <input type="image" src="" alt="" className="flex justify-center items-center h-[124px] w-[124px] border border-dashed rounded-xl relative"/>
+                            {/* <input type="file" src="" alt="" className="flex justify-center items-center h-[124px] w-[124px] border border-dashed rounded-xl relative" onChange={(e) => setInput((prev) => ({ ...prev, images: e.target.files[0] }))}/> */}
                             <div className="absolute"><Img /></div>
                           </div>
                           <div className="flex items-center justify-center">
-                            <input type="image" src="" alt="" className="flex justify-center items-center h-[124px] w-[124px] border border-dashed rounded-xl relative"/>
+                            {/* <input type="file" src="" alt="" className="flex justify-center items-center h-[124px] w-[124px] border border-dashed rounded-xl relative" onChange={(e) => setInput((prev) => ({ ...prev, images: e.target.files[0] }))}/> */}
                             <div className="absolute"><Img /></div>
                           </div>
                           <button className="h-10 w-10 rounded-[50%] bg-gray-200 flex justify-center items-center left-3"><Plus /></button>

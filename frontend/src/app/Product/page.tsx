@@ -26,17 +26,9 @@ export default function Product() {
 
   const getAllData = async () => {
     try {
-<<<<<<< HEAD
       const get = await axios.get(API);
       const res = get.data.Response;
       setData(res);
-=======
-      const get = await axios.get(API)
-      console.log(get);
-      
-      const res = get.data.getAll
-      setData(res)
->>>>>>> baa3bfd (aws)
     } catch (error) {
       console.log(error);
     }
@@ -122,102 +114,6 @@ export default function Product() {
                     />
                   </div>
                 </div>
-<<<<<<< HEAD
-                <div className="flex mt-[24px] w-[1170px] rounded-xl border-[1px] bg-white">
-                  <table>
-                    <tbody>
-                      <tr className="">
-                        <th className="w-[68px] py-[12px] px-[24px] border-b-[1px]">
-                          <div className="font-semibold text-sm">‎</div>
-                        </th>
-                        <th className="w-[156.8px] py-[12px] pl-0 pr-[100px] border-b-[1px]">
-                          <div className="font-semibold text-sm inline-flex">
-                            Бүтээгдэхүүн
-                          </div>
-                        </th>
-                        <th className="w-[214px] py-[12px] pl-0 pr-[100px] border-b-[1px]">
-                          <div className="font-semibold text-sm inline-flex">
-                            Ангилал
-                          </div>
-                        </th>
-                        <th className="w-[156.8px] py-[12px] pl-0 pr-[100px] border-b-[1px]">
-                          <div className="font-semibold text-sm inline-flex">
-                            Үнэ
-                          </div>
-                        </th>
-                        <th className="w-[156.8px] py-[12px] pl-0 pr-[100px] border-b-[1px]">
-                          <div className="font-semibold text-sm inline-flex">
-                            Үлдэгдэл
-                          </div>
-                        </th>
-                        <th className="w-[156.8px] py-[12px] pl-0 pr-[100px] border-b-[1px]">
-                          <div className="font-semibold text-sm inline-flex">
-                            Зарагдсан
-                          </div>
-                        </th>
-                        <th className="w-[156.8px] py-[12px] pl-0 pr-[100px] border-b-[1px]">
-                          <div className="font-semibold text-sm inline-flex">
-                            Нэмсэн огноо
-                          </div>
-                        </th>
-                        <th className="w-[104px] py-[12px] px-[24px] border-b-[1px]">
-                          <div className="font-semibold text-sm">‎</div>
-                        </th>
-                      </tr>
-                    </tbody>
-
-                    {data &&
-                      data.map((val: any, key) => {
-                        return (
-                          <tbody>
-                            <tr className="" key={key}>
-                              <td className="w-[68px] py-[12px] px-[24px] border-b-[1px]">
-                                <input type="checkbox" name="" id="" />
-                              </td>
-                              <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                                <div className="flex gap-[8px] align-items">
-                                  <img
-                                    src={val.images}
-                                    className="w-[40px] h-[40px] rounded-[50%] mt-[3px]"
-                                  />
-                                  <div className="column">
-                                    <p>{val.productName}</p>{" "}
-                                    <p>{val.categoryId}</p>
-                                  </div>
-                                </div>
-                              </td>
-                              <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                                {val.tag}
-                              </td>
-                              <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                                {val.price.toLocaleString()}₮
-                              </td>
-                              <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                                {val.qty}
-                              </td>
-                              <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                                {val.sold}
-                              </td>
-                              <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                                <p>{val.createdAt.slice(0, 10)}</p>
-                              </td>
-                              <td className="w-[68px] p-[16px] border-b-[1px]">
-                                <div className="justify-center flex">
-                                  <button className="flex">
-                                    <Delete />
-                                  </button>
-                                  <button className="flex">
-                                    <Edit />
-                                  </button>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        );
-                      })}
-                  </table>
-                </div>
-=======
               </div>
               <div className="flex mt-[24px] w-[1170px] rounded-xl border-[1px] bg-white">
                 <table>
@@ -234,7 +130,7 @@ export default function Product() {
                     </tr>
                   </tbody>
                   
-                  {data.map((val:any, key) => {
+                  {data && data.map((val:any, key) => {
                     return (
                       <tbody>
                         <tr className="" key={key}>
@@ -252,7 +148,6 @@ export default function Product() {
                     )
                   })}
                 </table>
->>>>>>> baa3bfd (aws)
               </div>
             </div>
           </div>
