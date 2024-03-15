@@ -51,17 +51,19 @@ const page = () => {
       ) : (
         <div>
           <Navbar />
-          <div className="flex w-[1440px] m-auto">
+          <div className="flex m-auto">
             <AsideBar />
-            <div className="bg-gray-200 w-full ">
-              <div className="flex ">
+            <div className="bg-gray-200 w-full">
+              <div className="flex">
                 {orderStatus.map((el, index) => {
                   return (
                     <button
-                      className="p-3 border-b"
+                      className="p-3 px-6 border-b text-xl"
                       style={{
                         borderBottomColor: activeIndex === index ? "#000" : "",
                         color: activeIndex === index ? "#000" : "",
+                        fontSize: activeIndex === index ? "bold" : "",
+                        fontWeight: activeIndex === index ? "500" : ""
                       }}
                       onClick={() => handleStatus(index)}
                     >
@@ -72,9 +74,9 @@ const page = () => {
               </div>
               <div className="p-8  flex flex-col gap-5 font-bold">
                 <div className="flex justify-between">
-                  <div className="flex gap-3">
+                  <div className="flex gap-5">
                     <button
-                      className="p-2 bg-white rounded"
+                      className="p-3 px-5 bg-white rounded"
                       style={{
                         backgroundColor: activeButton === today ? "green" : "",
                         color: activeButton === today ? "white" : "",
@@ -116,16 +118,16 @@ const page = () => {
                       })}
                     </select>
                   </div>
-                  <div className="flex py-2 px-6 bg-white gap-2 w-[360px] rounded">
+                  <div className="flex py-2 px-3 bg-white gap-3 w-[360px] rounded items-center">
                     <Search />
-                    <input type="text" placeholder="Дугаар, Имэйл" />
+                    <input type="text" placeholder="Дугаар, Имэйл" className="w-full h-full" />
                   </div>
                 </div>
-                <div className="bg-white h-fit border rounded-xl border-gray-300 w-[1100px]">
-                  <h1 className="text-[36px] p-4">Захиалга</h1>
-                  <div className="bg-gray-200 py-6 w-full flex flex-col gap-4">
+                <div className="bg-white h-fit border rounded-xl border-gray-300 w-full">
+                  <h1 className="text-[36px] p-4 px-7">Захиалга</h1>
+                  <div className="bg-gray-200 py-6 px-4 w-full flex flex-col gap-4">
                     <table>
-                      <tr>
+                      <tr className="flex justify-between">
                         <th className="w-[200px]">Захиалгын ID дугаар</th>
                         <th className="w-[160px] pl-3">Захиалагч</th>
                         <th className="w-[200px] pr-6">Огноо</th>

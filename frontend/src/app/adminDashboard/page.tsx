@@ -38,14 +38,14 @@ const page = () => {
       ) : (
         <div>
           <Navbar />
-          <div className="flex w-[1440px] m-auto">
+          <div className="flex m-auto">
             <AsideBar />
             <div className=" h-[100vh] flex flex-col gap-[24px] bg-gray-200 py-[40px] px-[40px] w-full">
               <div className="flex justify-between">
                 <Carddata />
               </div>
               <div className="flex justify-between gap-[40px]">
-                <div className="w-[100%]  bg-white rounded-[10px] px-[40px] flex flex-col py-[40px] gap-[30px]">
+                <div className="w-1/2 bg-white rounded-[10px] px-[40px] flex flex-col py-[40px] gap-[30px]">
                   <h1 className="text-xl font-bold">Шилдэг бүтээгдэхүүн</h1>
                   <div className="flex w-[100%] justify-around bg-gray-200 h-[50px] items-center">
                     <p>№</p>
@@ -73,11 +73,11 @@ const page = () => {
                       })}
                   </div>
                 </div>
-                <div className="flex flex-col gap-[40px] ">
-                  <div className="w-[500px] h-[369px] bg-white rounded-[10px] py-[24px]">
+                <div className="flex flex-col gap-[40px] w-1/2">
+                  <div className="w-full h-[369px] bg-white rounded-[10px] py-[24px]">
                     <Example />
                   </div>
-                  <div className="w-[500px] h-[363px] bg-white rounded-[10px] px-[24px] py-[24px] flex flex-col gap-[24px]">
+                  <div className="w-full h-[363px] bg-white rounded-[10px] px-[24px] py-[24px] flex flex-col gap-[24px]">
                     <div>
                       <p className="text-xl font-bold">Идэвхтэй бүс нутаг</p>
                     </div>

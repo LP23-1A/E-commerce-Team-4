@@ -19,10 +19,10 @@ import React from "react";
 
 const Carddata = () => {
   return (
-    <div className="flex justify-between w-full">
+    <div className="flex justify-between w-full gap-10">
       {data.map((el) => {
         return (
-          <div className="w-[350px] h-[170px] bg-white rounded-[10px] px-[20px] py-[20x] flex flex-col justify-around">
+          <div className="h-[170px] bg-white rounded-[10px] p-5 flex flex-col justify-between w-1/3">
             <p className="font-bold text-xl">{el.title}</p>
             <p className="text-[44px] font-bold">{el.count}</p>
             <p className="text-[18px]">{el.date}</p>

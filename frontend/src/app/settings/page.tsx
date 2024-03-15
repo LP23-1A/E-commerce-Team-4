@@ -40,13 +40,13 @@ const page = () => {
         {loading === true ? (
             <Loading/>
         ) :  <div><Navbar/>
-        <div className='flex w-[1440px] m-auto'>
+        <div className='flex m-auto'>
             <AsideBar/>
             <div className='bg-gray-200 w-[100%] h-[100vh]  flex justify-center py-[100px]'>
-                <div className='w-[729px] flex flex-col py-[20px] px-[20px] h-[304px] bg-white rounded-[10px] gap-[20px]'>
+                <div className='w-[1200px] flex flex-col py-[20px] px-[20px] h-fit bg-white rounded-[10px] gap-[20px]'>
                     <p className='text-xl font-bold'>Дэлгүүрийн профайл үүсгэх</p>
-                    <div className='flex flex-col justify-center items-center gap-[20px]'>
-                        <div className='flex justify-between px-[20px] w-[676px] h-[60px] rounded-[10px] border-gray-300 border-2 items-center'>
+                    <div className='flex flex-col justify-center items-center gap-[40px]'>
+                        <div className='flex justify-between px-[20px] w-full h-[60px] rounded-[10px] border-gray-300 border-2 items-center'>
 
                         <div className='flex gap-8'>
                         {check === true ? 
@@ -75,14 +75,14 @@ const page = () => {
                             </div>
                             </div>
                         </div>                       
-                        <div className='flex justify-between px-[20px] w-[676px] h-[60px] rounded-[10px] border-gray-300 border-2 items-center'>
+                        <div className='flex justify-between px-[20px] w-full h-[60px] rounded-[10px] border-gray-300 border-2 items-center'>
                             <div className='flex gap-8'>
                                 <input type="checkbox"/> 
                                 <p>Эхний бүтээгдэхүүнээ нэмнэ үү</p>
                             </div>
                             <button onClick={handleAddProduct} className='border-2 border-gray-300 px-[10px] rounded-[8px] py-[5px]'>Бүтээгдэхүүн нэмэх</button>                        
                         </div>                       
-                        <div className='flex justify-between px-[20px] w-[676px] h-[60px] rounded-[10px] border-gray-300 border-2 items-center'>
+                        <div className='flex justify-between px-[20px] w-full h-[60px] rounded-[10px] border-gray-300 border-2 items-center'>
                             <div className='flex gap-8'>
                                 <input type="checkbox"/>
                                 <p>Хүргэлтийг тохируулна уу</p>

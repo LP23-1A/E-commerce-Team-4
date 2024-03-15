@@ -47,10 +47,10 @@ const page = () => {
       ) : (
         <div className="flex flex-col mx-auto relative">
           <Navbar />
-          <div className="flex flex-col mx-auto w-[1440px]">
-            <div className="flex w-[1440px] mx-auto">
+          <div className="flex flex-col mx-auto w-full">
+            <div className="flex mx-auto justify-between w-full">
               <AsideBar />
-              <div className="bg-[#FEFEFE] h-14 w-full">
+              <div className="bg-[#FEFEFE] h-14 w-full ">
                 <div className="flex gap-10 items-center">
                   <a href="/Product">
                     <button className="flex h-14 w-14 items-center justify-center">
@@ -60,9 +60,9 @@ const page = () => {
                   <h1 className="text-xl">Бүтээгдэхүүн нэмэх</h1>
                 </div>
                 <div className="flex bg-[#F0F0F0] w-full h-screen p-9 flex-col">
-                  <div className="flex w-full h-fit justify-between">
-                    <div className="flex flex-col gap-5">
-                      <div className="w-[540px] bg-white rounded-xl p-6 gap-2 flex flex-col">
+                  <div className="flex w-full h-fit justify-between gap-10">
+                    <div className="flex flex-col gap-5 w-1/2">
+                      <div className="w-full bg-white rounded-xl p-6 gap-2 flex flex-col">
                         <div className="flex flex-col gap-1">
                           <h1 className="font-semibold">Бүтээгдэхүүн нэр</h1>
                           <input type="text" className="border w-full p-3 rounded-lg" placeholder="Нэр" onChange={(e) => setInput((prev) => ({ ...prev, productName: e.target.value }))}/>
@@ -76,7 +76,7 @@ const page = () => {
                           <input type="text" className="border w-full p-3 rounded-lg" placeholder="#12345678" onChange={(e) => setInput((prev) => ({ ...prev, qty: e.target.value }))}/>
                         </div>
                       </div>
-                      <div className="w-[540px] h-52 bg-white rounded-xl p-6 gap-2 flex flex-col">
+                      <div className="w-full h-52 bg-white rounded-xl p-6 gap-2 flex flex-col">
                         <h1 className="font-semibold text-xl">Бүтээгдэхүүн зураг</h1>
                         <div className="flex gap-6 justify-start items-center h-full">
                           <div className="flex items-center justify-center">
@@ -94,7 +94,7 @@ const page = () => {
                           <button className="h-10 w-10 rounded-[50%] bg-gray-200 flex justify-center items-center left-3"><Plus /></button>
                         </div>
                       </div>
-                      <div className="w-[540px] h-[163px] bg-white rounded-xl p-6 gap-2 flex justify-between">
+                      <div className="w-full h-[163px] bg-white rounded-xl p-6 gap-2 flex justify-between">
                         <div className="flex flex-col gap-1">
                           <h1 className="font-semibold">Үндсэн үнэ</h1>
                           <input type="text" placeholder="Үндсэн үнэ" className="border p-2 rounded-lg w-[230px]" onChange={(e) => setInput((prev) => ({ ...prev, price: e.target.value }))}/>
@@ -105,8 +105,8 @@ const page = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="flex flex-col gap-5">
-                      <div className="w-[540px] bg-white rounded-xl p-6 gap-2 flex flex-col">
+                    <div className="flex flex-col gap-5 w-1/2">
+                      <div className="w-full bg-white rounded-xl p-6 gap-2 flex flex-col">
                         <div className="flex flex-col gap-1">
                           <h1 className="font-semibold text-lg">Ерөнхий ангилал</h1>
                           <input type="text" className="border w-full p-3 rounded-lg h-16" placeholder="Сонгох" onChange={(e) => setInput((prev) => ({ ...prev, mainCate: e.target.value }))}/>
@@ -116,7 +116,7 @@ const page = () => {
                           <input type="text" className="border w-full p-3 rounded-lg h-16" placeholder="Сонгох" onChange={(e) => setInput((prev) => ({ ...prev, subCate: e.target.value }))}/>
                         </div>
                       </div>
-                      <div className="w-[540px] bg-white rounded-xl p-6 gap-4 flex flex-col">
+                      <div className="w-full bg-white rounded-xl p-6 gap-4 flex flex-col">
                         <h1 className="text-xl font-semibold">Төрөл</h1>
                         <div className="flex gap-7 items-center">
                           <p>Өнгө</p>
@@ -136,7 +136,7 @@ const page = () => {
                         </div>
                         <button className="border p-3 px-5 w-fit rounded-md font-semibold">Төрөл нэмэх</button>
                       </div>
-                      <div className="w-[540px] bg-white rounded-xl p-6 gap-2 flex flex-col">
+                      <div className="w-full bg-white rounded-xl p-6 gap-2 flex flex-col">
                         <h1 className="font-semibold text-lg">Таг</h1>
                         <input type="text" className="border w-full p-3 rounded-lg h-16" placeholder="Таг нэмэх..." onChange={(e) => setInput((prev) => ({ ...prev, tag: e.target.value,}))}/>
                         <p className="text-gray-600">Санал болгох: Гутал, Цүнх, Эмэгтэй</p>

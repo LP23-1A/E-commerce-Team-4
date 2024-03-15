@@ -42,7 +42,7 @@ export default function Product() {
       ) : (
         <div>
           <Navbar></Navbar>
-          <div className="border-black flex w-[1440px] m-auto">
+          <div className="border-black flex m-auto">
             <AsideBar></AsideBar>
             <div className="bg-[#ECEDF0] w-full">
               <div className="flex bg-[#ECEDF0] gap-[10px] h-[56px] align-middle border-b-[1px] border-black-100">
@@ -95,7 +95,7 @@ export default function Product() {
                     />
                   </div>
                 </div>
-                <div className="flex mt-[24px] w-[1170px] rounded-xl border-[1px] bg-white">
+                <div className="flex mt-[24px] w-full justify-between rounded-xl border-[1px] bg-white">
                   <table>
                     <tbody>
                       <tr className="">
@@ -127,7 +127,7 @@ export default function Product() {
                             Зарагдсан
                           </div>
                         </th>
-                        <th className="w-[156.8px] py-[12px] pl-0 pr-[100px] border-b-[1px]">
+                        <th className="w-[180px] py-[12px] pl-0 pr-[100px] border-b-[1px]">
                           <div className="font-semibold text-sm inline-flex">
                             Нэмсэн огноо
                           </div>
