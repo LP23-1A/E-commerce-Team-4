@@ -42,6 +42,8 @@ const page = () => {
       setLoading(false);
     }, 500);
   },[]);
+  console.log(filterData);
+  
   return (
     <div>
       {loading === true ? (
@@ -135,7 +137,7 @@ const page = () => {
                     </table>
                   </div>
                   <div className="bg-white rounded-xl px-4 flex flex-col ">
-                    {filterData?.map((el: any) => {
+                    {filterData && filterData?.map((el: any) => {
                       return (
                         <UserOrder
                           key={el._id}
