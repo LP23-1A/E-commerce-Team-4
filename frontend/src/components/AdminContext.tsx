@@ -1,16 +1,6 @@
 import React, { createContext, useRef, useState } from "react";
 export const AdminContext = createContext({});
 const AdminContextProvider = ({ children }: any) => {
-  // const [data, setData] = useState({
-  //   email: "",
-  //   name: "",
-  //   shopInformation: "",
-  //   city: "",
-  //   district: "",
-  //   khoroo: "",
-  //   exprience: "",
-  //   product: "",
-  // });
   const formDataRef = useRef({
     email: "",
     name: "",

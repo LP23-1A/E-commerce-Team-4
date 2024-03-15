@@ -42,7 +42,9 @@ const createOrder = async (req: Request, res: Response) => {
 const getOneOrder = async (req: Request, res: Response) => {
   try {
     const { _id } = req.body;
-    const getOneOrder = await OrderModel.findOne({ _id: _id });
+    const getOneOrder = await OrderModel.findOne({ _id: _id })
+      .populate("userId")
+      .populate("details");
     res.status(200).send({ success: true, getOneOrder });
   } catch (error) {
     res.status(500).send({ success: false, error });

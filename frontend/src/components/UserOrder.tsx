@@ -25,7 +25,7 @@ const UserOrder: React.FC<props> = ({
         <td className="w-[200px] text-[14px] pl-2">#{orderNumber}</td>
         <td className="w-[250px] text-[14px] pl-24">
           <p>ZolooSoko</p>
-          <p className="text-[14px] font-extralight">ZolooSoko@gmail.com</p>
+          <p className="text-[14px] font-extralight">Zoloo@gmail.com</p>
         </td>
         <td className="w-[200px] text-[14px] pl-10 font-light">{date}</td>
         <td className="w-[100px] text-[14px] pl-20 font-light">{time}</td>
