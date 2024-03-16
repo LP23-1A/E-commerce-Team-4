@@ -41,13 +41,13 @@ export default function Income() {
         <Loading />
       ) : (
         <div>
-          <Navbar></Navbar>
-          <div className="flex w-[1440px] m-auto">
-            <AsideBar></AsideBar>
-            <div className="bg-[#ECEDF0] w-full py-10">
-              <div className=" bg-white rounded-xl w-[724px] m-auto">
+          <Navbar />
+          <div className="flex m-auto">
+            <AsideBar />
+            <div className="bg-[#ECEDF0] w-full py-10 px-10">
+              <div className=" bg-white rounded-xl w-[1200px] m-auto">
                 <div className="border-b-[1px] border-black-100">
-                  <div className="px-[24px] py-[20px] flex gap-4">
+                  <div className="px-[24px] py-[20px] flex gap-4 justify-between">
                     <div className="w-[516px]">
                       <p className="w-[73px] h-[28px] font-bold text-xl tracking-tighter">
                         Орлого
@@ -55,7 +55,7 @@ export default function Income() {
                     </div>
                     <button className="bg-[#1C20240A] px-[10px] py-[6px] rounded-lg">
                       <div className="flex gap-1 align-items vertical-align">
-                        <Download></Download>
+                        <Download />
                         <p className="font-semibold text-sm">Хуулга татах</p>
                       </div>
                     </button>
@@ -88,11 +88,11 @@ export default function Income() {
                   </div>
                 </div>
               </div>
-              <div className="flex mx-auto mt-[24px] w-[724px] rounded-xl border-[1px] bg-white">
+              <div className="flex mx-auto mt-[24px] w-[1200px] rounded-xl border-[1px] bg-white">
                 <table>
                   <tbody>
-                    <tr className="">
-                      <th className="w-[169px] py-[12px] px-[24px] border-b-[1px]">
+                    <tr className="flex justify-between w-full px-6">
+                      <th className="flex items-center justify-between ">
                         <div className="font-semibold text-sm inline-flex justify-start">
                           Захиалгын ID дугаар
                         </div>

@@ -5,8 +5,8 @@ import React from 'react'
 
 const Navbar = () => {
   return (
-    <div className='bg-black'>
-      <div className='flex justify-between w-[1440px] mx-auto h-12 items-center'>
+    <div className='bg-black px-12'>
+      <div className='flex justify-between mx-auto h-12 items-center'>
         <div><Logo /></div>
         <div className='flex items-center gap-8'>
             <button><Noti /></button>
