@@ -1,26 +1,40 @@
 "use client";
 import Pineconelogo from "@/images/Pineconelogo";
-import React, { useContext, useState } from "react";
+import React, { useRef } from "react";
 import Applelogo from "../images/Applelogo";
 import Googlelogo from "@/images/Googlelogo";
 import Microsoftlogo from "@/images/Microsoftlogo";
 import Arrowlogo from "@/images/Arrowlogo";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+import { json } from "stream/consumers";
+
+const API = "http://localhost:8000/user/one";
 export default function SignUppage1({ next }: any) {
   const { loginWithRedirect } = useAuth0();
   const router = useRouter();
-  const [data, setData] = useState({
+  const adminRef = useRef({
     email: "",
     name: "",
   });
-  const handler = () => {
-    if (data.email !== "" && data.name !== "") {
-      localStorage.setItem("userData", JSON.stringify(data));
-      router.push("/signupStep");
+  const handler = async () => {
+    try {
+      const adminLogin: any = await axios.post(API, {
+        email: adminRef.current.email,
+      });
+      if (adminLogin && adminLogin.data.getUser.role === "admin") {
+        const id = adminLogin.data.getUser._id;
+        localStorage.setItem("id", JSON.stringify(id));
+        router.push(`/adminDashboard/${adminLogin.data.getUser._id}`);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
-
+  const handleOnChange = (field: string, value: string | number) => {
+    adminRef.current = { ...adminRef.current, [field]: value };
+  };
   return (
     <div className="flex flex-col justify-center items-center gap-[100px] py-[30px] px-[30px]">
       <div className="flex justify-start items-start text-start w-[100%]">
@@ -34,9 +48,7 @@ export default function SignUppage1({ next }: any) {
             className="bg-gray-200 w-[400px] px-[8px] rounded-[5px] h-[50px]"
             type="email"
             placeholder="имэйл"
-            onChange={(el) =>
-              setData((prev) => ({ ...prev, email: el.target.value }))
-            }
+            onChange={(e) => handleOnChange("email", e.target.value)}
           />
         </div>
         <div>
@@ -45,9 +57,7 @@ export default function SignUppage1({ next }: any) {
             className="bg-gray-200 w-[400px] px-[8px]  rounded-[5px] h-[50px]"
             type="email"
             placeholder="Hэр"
-            onChange={(el) =>
-              setData((prev) => ({ ...prev, name: el.target.value }))
-            }
+            onChange={(e) => handleOnChange("name", e.target.value)}
           />
         </div>
         <button

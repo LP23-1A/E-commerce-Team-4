@@ -12,7 +12,6 @@ const URL = "http://localhost:8000/products/product";
 const page = () => {
   const [data, setData] = React.useState([]);
   const [loading, setLoading] = useState(false);
-
   const handler = async () => {
     try {
       const { data } = await axios.get(URL);
@@ -30,7 +29,7 @@ const page = () => {
     setTimeout(() => {
       setLoading(false);
     }, 500);
-  },[]);
+  }, []);
   return (
     <div>
       {loading === true ? (
