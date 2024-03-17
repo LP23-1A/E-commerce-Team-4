@@ -81,10 +81,11 @@ const getUser = async (req: Request, res: Response) => {
 const updateUser = async (req: Request, res: Response) => {
   try {
     const updateId = req.params.id;
-    const { email, name } = req.body;
+    const { email, name, shopInformation } = req.body;
     const updateUser = await UserModel.findByIdAndUpdate(updateId, {
       email: email,
       name: name,
+      shopInformation: shopInformation,
     });
     res.status(201).send({ success: true, updateUser });
   } catch (error) {

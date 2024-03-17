@@ -30,10 +30,13 @@ const page = () => {
       setLoading(false);
     }, 500);
   }, []);
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <div>
-      {loading === true ? (
-        <Loading />
+      {data.length === 0 ? (
+        <DashboardEmpty />
       ) : (
         <div>
           <Navbar />

@@ -8,8 +8,7 @@ import Arrowlogo from "@/images/Arrowlogo";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { json } from "stream/consumers";
-
+import toast, { Toaster } from "react-hot-toast";
 const API = "http://localhost:8000/user/one";
 export default function SignUppage1({ next }: any) {
   const { loginWithRedirect } = useAuth0();
@@ -26,10 +25,14 @@ export default function SignUppage1({ next }: any) {
       if (adminLogin && adminLogin.data.getUser.role === "admin") {
         const id = adminLogin.data.getUser._id;
         localStorage.setItem("id", JSON.stringify(id));
-        router.push(`/adminDashboard/${adminLogin.data.getUser._id}`);
+        toast.success("Та амжилттай нэвтэрлээ");
+        setTimeout(() => {
+          router.push(`/adminDashboard/${adminLogin.data.getUser._id}`);
+        }, 2000);
       }
     } catch (error) {
       console.log(error);
+      toast.error("Таны имэйл хаяг буруу байна");
     }
   };
   const handleOnChange = (field: string, value: string | number) => {
@@ -67,6 +70,9 @@ export default function SignUppage1({ next }: any) {
           <p>Дараах </p>
           <Arrowlogo />
         </button>
+        <Toaster position="top-right" />
+        <Toaster position="top-right" />
+
         <div className="border-t-[2px] border-b-[2px]  border-gray-200 py-[20px] flex flex-col w-[100%] gap-[20px]">
           <button
             className="bg-gray-200 h-[50px] flex justify-center items-center gap-[10px]  rounded-[5px] text-black w-[100%] hover:scale-95 "
