@@ -12,7 +12,7 @@ type UserType = {
   khoroo: String;
   exprience: String;
   product: String;
-  role: "admin" | null;
+  role: string;
 };
 const createUser = async (req: Request, res: Response) => {
   try {
@@ -25,6 +25,7 @@ const createUser = async (req: Request, res: Response) => {
       khoroo,
       exprience,
       product,
+      role,
     }: Required<UserType> = req.body;
     const createUser = await UserModel.create({
       email: email,
@@ -35,6 +36,7 @@ const createUser = async (req: Request, res: Response) => {
       khoroo: khoroo,
       exprience: exprience,
       product: product,
+      role: role,
     });
     res.status(201).send({ success: true, createUser });
   } catch (error) {
@@ -79,10 +81,11 @@ const getUser = async (req: Request, res: Response) => {
 const updateUser = async (req: Request, res: Response) => {
   try {
     const updateId = req.params.id;
-    const { email, name } = req.body;
+    const { email, name, shopInformation } = req.body;
     const updateUser = await UserModel.findByIdAndUpdate(updateId, {
       email: email,
       name: name,
+      shopInformation: shopInformation,
     });
     res.status(201).send({ success: true, updateUser });
   } catch (error) {

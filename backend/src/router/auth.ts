@@ -6,6 +6,7 @@ import {
   updateUser,
 } from "../controller/auth";
 const user = express.Router();
-user.route("/").post(createUser).get(getUser);
+user.route("/").post(createUser);
+user.route("/one").post(getUser);
 user.route("/:id").put(updateUser).delete(deleteUser);
 export { user };

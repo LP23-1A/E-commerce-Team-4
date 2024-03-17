@@ -2,8 +2,13 @@ import Working from "@/images/Working";
 import ToLeft from "@/images/ToLeft";
 import Navbar from "@/components/Navbar";
 import AsideBar from "@/components/AsideBar";
+import { useRouter } from "next/navigation";
 
 const DashboardEmpty = () => {
+  const router = useRouter();
+  const handler = () => {
+    router.push("/settings");
+  };
   return (
     <div>
       <Navbar></Navbar>
@@ -23,11 +28,14 @@ const DashboardEmpty = () => {
                   Та мэдээлэл харахын тулд мэдээллээ тохируулж дуусгана уу.
                 </p>
               </div>
-              <button className="bg-[#121316] rounded-lg mx-[55px] mt-[25px]">
+              <button
+                className="bg-[#121316] rounded-lg mx-[55px] mt-[25px]"
+                onClick={handler}
+              >
                 <div className="flex py-[5px] px-[10px]">
                   <p className="text-white ">Тохиргоог үргэлжлүүлэх</p>
                   <div className="rotate-180 text-white">
-                    <ToLeft></ToLeft>
+                    <ToLeft />
                   </div>
                 </div>
               </button>
