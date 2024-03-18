@@ -1,8 +1,10 @@
 import Arrowlogo from "@/images/Arrowlogo";
 import ExpandMore from "@/images/ExpandMore";
 import Right from "@/images/Right";
+import { orderStatus } from "@/utils/OrderStatus";
+import { stat } from "fs";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 type props = {
   orderNumber: String;
   date: String;
@@ -19,31 +21,51 @@ const UserOrder: React.FC<props> = ({
   status,
   onclick,
 }) => {
+  const [color, setColor] = useState("");
   return (
-    <div className="py-2">
-      <tr className="flex items-center text-black">
-        <td className="w-[200px] text-[14px] pl-2">#{orderNumber}</td>
-        <td className="w-[250px] text-[14px] pl-24">
-          <p>ZolooSoko</p>
-          <p className="text-[14px] font-extralight">Zoloo@gmail.com</p>
-        </td>
-        <td className="w-[200px] text-[14px] pl-10 font-light">{date}</td>
-        <td className="w-[100px] text-[14px] pl-20 font-light">{time}</td>
-        <td className="w-[100px] text-[14px] pl-20 font-light">{price}</td>
-        <td className="w-[200px] text-[14px] pl-24">
-          <p className="px-10 py-2 flex justify-center bg-green-300 rounded-xl font-light">
-            {status}
-          </p>
-        </td>
-        <td
-          className="w-[200px] text-[14px] pl-24 cursor-pointer"
-          onClick={onclick}
+    <tr className=" w-full flex justify-between items-center bg-white">
+      <td className="w-[300px]">#{orderNumber}</td>
+      <td className="w-[200px] pl-[60px]">
+        <p>ZolooSoko</p>
+        <p className="text-[14px] text-gray font-light">Zoloo@gmail.com</p>
+      </td>
+      <td className="w-[200px] pl-[75px] text-gray font-light">{date}</td>
+      <td className="w-[200px] pl-[84px] text-gray font-light">{time}</td>
+      <td className="w-[200px] pl-[72px] text-gray font-light">{price}</td>
+      <td className="w-[200px] pl-[70px] text-gray font-light">
+        <select
+          name=""
+          id=""
+          className="py-1 px-2 rounded-xl"
+          onChange={(e) => setColor(e.target.value)}
+          style={{
+            backgroundColor:
+              color === "Хүргэгдсэн"
+                ? "green"
+                : "" || color === "Хүргэлтэнд гарсан"
+                ? "blue"
+                : "" || color === "Шинэ захиалга"
+                ? "white"
+                : "" || color === "Бэлтгэгдэж байна"
+                ? "gray"
+                : "" || color === "Цуцлагдсан"
+                ? "red"
+                : "",
+          }}
         >
-          <Right />
-        </td>
-      </tr>
-      <div className="border-b border-gray-200 mt-3"></div>
-    </div>
+          <option value={`${status}`}>{status}</option>
+          {orderStatus.map((e) => {
+            return <option value={`${e.name}`}>{e.name}</option>;
+          })}
+        </select>
+      </td>
+      <td
+        className="w-[200px] text-[14px] pl-[85px]  cursor-pointer"
+        onClick={onclick}
+      >
+        <Right />
+      </td>
+    </tr>
   );
 };
 

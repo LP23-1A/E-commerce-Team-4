@@ -9,6 +9,7 @@ type OrderType = {
   coupon: String;
   description: String;
   details: [];
+  status: String;
 };
 
 const createOrder = async (req: Request, res: Response) => {
@@ -72,6 +73,7 @@ const updateOrder = async (req: Request, res: Response) => {
       amountToBePaid,
       coupon,
       description,
+      status,
     }: Required<OrderType> = req.body;
     const getAllOrder = await OrderModel.findByIdAndUpdate(updateById, {
       orderNumber: orderNumber,
@@ -80,6 +82,7 @@ const updateOrder = async (req: Request, res: Response) => {
       amountToBePaid: amountToBePaid,
       coupon: coupon,
       description: description,
+      status: status,
     });
     res.status(201).send({ success: true, getAllOrder });
   } catch (error) {

@@ -3,8 +3,14 @@ const OrderSchema = new mongoose.Schema({
   orderNumber: String,
   status: {
     type: String,
-    enum: ["Ordered", "PreperingToShip", "Shiped", "Delivered"],
-    default: "Ordered",
+    enum: [
+      "Шинэ захиалга",
+      "Бэлтгэгдэж байна",
+      "Хүргэлтэгд гарсан",
+      "Хүргэгдсэн",
+      "Цуцлагдсан",
+    ],
+    default: "Шинэ захиалга",
   },
   phoneNumber: String,
   userId: {
