@@ -42,7 +42,7 @@ const page = () => {
       ) : (
         <div>
           <Navbar />
-          <div className="flex w-[1440px] m-auto">
+          <div className="flex w-full m-auto">
             <AsideBar />
             <div className="bg-gray-200 w-[100%] h-[100vh]  flex justify-center py-[100px]">
               <div className="w-[729px] flex flex-col py-[20px] px-[20px] h-[304px] bg-white rounded-[10px] gap-[20px]">
