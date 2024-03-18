@@ -7,28 +7,16 @@ import ExpandMore from "@/images/ExpandMore";
 import Category from "@/images/Category";
 import Dollar from "@/images/Dollar";
 import Calendar from "@/images/Calendar";
-import Delete from "@/images/Delete";
-import Edit from "@/images/Edit";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Loading from "@/components/Loading";
 import Search from "@/images/Search";
-const API = "http://localhost:8000/products/product";
+import ProductTable from "@/components/ProductTable";
+import { month } from "@/utils/Month";
+
 export default function Product() {
-  const [data, setData] = useState([]);
+  
   const [loading, setLoading] = useState(false);
-  const getAllData = async () => {
-    try {
-      const get = await axios.get(API);
-      const res = get.data.getAll;
-      setData(res);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    getAllData();
-  }, []);
+
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
@@ -62,7 +50,7 @@ export default function Product() {
                 </a>
                 <div className="w-full h-[40px] justify-between mt-[24px] flex">
                   <div className="flex gap-[13px]">
-                    <button className="bg-white h-[40px] rounded-lg border-[1px]">
+                    {/* <button className="bg-white h-[40px] rounded-lg border-[1px]">
                       <div className="flex mx-[11px] gap-[4px]">
                         <Category />
                         <div>Ангилал</div>
@@ -75,14 +63,25 @@ export default function Product() {
                         <div>Үнэ</div>
                         <ExpandMore />
                       </div>
-                    </button>
-                    <button className="bg-white h-[40px] rounded-lg border-[1px]">
-                      <div className="flex mx-[11px] gap-[4px]">
-                        <Calendar />
-                        <div>Сараар</div>
-                        <ExpandMore />
-                      </div>
-                    </button>
+                    </button> */}
+                    <select className="bg-white h-[40px] rounded-lg border-[1px]">
+                      <option>Ангилал</option>
+                      <option>female</option>
+                      <option>male</option>
+                    </select>
+                    <select className="bg-white h-[40px] rounded-lg border-[1px] justify-center">
+                      <option>Үнэ</option>
+                      <option>Highest to Lowest</option>
+                      <option>Lowest to Highest</option>
+                    </select>
+                    <select className="bg-white h-[40px] rounded-lg border-[1px]">
+                      <option className="flex mx-[11px] gap-[4px] w-[150px]"><Calendar/>Сараар</option>
+                      {month.map((e) => {
+                        return (
+                          <option className="flex mx-[11px] gap-[4px] w-[150px]">{e.name}</option>
+                        )
+                      })}
+                    </select>
                   </div>
                   <div className="flex w-[419px] h-[40px] mr-0">
                     <div className="flex items-center z-10 mr-[-35px]">
@@ -95,100 +94,7 @@ export default function Product() {
                     />
                   </div>
                 </div>
-                <div className="flex mt-[24px] w-full justify-between rounded-xl border-[1px] bg-white">
-                  <table>
-                    <tbody>
-                      <tr className="">
-                        <th className="w-[68px] py-[12px] px-[24px] border-b-[1px]">
-                          <div className="font-semibold text-sm">‎</div>
-                        </th>
-                        <th className="w-[156.8px] py-[12px] pl-0 pr-[100px] border-b-[1px]">
-                          <div className="font-semibold text-sm inline-flex">
-                            Бүтээгдэхүүн
-                          </div>
-                        </th>
-                        <th className="w-[214px] py-[12px] pl-0 pr-[100px] border-b-[1px]">
-                          <div className="font-semibold text-sm inline-flex">
-                            Ангилал
-                          </div>
-                        </th>
-                        <th className="w-[156.8px] py-[12px] pl-0 pr-[100px] border-b-[1px]">
-                          <div className="font-semibold text-sm inline-flex">
-                            Үнэ
-                          </div>
-                        </th>
-                        <th className="w-[156.8px] py-[12px] pl-0 pr-[100px] border-b-[1px]">
-                          <div className="font-semibold text-sm inline-flex">
-                            Үлдэгдэл
-                          </div>
-                        </th>
-                        <th className="w-[156.8px] py-[12px] pl-0 pr-[100px] border-b-[1px]">
-                          <div className="font-semibold text-sm inline-flex">
-                            Зарагдсан
-                          </div>
-                        </th>
-                        <th className="w-[180px] py-[12px] pl-0 pr-[100px] border-b-[1px]">
-                          <div className="font-semibold text-sm inline-flex">
-                            Нэмсэн огноо
-                          </div>
-                        </th>
-                        <th className="w-[104px] py-[12px] px-[24px] border-b-[1px]">
-                          <div className="font-semibold text-sm">‎</div>
-                        </th>
-                      </tr>
-                    </tbody>
-
-                    {data &&
-                      data.map((val: any, index) => {
-                        return (
-                          <tbody key={index}>
-                            <tr >
-                              <td className="w-[68px] py-[12px] px-[24px] border-b-[1px]">
-                                <input type="checkbox" name="" id="" />
-                              </td>
-                              <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                                <div className="flex gap-[8px] align-items">
-                                  <img
-                                    src={val.images}
-                                    className="w-[40px] h-[40px] rounded-[50%] mt-[3px]"
-                                  />
-                                  <div className="column">
-                                    <p>{val.productName}</p>{" "}
-                                    <p>{val.categoryId}</p>
-                                  </div>
-                                </div>
-                              </td>
-                              <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                                {val.tag}
-                              </td>
-                              <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                                {val.price.toLocaleString()}₮
-                              </td>
-                              <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                                {val.qty}
-                              </td>
-                              <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                                {val.sold}
-                              </td>
-                              <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                                <p>{val.createdAt.slice(0, 10)}</p>
-                              </td>
-                              <td className="w-[68px] p-[16px] border-b-[1px]">
-                                <div className="justify-center flex gap-2">
-                                  <button className="flex">
-                                    <Delete />
-                                  </button>
-                                  <button className="flex">
-                                    <Edit />
-                                  </button>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        );
-                      })}
-                  </table>
-                </div>
+                <ProductTable/>
               </div>
             </div>
           </div>
