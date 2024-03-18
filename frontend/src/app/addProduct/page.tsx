@@ -8,12 +8,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Modal from "@/components/Modal";
 import Loading from "@/components/Loading";
+import { useRouter } from "next/navigation";
 const page = () => {
   const [input, setInput] = useState({
     productName: "",
     categoryId: "",
     price: "",
     qty: "",
+    productCode: "",
     thumbnails: "",
     description: "",
     tag: "",
@@ -23,13 +25,14 @@ const page = () => {
   });
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+  const router = useRouter()
   const createProduct = async () => {
     try {
       const res = await axios.post("http://localhost:8000/products/product", {
         ...input,
       });
-      console.log(res);
       setOpen(!open);
+      router.push('/Product')
     } catch (error) {
       console.log(error);
     }
@@ -73,7 +76,7 @@ const page = () => {
                         </div>
                         <div className="flex flex-col gap-1">
                           <h1 className="font-semibold">Барааны код</h1>
-                          <input type="text" className="border w-full p-3 rounded-lg" placeholder="#12345678" onChange={(e) => setInput((prev) => ({ ...prev, qty: e.target.value }))}/>
+                          <input type="text" className="border w-full p-3 rounded-lg" placeholder="#12345678" onChange={(e) => setInput((prev) => ({ ...prev, productCode: e.target.value }))}/>
                         </div>
                       </div>
                       <div className="w-full h-52 bg-white rounded-xl p-6 gap-2 flex flex-col">
