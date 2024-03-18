@@ -2,35 +2,48 @@
 import AsideBar from "@/components/AsideBar";
 import Loading from "@/components/Loading";
 import Navbar from "@/components/Navbar";
-import UserOrder from "@/components/UserOrder";
 import Search from "@/images/Search";
 import { month } from "@/utils/Month";
 import { orderStatus } from "@/utils/OrderStatus";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
-import { AutoComplete } from "antd";
+import React, { useContext, useEffect, useState } from "react";
 import useSWR from "swr";
 import AdminOrderTable from "@/components/AdminOrderTable";
+import axios from "axios";
+import AdminOrderContextProvider, {
+  AdminOrderContext,
+} from "@/components/AdminOrderContext";
+import OrderSearch from "@/components/OrderSearch";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const API = "http://localhost:8000/order";
 const page = () => {
+  const { color }: any = useContext(AdminOrderContext);
   const birthDay = new Date();
   const today: number = birthDay.getDate();
   const [activeIndex, setActiveIndex] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [query, setQuery] = useState("");
   const [activeButton, setActiveButton] = useState<string | any>(today);
   const { data, error, isLoading } = useSWR(API, fetcher);
   const router = useRouter();
   const handleStatus = (index: number) => {
     setActiveIndex(index);
   };
+  console.log(data);
+
   let filterData = data?.getAllOrder.filter((e: any) => {
     if (activeButton == today) {
       return e.createdAt.slice(8, 10) == activeButton;
     } else if (activeButton == today - 6) {
       return e.createdAt.slice(8, 10) > activeButton;
+    } else {
+      return e.filter((item: any) =>
+        item.orderNumber.toLowercase().includes(query)
+      );
     }
   });
+  console.log(filterData);
+
   const handleButton = (index: number) => {
     setActiveButton(index);
   };
@@ -38,6 +51,18 @@ const page = () => {
     router.push("/orderDetail");
     localStorage.setItem("orderId", JSON.stringify({ id }));
   };
+  console.log(color);
+
+  // const handleOrderStatus = async (id: number) => {
+  //   try {
+  //     const update = await axios.put(`http://localhost:8000/order/${id}`, {
+  //       status: color,
+  //     });
+  //     console.log(update);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
@@ -46,7 +71,7 @@ const page = () => {
   }, []);
 
   return (
-    <div>
+    <AdminOrderContextProvider>
       {loading === true ? (
         <Loading />
       ) : (
@@ -119,7 +144,11 @@ const page = () => {
                   </div>
                   <div className="flex py-2 px-6 bg-white gap-4 w-[360px] rounded items-center">
                     <Search />
-                    <input type="text" placeholder="Дугаар Имэйл" />
+                    <input
+                      type="text"
+                      placeholder="Дугаар Имэйл"
+                      onChange={(e) => setQuery(e.target.value)}
+                    />
                   </div>
                 </div>
                 <AdminOrderTable filterData={filterData} handler={handler} />
@@ -128,7 +157,7 @@ const page = () => {
           </div>
         </div>
       )}
-    </div>
+    </AdminOrderContextProvider>
   );
 };
 export default page;

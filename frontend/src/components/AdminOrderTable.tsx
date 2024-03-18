@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import UserOrder from "./UserOrder";
+import axios from "axios";
 
-const AdminOrderTable = ({ filterData, handler }: any) => {
+const AdminOrderTable = ({ filterData, handler, handleOrderStatus }: any) => {
+  console.log(filterData);
+
   return (
     <div>
       <div className="bg-white h-fit border rounded-xl border-gray-300 w-full">
@@ -36,6 +39,7 @@ const AdminOrderTable = ({ filterData, handler }: any) => {
                     status={el.status}
                     price={el.amountPaid}
                     onclick={() => handler(el._id)}
+                    handleOrderStatus={() => handleOrderStatus(el._id)}
                   />
                   <div className="border-b bg-gray-200 w-full"></div>
                 </div>

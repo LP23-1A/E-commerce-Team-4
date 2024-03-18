@@ -1,10 +1,8 @@
-import Arrowlogo from "@/images/Arrowlogo";
-import ExpandMore from "@/images/ExpandMore";
 import Right from "@/images/Right";
 import { orderStatus } from "@/utils/OrderStatus";
-import { stat } from "fs";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
+import { AdminOrderContext } from "./AdminOrderContext";
 type props = {
   orderNumber: String;
   date: String;
@@ -12,6 +10,7 @@ type props = {
   price: string;
   status: String;
   onclick: () => void;
+  handleOrderStatus: (id: number) => void;
 };
 const UserOrder: React.FC<props> = ({
   orderNumber,
@@ -20,8 +19,13 @@ const UserOrder: React.FC<props> = ({
   price,
   status,
   onclick,
+  handleOrderStatus,
 }) => {
-  const [color, setColor] = useState("");
+  const { color, setColor }: any = useContext(AdminOrderContext);
+  useEffect(() => {
+    handleOrderStatus;
+  });
+
   return (
     <tr className=" w-full flex justify-between items-center bg-white">
       <td className="w-[300px]">#{orderNumber}</td>
@@ -54,8 +58,12 @@ const UserOrder: React.FC<props> = ({
           }}
         >
           <option value={`${status}`}>{status}</option>
-          {orderStatus.map((e) => {
-            return <option value={`${e.name}`}>{e.name}</option>;
+          {orderStatus.map((e, index) => {
+            return (
+              <option key={index} value={`${e.name}`}>
+                {e.name}
+              </option>
+            );
           })}
         </select>
       </td>
