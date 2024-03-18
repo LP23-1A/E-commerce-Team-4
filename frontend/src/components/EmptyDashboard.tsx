@@ -11,12 +11,12 @@ const DashboardEmpty = () => {
   };
   return (
     <div>
-      <Navbar></Navbar>
+      <Navbar />
       <div className="flex justify-center">
-        <AsideBar></AsideBar>
-        <div className="bg-[#ECEDF0] h-[auto] w-[1218px] px-[auto]">
-          <div className="w-[821px] h-[290px] rounded-2xl drop-shadow-2xl absolute mt-[367px] ml-[140px] z-10 bg-white flex">
-            <div className="ml-[0.75px]  w-[359.56px]">
+        <AsideBar />
+        <div className="bg-[#ECEDF0] h-auto w-full relative">
+          <div className="flex w-[821px] h-[290px] rounded-2xl drop-shadow-2xl absolute mt-[367px] mx-auto items-center justify-center bg-white inset-0">
+            <div className="w-[359.56px]">
               <Working />
             </div>
             <div className="mt-[87.25px] ml-[25px] w-[349px]">
@@ -41,17 +41,17 @@ const DashboardEmpty = () => {
               </button>
             </div>
           </div>
-          <div className="justify-center ml-[24px]">
-            <div className="flex gap-[24px] w-[1170x] mt-[82px] ">
-              <div className="w-[374px] h-[136px] bg-white rounded-xl"></div>
-              <div className="w-[374px] h-[136px] bg-white rounded-xl"></div>
-              <div className="w-[374px] h-[136px] bg-white rounded-xl"></div>
+          <div className="">
+            <div className="flex gap-[24px] w-full mt-[82px] px-8">
+              <div className="w-full h-[150px] bg-white rounded-xl"></div>
+              <div className="w-full h-[150px] bg-white rounded-xl"></div>
+              <div className="w-full h-[150px] bg-white rounded-xl"></div>
             </div>
-            <div className="flex gap-[24px] w-[1170px] mt-[32px]">
-              <div className="w-[581px] h-[706px] bg-white rounded-xl"></div>
+            <div className="flex w-full mt-[32px] px-8 justify-between">
+              <div className="w-full h-[706px] bg-white rounded-xl"></div>
               <div className="flex flex-col gap-[24px]">
-                <div className="w-[565px] h-[349px] bg-white rounded-xl"></div>
-                <div className="w-[565px] h-[333px] bg-white rounded-xl"></div>
+                <div className="w-full h-[349px] bg-white rounded-xl"></div>
+                <div className="w-full h-[333px] bg-white rounded-xl"></div>
               </div>
             </div>
           </div>

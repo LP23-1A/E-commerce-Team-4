@@ -8,9 +8,32 @@ import { month } from "@/utils/Month";
 import { orderStatus } from "@/utils/OrderStatus";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import {AutoComplete} from "antd";
 import useSWR from "swr";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const API = "http://localhost:8000/order";
+const DEFAULT_OPTIONS = [
+  {
+    label: 'One',
+    value: 'One'
+  },
+  {
+    label: 'Two',
+    value: 'Two'
+  },
+  {
+    label: 'Three',
+    value: 'Three'
+  },
+  {
+    label: 'Four',
+    value: 'Four'
+  },
+  {
+    label: 'Five',
+    value: 'Five'
+  }
+]
 const page = () => {
   const birthDay = new Date();
   const today: number = birthDay.getDate();
@@ -18,7 +41,12 @@ const page = () => {
   const [loading, setLoading] = useState(false);
   const [activeButton, setActiveButton] = useState<string | any>(today);
   const { data, error, isLoading } = useSWR(API, fetcher);
+  const [ options, setOptions ] = useState(DEFAULT_OPTIONS)
   const router = useRouter();
+
+  const searching = () => {
+
+  }
   const handleStatus = (index: number) => {
     setActiveIndex(index);
   };
@@ -50,7 +78,7 @@ const page = () => {
       ) : (
         <div>
           <Navbar />
-          <div className="flex w-[1440px] m-auto">
+          <div className="flex w-full m-auto">
             <AsideBar />
             <div className="bg-gray-200 w-full ">
               <div className="flex ">
@@ -115,12 +143,17 @@ const page = () => {
                       })}
                     </select>
                   </div>
-                  <div className="flex py-2 px-6 bg-white gap-2 w-[360px] rounded">
+                  <div className="flex py-2 px-6 bg-white gap-4 w-[360px] rounded items-center">
                     <Search />
-                    <input type="text" placeholder="Дугаар, Имэйл" />
+                    <AutoComplete style={{ width: 300 }}
+                    placeholder="Дугаар, Имэйл"
+                    options={options}
+                    filterOption={true}
+                    onSelect={(value) => {console.log('Selected value:', value)}}/>
+
                   </div>
                 </div>
-                <div className="bg-white h-fit border rounded-xl border-gray-300 w-[1100px]">
+                <div className="bg-white h-fit border rounded-xl border-gray-300 w-full">
                   <h1 className="text-[36px] p-4">Захиалга</h1>
                   <div className="bg-gray-200 py-6 w-full flex flex-col gap-4">
                     <table>
