@@ -6,45 +6,70 @@ import Plus from "@/images/Plus";
 import ToLeft from "@/images/ToLeft";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Modal from "@/components/Modal";
 import Loading from "@/components/Loading";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { log } from "console";
+type data = {
+    productName: string,
+    description: string,
+    productCode: string,
+    price: string,
+    tag: string,
+    residual: string,
+    mainCate: string,
+    subCate: string
+}
 const page = () => {
-  const [input, setInput] = useState({
-    productName: "",
-    categoryId: "",
-    price: "",
-    qty: "",
-    productCode: "",
-    thumbnails: "",
-    description: "",
-    tag: "",
-    residual: "",
-    mainCate: "",
-    subCate: "",
-  });
-  const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(false);
-  const router = useRouter()
-  const createProduct = async () => {
-    try {
-      const res = await axios.post("http://localhost:8000/products/product", {
-        ...input,
-      });
-      console.log(res);
-      
-      setOpen(!open);
-      router.push('/Product')
-    } catch (error) {
-      console.log(error);
+    const [ data, setData ] = useState<data>()
+    const [loading, setLoading] = useState(false);
+    const router = useRouter()
+    const [input, setInput] = useState({
+        productName: "",
+        description: "",
+        productCode: "",
+        price: "",
+        tag: "",
+        residual: "",
+        mainCate: "",
+        subCate: "",
+    });
+    const gettingData = async () => {
+        const productId = JSON.parse(localStorage.getItem("putProduct") as string)
+        try {
+            const res = await axios.get(`http://localhost:8000/products/${productId}`)
+            setData(res.data.getData)
+        } catch (error) {
+            console.log(error);
+        }
     }
-  };
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  },[]);
+    const putProduct = async () => {
+        const productId = JSON.parse(localStorage.getItem("putProduct") as string)
+        try {
+            const res = await axios.put(`http://localhost:8000/products/${productId}`, { ...input })
+            console.log(res);
+            router.push('/Product')
+        } catch (error) {
+            console.log(error);
+        }
+    }  
+    useEffect(() => {
+            setLoading(true);
+            setTimeout(() => {
+                  setLoading(false);
+                }, 500);
+            },[]);
+    useEffect(() => {
+        gettingData()
+    }, [])
+    console.log(data);
+    const name = data?.productName
+    const description = data?.description
+    const productCode = data?.productCode
+    const price = data?.price
+    const tag = data?.tag
+    const residual = data?.residual
+    const mainCate = data?.mainCate
+    const subCate = data?.subCate
   return (
     <div>
       {loading === true ? (
@@ -70,15 +95,15 @@ const page = () => {
                       <div className="w-full bg-white rounded-xl p-6 gap-2 flex flex-col">
                         <div className="flex flex-col gap-1">
                           <h1 className="font-semibold">Бүтээгдэхүүн нэр</h1>
-                          <input type="text" className="border w-full p-3 rounded-lg" placeholder="Нэр" onChange={(e) => setInput((prev) => ({ ...prev, productName: e.target.value }))}/>
+                          <input type="text" className="border w-full p-3 rounded-lg" placeholder={name} onChange={(e) => setInput((prev) => ({ ...prev, productName: e.target.value }))}/>
                         </div>
                         <div className="flex flex-col gap-1">
                           <h1 className="font-semibold">Нэмэлт мэдээлэл</h1>
-                          <input type="text" className="border w-full p-3 rounded-lg h-fit" placeholder="Гол онцлог, давуу тал, техникийн үзүүлэлтүүдийг онцолсон дэлгэрэнгүй, сонирхолтой тайлбар" onChange={(e) => setInput((prev) => ({ ...prev, description: e.target.value }))}/>
+                          <input type="text" className="border w-full p-3 rounded-lg h-fit" placeholder={description} onChange={(e) => setInput((prev) => ({ ...prev, description: e.target.value }))}/>
                         </div>
                         <div className="flex flex-col gap-1">
                           <h1 className="font-semibold">Барааны код</h1>
-                          <input type="text" className="border w-full p-3 rounded-lg" placeholder="#12345678" onChange={(e) => setInput((prev) => ({ ...prev, productCode: e.target.value }))}/>
+                          <input type="text" className="border w-full p-3 rounded-lg" placeholder={productCode} onChange={(e) => setInput((prev) => ({ ...prev, productCode: e.target.value }))}/>
                         </div>
                       </div>
                       <div className="w-full h-52 bg-white rounded-xl p-6 gap-2 flex flex-col">
@@ -102,11 +127,11 @@ const page = () => {
                       <div className="w-full h-[163px] bg-white rounded-xl p-6 gap-2 flex justify-between">
                         <div className="flex flex-col gap-1">
                           <h1 className="font-semibold">Үндсэн үнэ</h1>
-                          <input type="text" placeholder="Үндсэн үнэ" className="border p-2 rounded-lg w-[230px]" onChange={(e) => setInput((prev) => ({ ...prev, price: e.target.value }))}/>
+                          <input type="text" placeholder={price} className="border p-2 rounded-lg w-[230px]" onChange={(e) => setInput((prev) => ({ ...prev, price: e.target.value }))}/>
                         </div>
                         <div className="flex flex-col gap-1">
                           <h1 className="font-semibold">Үлдэгдэл тоо ширхэг</h1>
-                          <input type="text" placeholder="Үлдэгдэл тоо ширхэг" className="border p-2 rounded-lg w-[230px]" onChange={(e) => setInput((prev) => ({ ...prev, residual: e.target.value }))}/>
+                          <input type="text" placeholder={residual} className="border p-2 rounded-lg w-[230px]" onChange={(e) => setInput((prev) => ({ ...prev, residual: e.target.value }))}/>
                         </div>
                       </div>
                     </div>
@@ -114,11 +139,11 @@ const page = () => {
                       <div className="w-full bg-white rounded-xl p-6 gap-2 flex flex-col">
                         <div className="flex flex-col gap-1">
                           <h1 className="font-semibold text-lg">Ерөнхий ангилал</h1>
-                          <input type="text" className="border w-full p-3 rounded-lg h-16" placeholder="Сонгох" onChange={(e) => setInput((prev) => ({ ...prev, mainCate: e.target.value }))}/>
+                          <input type="text" className="border w-full p-3 rounded-lg h-16" placeholder={mainCate} onChange={(e) => setInput((prev) => ({ ...prev, mainCate: e.target.value }))}/>
                         </div>
                         <div className="flex flex-col gap-1">
                           <h1 className="font-semibold text-lg">Дэд ангилал</h1>
-                          <input type="text" className="border w-full p-3 rounded-lg h-16" placeholder="Сонгох" onChange={(e) => setInput((prev) => ({ ...prev, subCate: e.target.value }))}/>
+                          <input type="text" className="border w-full p-3 rounded-lg h-16" placeholder={subCate} onChange={(e) => setInput((prev) => ({ ...prev, subCate: e.target.value }))}/>
                         </div>
                       </div>
                       <div className="w-full bg-white rounded-xl p-6 gap-4 flex flex-col">
@@ -143,7 +168,7 @@ const page = () => {
                       </div>
                       <div className="w-full bg-white rounded-xl p-6 gap-2 flex flex-col">
                         <h1 className="font-semibold text-lg">Таг</h1>
-                        <input type="text" className="border w-full p-3 rounded-lg h-16" placeholder="Таг нэмэх..." onChange={(e) => setInput((prev) => ({ ...prev, tag: e.target.value,}))}/>
+                        <input type="text" className="border w-full p-3 rounded-lg h-16" placeholder={tag} onChange={(e) => setInput((prev) => ({ ...prev, tag: e.target.value,}))}/>
                         <p className="text-gray-600">Санал болгох: Гутал, Цүнх, Эмэгтэй</p>
                       </div>
                     </div>
@@ -152,17 +177,16 @@ const page = () => {
                     <button className="border p-3 px-5 text-black bg-white rounded-lg">
                       Ноорог
                     </button>
-                    <button className="border p-3 px-5 text-white bg-black rounded-lg" onClick={createProduct}>Нийтлэх</button>
+                    <button className="border p-3 px-5 text-white bg-black rounded-lg" onClick={putProduct}>Нийтлэх</button>
                   </div>
                 </div>
               </div>
             </div>
-            {open && <Modal createProduct={createProduct} />}
           </div>
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default page;
+export default page

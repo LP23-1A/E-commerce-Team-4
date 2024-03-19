@@ -13,9 +13,9 @@ const DeleteBtn = ({ val }: any) => {
       }
   return (
     <div>
-        <button className="flex" onClick={() => deleteItem(val)}>
-            <Delete />
-        </button>
+      <button className="flex" onClick={() => deleteItem(val)}>
+        <Delete />
+      </button>
     </div>
   )
 }

@@ -36,7 +36,7 @@ export default function Product() {
     }, 500);
   },[]);
   return (
-    <div className=" ">
+    <div className="">
       {loading === true ? (
         <Loading />
       ) : (

@@ -4,17 +4,14 @@ import Edit from "@/images/Edit";
 import { useRouter } from "next/navigation";
 
 const ProductPutBtn = ({ val }: any) => {
-    const updateItem = async (id: Number) => {
-        try {
-          const items = await axios.put(`http://localhost:8000/products/${id}`)
-
-        } catch (error) {
-          console.log(error);
-        }
-    }
+  const router = useRouter()
+  const editProductPage = (_id: Number) => {
+    localStorage.setItem("putProduct", JSON.stringify(_id))
+    router.push(`/editProduct?productId=${_id}`)
+  }
   return (
     <div>
-        <button className="flex" onClick={() => updateItem(val._id)}>
+        <button className="flex" onClick={() => editProductPage(val)}>
             <Edit />
         </button>
     </div>
