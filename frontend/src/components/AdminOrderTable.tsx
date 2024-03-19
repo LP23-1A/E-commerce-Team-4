@@ -1,10 +1,22 @@
-import React, { useState } from "react";
-import UserOrder from "./UserOrder";
+import React, { useContext, useState } from "react";
 import axios from "axios";
+import { AdminOrderContext } from "./AdminOrderContext";
+import { orderStatus } from "@/utils/OrderStatus";
+import Right from "@/images/Right";
+import { orderHandleStatus } from "@/utils/OrderhandleStatus";
 
-const AdminOrderTable = ({ filterData, handler, handleOrderStatus }: any) => {
-  console.log(filterData);
-
+const AdminOrderTable = ({ filterData, handler }: any) => {
+  const [color, setColor] = useState("");
+  const handleOrderStatus = async (id: number, orderStatus: string) => {
+    try {
+      const update = await axios.put(`http://localhost:8000/order/${id}`, {
+        status: orderStatus,
+      });
+      console.log(update);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div>
       <div className="bg-white h-fit border rounded-xl border-gray-300 w-full">
@@ -13,15 +25,15 @@ const AdminOrderTable = ({ filterData, handler, handleOrderStatus }: any) => {
           <table className="w-full flex   justify-between  ">
             <tbody className="w-full flex flex-col justify-between">
               <tr className="w-full flex justify-between">
-                <th className="w-[300px] flex justify-start">
+                <th className="w-[200px] flex justify-start">
                   Захиалгын ID дугаар
                 </th>
-                <th className="w-[200px]">Захиалагч</th>
-                <th className="w-[200px]">Огноо</th>
-                <th className="w-[200px]">Цаг</th>
-                <th className="w-[200px]">Төлбөр</th>
-                <th className="w-[200px]">Статус</th>
-                <th className="w-[200px]">Дэлгэрэнгүй</th>
+                <th className="w-[200px] flex justify-start">Захиалагч</th>
+                <th className="w-[200px] flex justify-start">Огноо</th>
+                <th className="w-[200px] flex justify-start">Цаг</th>
+                <th className="w-[200px] flex justify-start">Төлбөр</th>
+                <th className="w-[200px] flex justify-start">Статус</th>
+                <th className="w-[200px] flex justify-start">Дэлгэрэнгүй</th>
               </tr>
             </tbody>
           </table>
@@ -31,16 +43,62 @@ const AdminOrderTable = ({ filterData, handler, handleOrderStatus }: any) => {
             filterData?.map((el: any) => {
               return (
                 <div className="w-full">
-                  <UserOrder
-                    key={el._id}
-                    orderNumber={el.orderNumber}
-                    date={el.createdAt.slice(0, 10)}
-                    time={el.createdAt.slice(11, 16)}
-                    status={el.status}
-                    price={el.amountPaid}
-                    onclick={() => handler(el._id)}
-                    handleOrderStatus={() => handleOrderStatus(el._id)}
-                  />
+                  <tr className=" w-full flex justify-between items-center bg-white">
+                    <td className="w-[200px] flex justify-start">
+                      #{el.orderNumber}
+                    </td>
+                    <td className="w-[200px] ">
+                      <p>ZolooSoko</p>
+                      <p className="text-[14px] text-gray font-light">
+                        Zoloo@gmail.com
+                      </p>
+                    </td>
+                    <td className="w-[200px]  text-gray font-light">
+                      {el.createdAt.slice(0, 10)}
+                    </td>
+                    <td className="w-[200px]  text-gray font-light">
+                      {el.createdAt.slice(11, 16)}
+                    </td>
+                    <td className="w-[200px]  text-gray font-light">
+                      {el.amountPaid}
+                    </td>
+                    <td className="w-[200px]  text-gray font-light">
+                      <select
+                        className="py-1 px-2 rounded-xl border "
+                        style={{
+                          backgroundColor:
+                            el.status === "Хүргэгдсэн"
+                              ? "#C1E6CF"
+                              : "" || el.status === "Хүргэлтэнд гарсан"
+                              ? "#B7DDFF"
+                              : "" || el.status === "Шинэ захиалга"
+                              ? "white"
+                              : "" || el.status === "Бэлтгэгдэж байна"
+                              ? "#ECEDFO"
+                              : "" || el.status === "Цуцлагдсан"
+                              ? "#FCBABE"
+                              : "",
+                        }}
+                        value={el.name}
+                        onChange={(e) => {
+                          handleOrderStatus(el._id, e.target.value);
+                        }}
+                      >
+                        <option value={`${el.status}`}>{el.status}</option>
+                        {orderHandleStatus.map((e: any) => {
+                          console.log(el.status);
+
+                          return <option>{e.name}</option>;
+                        })}
+                      </select>
+                    </td>
+                    <td
+                      className="w-[200px] text-[14px] pl-[85px]  cursor-pointer"
+                      onClick={() => handler(el._id)}
+                    >
+                      <Right />
+                    </td>
+                  </tr>
                   <div className="border-b bg-gray-200 w-full"></div>
                 </div>
               );

@@ -32,8 +32,7 @@ export default function Income() {
     setTimeout(() => {
       setLoading(false);
     }, 500);
-  },[]);
-  console.log(data);
+  }, []);
 
   return (
     <div>

@@ -75,7 +75,7 @@ const updateOrder = async (req: Request, res: Response) => {
       description,
       status,
     }: Required<OrderType> = req.body;
-    const getAllOrder = await OrderModel.findByIdAndUpdate(updateById, {
+    const updateOrder = await OrderModel.findByIdAndUpdate(updateById, {
       orderNumber: orderNumber,
       phoneNumber: phoneNumber,
       amountPaid: amountPaid,
@@ -84,7 +84,7 @@ const updateOrder = async (req: Request, res: Response) => {
       description: description,
       status: status,
     });
-    res.status(201).send({ success: true, getAllOrder });
+    res.status(201).send({ success: true, updateOrder });
   } catch (error) {
     res.status(500).send({ success: false, error });
   }

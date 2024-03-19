@@ -7,42 +7,38 @@ import { month } from "@/utils/Month";
 import { orderStatus } from "@/utils/OrderStatus";
 import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
-import useSWR from "swr";
+import useSWR, { useSWRConfig } from "swr";
 import AdminOrderTable from "@/components/AdminOrderTable";
-import axios from "axios";
-import AdminOrderContextProvider, {
-  AdminOrderContext,
-} from "@/components/AdminOrderContext";
-import OrderSearch from "@/components/OrderSearch";
+import AdminOrderContextProvider from "@/components/AdminOrderContext";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const API = "http://localhost:8000/order";
 const page = () => {
-  const { color }: any = useContext(AdminOrderContext);
   const birthDay = new Date();
   const today: number = birthDay.getDate();
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(orderStatus[0].name);
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState("");
   const [activeButton, setActiveButton] = useState<string | any>(today);
   const { data, error, isLoading } = useSWR(API, fetcher);
   const router = useRouter();
+
   const handleStatus = (index: number) => {
-    setActiveIndex(index);
+    setActiveIndex(orderStatus[0 + index].name);
+    handleButton(-1);
   };
-  console.log(data);
 
   let filterData = data?.getAllOrder.filter((e: any) => {
     if (activeButton == today) {
       return e.createdAt.slice(8, 10) == activeButton;
-    } else if (activeButton == today - 6) {
+    } else if (activeButton == today - 7) {
       return e.createdAt.slice(8, 10) > activeButton;
-    } else {
-      return e.filter((item: any) =>
-        item.orderNumber.toLowercase().includes(query)
-      );
+    } else if (activeButton == -1) {
+      if (activeIndex === "Бүгд") {
+        return e;
+      }
+      return e.status.includes(activeIndex);
     }
   });
-  console.log(filterData);
 
   const handleButton = (index: number) => {
     setActiveButton(index);
@@ -51,18 +47,6 @@ const page = () => {
     router.push("/orderDetail");
     localStorage.setItem("orderId", JSON.stringify({ id }));
   };
-  console.log(color);
-
-  // const handleOrderStatus = async (id: number) => {
-  //   try {
-  //     const update = await axios.put(`http://localhost:8000/order/${id}`, {
-  //       status: color,
-  //     });
-  //     console.log(update);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
@@ -86,8 +70,9 @@ const page = () => {
                     <button
                       className="p-3 border-b"
                       style={{
-                        borderBottomColor: activeIndex === index ? "#000" : "",
-                        color: activeIndex === index ? "#000" : "",
+                        borderBottomColor:
+                          activeIndex === el.name ? "#000" : "",
+                        color: activeIndex === el.name ? "#000" : "",
                       }}
                       onClick={() => handleStatus(index)}
                     >
@@ -115,10 +100,10 @@ const page = () => {
                       value={1}
                       style={{
                         backgroundColor:
-                          activeButton === today - 6 ? "green" : "",
-                        color: activeButton === today - 6 ? "white" : "",
+                          activeButton === today - 7 ? "green" : "",
+                        color: activeButton === today - 7 ? "white" : "",
                       }}
-                      onClick={() => handleButton(today - 6)}
+                      onClick={() => handleButton(today - 7)}
                     >
                       7 Хоног
                     </button>
