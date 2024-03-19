@@ -12,10 +12,46 @@ import Loading from "@/components/Loading";
 import Search from "@/images/Search";
 import ProductTable from "@/components/ProductTable";
 import { month } from "@/utils/Month";
+import axios from "axios";
+const API = "http://localhost:8000/products/product";
 
 export default function Product() {
   
   const [loading, setLoading] = useState(false);
+  const [filter, setFilter] = useState("")
+  const [data, setData] = useState([]);
+  const getAllData = async () => {
+      try {
+        const get = await axios.get(API);
+        const res = get.data.getAll;
+        setData(res);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    useEffect(() => {
+      getAllData();
+    }, []);
+  console.log(filter);
+  let amount:[] | any =[]
+  let filterData = data?.filter((e: any) => {
+    if (filter === "") {
+      return e
+    } else if (filter === "эмэгтэй"){
+      return e.mainCate.includes(filter)
+    } else if (filter === "эрэгтэй"){
+      return e.mainCate.includes(filter)
+    } else if (filter === "high"){
+      console.log(e.price)
+      amount.push(e.price)
+      amount.sort((a:number, b:number) => b-a)
+      return e.price === amount[0]
+
+    }
+  })
+
+ 
+  // filterData = filterData.sort((a, b) => a + b)
 
   useEffect(() => {
     setLoading(true);
@@ -64,15 +100,15 @@ export default function Product() {
                         <ExpandMore />
                       </div>
                     </button> */}
-                    <select className="bg-white h-[40px] rounded-lg border-[1px]">
-                      <option>Ангилал</option>
-                      <option>female</option>
-                      <option>male</option>
+                    <select className="bg-white h-[40px] rounded-lg border-[1px]" onChange={(e) => setFilter(e.target.value)}>
+                      <option value={" "} selected>Ангилал</option>
+                      <option value={"эмэгтэй"}>Эмэгтэй</option>
+                      <option value={"эрэгтэй"}>Эрэгтэй</option>
                     </select>
-                    <select className="bg-white h-[40px] rounded-lg border-[1px] justify-center">
-                      <option>Үнэ</option>
-                      <option>Highest to Lowest</option>
-                      <option>Lowest to Highest</option>
+                    <select className="bg-white h-[40px] rounded-lg border-[1px] justify-center" onChange={(e) => setFilter(e.target.value)} >
+                      <option value={""} selected>Үнэ</option>
+                      <option value={"high"}>Highest to Lowest</option>
+                      <option value={"lo2hi"}>Lowest to Highest</option>
                     </select>
                     <select className="bg-white h-[40px] rounded-lg border-[1px]">
                       <option className="flex mx-[11px] gap-[4px] w-[150px]"><Calendar/>Сараар</option>
@@ -94,7 +130,7 @@ export default function Product() {
                     />
                   </div>
                 </div>
-                <ProductTable/>
+                <ProductTable data={filterData} />
               </div>
             </div>
           </div>

@@ -2,22 +2,9 @@ import Delete from "@/images/Delete";
 import Edit from "@/images/Edit";
 import { useState, useEffect } from "react";
 import axios from "axios";
-const API = "http://localhost:8000/products/product";
 
-export default function ProductTable() {
-    const [data, setData] = useState([]);
-    const getAllData = async () => {
-        try {
-          const get = await axios.get(API);
-          const res = get.data.getAll;
-          setData(res);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      useEffect(() => {
-        getAllData();
-      }, []);
+export default function ProductTable({data}:any) {
+   
     return (
         <div className="flex mt-[24px] w-full rounded-xl border-[1px] bg-white">
             <table>
@@ -26,22 +13,22 @@ export default function ProductTable() {
                 <th className="w-[68px] py-[12px] px-[24px] border-b-[1px]">
                     <div className="font-semibold text-sm leading-5">‎</div>
                 </th>
-                <th className="w-[14vw] py-[12px] px-[24px] border-b-[1px] font-semibold text-sm leading-5">
+                <th className="w-[14vw] py-[12px] px-[24px] border-b-[1px] font-semibold text-sm leading-5 text-left">
                     Бүтээгдэхүүн
                 </th>
-                <th className="w-[14vw] py-[12px] px-[24px]] border-b-[1px] font-semibold text-sm leading-5">
+                <th className="w-[14vw] py-[12px] px-[24px] border-b-[1px] font-semibold text-sm leading-5 text-left">
                     Ангилал
                 </th>
-                <th className="w-[14vw] py-[12px] px-[24px] border-b-[1px] font-semibold text-sm leading-5">
+                <th className="w-[14vw] py-[12px] px-[24px] border-b-[1px] font-semibold text-sm leading-5 text-left">
                     Үнэ
                 </th>
-                <th className="w-[14vw] py-[12px] px-[24px] border-b-[1px] font-semibold text-sm leading-5">
+                <th className="w-[14vw] py-[12px] px-[24px] border-b-[1px] font-semibold text-sm leading-5 text-left">
                     Үлдэгдэл
                 </th>
-                <th className="w-[14vw] py-[12px] px-[24px] border-b-[1px] font-semibold text-sm leading-5">
+                <th className="w-[14vw] py-[12px] px-[24px] border-b-[1px] font-semibold text-sm leading-5 text-left">
                     Зарагдсан
                 </th>
-                <th className="w-[14vw] py-[12px] px-[24px] border-b-[1px] font-semibold text-sm leading-5">
+                <th className="w-[14vw] py-[12px] px-[24px] border-b-[1px] font-semibold text-sm leading-5 text-left">
                     Нэмсэн огноо
                 </th>
                 <th className="w-[120px] py-[12px] px-[24px] border-b-[1px]">
@@ -51,7 +38,7 @@ export default function ProductTable() {
             </tbody>
 
             {data &&
-                data.map((val: any, index) => {
+                data.map((val: any, index:number) => {
                 return (
                     <tbody key={index}>
                     <tr >
@@ -66,18 +53,18 @@ export default function ProductTable() {
                                 />
                                 <div className="column">
                                     <p>{val.productName}</p>{" "}
-                                    <p>{val.categoryId}</p>
+                                    <p>{val.productCode}</p>
                                 </div>
                             </div>
                         </td>
                         <td className="py-[12px] px-[24px] border-b-[1px]">
-                            {val.tag}
+                            {val.mainCate}, {val.subCate}
                         </td>
                         <td className="py-[12px] px-[24px] border-b-[1px]">
                             {val.price}₮
                         </td>
                         <td className="py-[12px] px-[24px] border-b-[1px]">
-                            {val.qty}
+                            {val.residual}
                         </td>
                         <td className="py-[12px] px-[24px] border-b-[1px]">
                             {val.sold}
