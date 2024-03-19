@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AdminOrderContext } from "./AdminOrderContext";
 import { orderStatus } from "@/utils/OrderStatus";
@@ -17,6 +17,7 @@ const AdminOrderTable = ({ filterData, handler }: any) => {
       console.log(error);
     }
   };
+
   return (
     <div>
       <div className="bg-white h-fit border rounded-xl border-gray-300 w-full">
@@ -41,6 +42,8 @@ const AdminOrderTable = ({ filterData, handler }: any) => {
         <div className="px-6">
           {filterData &&
             filterData?.map((el: any) => {
+              console.log(el.userId);
+
               return (
                 <div className="w-full">
                   <tr className=" w-full flex justify-between items-center bg-white">
@@ -48,9 +51,9 @@ const AdminOrderTable = ({ filterData, handler }: any) => {
                       #{el.orderNumber}
                     </td>
                     <td className="w-[200px] ">
-                      <p>ZolooSoko</p>
+                      <p>{el.userId?.name}</p>
                       <p className="text-[14px] text-gray font-light">
-                        Zoloo@gmail.com
+                        {el.userId?.email}
                       </p>
                     </td>
                     <td className="w-[200px]  text-gray font-light">

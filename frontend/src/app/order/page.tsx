@@ -21,12 +21,6 @@ const page = () => {
   const [activeButton, setActiveButton] = useState<string | any>(today);
   const { data, error, isLoading } = useSWR(API, fetcher);
   const router = useRouter();
-
-  const handleStatus = (index: number) => {
-    setActiveIndex(orderStatus[0 + index].name);
-    handleButton(-1);
-  };
-
   let filterData = data?.getAllOrder.filter((e: any) => {
     if (activeButton == today) {
       return e.createdAt.slice(8, 10) == activeButton;
@@ -37,16 +31,27 @@ const page = () => {
         return e;
       }
       return e.status.includes(activeIndex);
+    } else if (activeButton == -2) {
+      return e.orderNumber.includes(query) || e.userId?.email.includes(query);
+    } else if (activeButton == -3) {
+      return e.createdAt.slice(5, 7) == query;
     }
   });
 
   const handleButton = (index: number) => {
     setActiveButton(index);
   };
+
   const handler = (id: number) => {
     router.push("/orderDetail");
     localStorage.setItem("orderId", JSON.stringify({ id }));
   };
+
+  const handleStatus = (index: number) => {
+    setActiveIndex(orderStatus[0 + index].name);
+    handleButton(-1);
+  };
+
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
@@ -108,6 +113,7 @@ const page = () => {
                       7 Хоног
                     </button>
                     <select
+                      onChange={(e) => setQuery(e.target.value)}
                       style={{
                         backgroundColor: activeButton === 30 ? "green" : "",
                         color: activeButton === 30 ? "white" : "",
@@ -118,16 +124,20 @@ const page = () => {
                       {month.map((e, ind) => {
                         return (
                           <option
-                            onClick={() => handleButton(ind + 1)}
+                            onClick={() => handleButton(-3)}
                             key={ind}
+                            value={e.value}
                           >
-                            {e.name}
+                            {e.label}
                           </option>
                         );
                       })}
                     </select>
                   </div>
-                  <div className="flex py-2 px-6 bg-white gap-4 w-[360px] rounded items-center">
+                  <div
+                    className="flex py-2 px-6 bg-white gap-4 w-[360px] rounded items-center"
+                    onClick={() => handleButton(-2)}
+                  >
                     <Search />
                     <input
                       type="text"

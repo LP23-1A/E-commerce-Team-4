@@ -29,11 +29,13 @@ const OrderSchema = new mongoose.Schema({
     default: 0,
   },
   description: String,
-  details: {
-    type: mongoose.Types.ObjectId,
-    ref: "product",
-    require: true,
-  },
+  details: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "product",
+      require: true,
+    },
+  ],
 
   createdAt: {
     type: Date,
