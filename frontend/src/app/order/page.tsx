@@ -2,68 +2,56 @@
 import AsideBar from "@/components/AsideBar";
 import Loading from "@/components/Loading";
 import Navbar from "@/components/Navbar";
-import UserOrder from "@/components/UserOrder";
 import Search from "@/images/Search";
 import { month } from "@/utils/Month";
 import { orderStatus } from "@/utils/OrderStatus";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
-import {AutoComplete} from "antd";
-import useSWR from "swr";
+import React, { useContext, useEffect, useState } from "react";
+import useSWR, { useSWRConfig } from "swr";
+import AdminOrderTable from "@/components/AdminOrderTable";
+import AdminOrderContextProvider from "@/components/AdminOrderContext";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const API = "http://localhost:8000/order";
-const DEFAULT_OPTIONS = [
-  {
-    label: 'One',
-    value: 'One'
-  },
-  {
-    label: 'Two',
-    value: 'Two'
-  },
-  {
-    label: 'Three',
-    value: 'Three'
-  },
-  {
-    label: 'Four',
-    value: 'Four'
-  },
-  {
-    label: 'Five',
-    value: 'Five'
-  }
-]
 const page = () => {
   const birthDay = new Date();
   const today: number = birthDay.getDate();
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(orderStatus[0].name);
   const [loading, setLoading] = useState(false);
+  const [query, setQuery] = useState("");
   const [activeButton, setActiveButton] = useState<string | any>(today);
   const { data, error, isLoading } = useSWR(API, fetcher);
-  const [ options, setOptions ] = useState(DEFAULT_OPTIONS)
   const router = useRouter();
-
-  const searching = () => {
-
-  }
-  const handleStatus = (index: number) => {
-    setActiveIndex(index);
-  };
   let filterData = data?.getAllOrder.filter((e: any) => {
     if (activeButton == today) {
       return e.createdAt.slice(8, 10) == activeButton;
-    } else if (activeButton == today - 6) {
+    } else if (activeButton == today - 7) {
       return e.createdAt.slice(8, 10) > activeButton;
+    } else if (activeButton == -1) {
+      if (activeIndex === "Бүгд") {
+        return e;
+      }
+      return e.status.includes(activeIndex);
+    } else if (activeButton == -2) {
+      return e.orderNumber.includes(query) || e.userId?.email.includes(query);
+    } else if (activeButton == -3) {
+      return e.createdAt.slice(5, 7) == query;
     }
   });
+
   const handleButton = (index: number) => {
     setActiveButton(index);
   };
+
   const handler = (id: number) => {
     router.push("/orderDetail");
     localStorage.setItem("orderId", JSON.stringify({ id }));
   };
+
+  const handleStatus = (index: number) => {
+    setActiveIndex(orderStatus[0 + index].name);
+    handleButton(-1);
+  };
+
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
@@ -72,7 +60,7 @@ const page = () => {
   }, []);
 
   return (
-    <div>
+    <AdminOrderContextProvider>
       {loading === true ? (
         <Loading />
       ) : (
@@ -85,10 +73,12 @@ const page = () => {
                 {orderStatus.map((el, index) => {
                   return (
                     <button
+                      key={index}
                       className="p-3 border-b"
                       style={{
-                        borderBottomColor: activeIndex === index ? "#000" : "",
-                        color: activeIndex === index ? "#000" : "",
+                        borderBottomColor:
+                          activeIndex === el.name ? "#000" : "",
+                        color: activeIndex === el.name ? "#000" : "",
                       }}
                       onClick={() => handleStatus(index)}
                     >
@@ -97,7 +87,7 @@ const page = () => {
                   );
                 })}
               </div>
-              <div className="p-8  flex flex-col gap-5 font-bold">
+              <div className="p-8 flex flex-col gap-5 font-bold">
                 <div className="flex justify-between">
                   <div className="flex gap-3">
                     <button
@@ -116,81 +106,51 @@ const page = () => {
                       value={1}
                       style={{
                         backgroundColor:
-                          activeButton === today - 6 ? "green" : "",
-                        color: activeButton === today - 6 ? "white" : "",
+                          activeButton === today - 7 ? "green" : "",
+                        color: activeButton === today - 7 ? "white" : "",
                       }}
-                      onClick={() => handleButton(today - 6)}
+                      onClick={() => handleButton(today - 7)}
                     >
                       7 Хоног
                     </button>
                     <select
+                      onChange={(e) => setQuery(e.target.value)}
+                      onClick={() => handleButton(-3)}
                       style={{
-                        backgroundColor: activeButton === 30 ? "green" : "",
-                        color: activeButton === 30 ? "white" : "",
+                        backgroundColor: activeButton === -3 ? "green" : "",
+                        color: activeButton === -3 ? "white" : "",
                       }}
                       className="flex p-2 bg-white justify-center items-center rounded gap-2"
                     >
                       <option>Сараар</option>
-                      {month.map((e, ind) => {
+                      {month.map((e, index) => {
                         return (
-                          <option
-                            onClick={() => handleButton(ind + 1)}
-                            key={ind}
-                          >
-                            {e.name}
+                          <option key={index} value={e.value}>
+                            {e.label}
                           </option>
                         );
                       })}
                     </select>
                   </div>
-                  <div className="flex py-2 px-6 bg-white gap-4 w-[360px] rounded items-center">
+                  <div
+                    className="flex py-2 px-6 bg-white gap-4 w-[360px] rounded items-center"
+                    onClick={() => handleButton(-2)}
+                  >
                     <Search />
-                    <AutoComplete style={{ width: 300 }}
-                    placeholder="Дугаар, Имэйл"
-                    options={options}
-                    filterOption={true}
-                    onSelect={(value) => {console.log('Selected value:', value)}}/>
-
+                    <input
+                      type="text"
+                      placeholder="Дугаар Имэйл"
+                      onChange={(e) => setQuery(e.target.value)}
+                    />
                   </div>
                 </div>
-                <div className="bg-white h-fit border rounded-xl border-gray-300 w-full">
-                  <h1 className="text-[36px] p-4">Захиалга</h1>
-                  <div className="bg-gray-200 py-6 w-full flex flex-col gap-4">
-                    <table>
-                      <tr>
-                        <th className="w-[200px]">Захиалгын ID дугаар</th>
-                        <th className="w-[160px] pl-3">Захиалагч</th>
-                        <th className="w-[200px] pr-6">Огноо</th>
-                        <th className="w-[100px]">Цаг</th>
-                        <th className="w-[100px] pl-4">Төлбөр</th>
-                        <th className="w-[200px] pr-2">Статус</th>
-                        <th className="pr-6">Дэлгэрэнгүй</th>
-                      </tr>
-                    </table>
-                  </div>
-                  <div className="bg-white rounded-xl px-4 flex flex-col ">
-                    {filterData &&
-                      filterData?.map((el: any) => {
-                        return (
-                          <UserOrder
-                            key={el._id}
-                            orderNumber={el.orderNumber}
-                            date={el.createdAt.slice(0, 10)}
-                            time={el.createdAt.slice(11, 16)}
-                            status={el.status}
-                            price={el.amountPaid}
-                            onclick={() => handler(el._id)}
-                          />
-                        );
-                      })}
-                  </div>
-                </div>
+                <AdminOrderTable filterData={filterData} handler={handler} />
               </div>
             </div>
           </div>
         </div>
       )}
-    </div>
+    </AdminOrderContextProvider>
   );
 };
 export default page;

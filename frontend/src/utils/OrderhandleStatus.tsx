@@ -1,12 +1,6 @@
-export const orderStatus = [
-  {
-    name: "Бүгд",
-  },
+export const orderHandleStatus = [
   {
     name: "Шинэ захиалга",
-  },
-  {
-    name: "Бэлтгэгдэж байна",
   },
   {
     name: "Хүргэлтэнд гарсан",
