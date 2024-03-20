@@ -7,12 +7,12 @@ import ExpandMore from "@/images/ExpandMore";
 import Category from "@/images/Category";
 import Dollar from "@/images/Dollar";
 import Calendar from "@/images/Calendar";
-import Delete from "@/images/Delete";
-import Edit from "@/images/Edit";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Loading from "@/components/Loading";
 import Search from "@/images/Search";
+import DeleteBtn from "@/components/DeleteBtn";
+import ProductPutBtn from "@/components/ProductPutBtn";
 const API = "http://localhost:8000/products/product";
 export default function Product() {
   const [data, setData] = useState([]);
@@ -36,14 +36,14 @@ export default function Product() {
     }, 500);
   }, []);
   return (
-    <div className=" ">
+    <div className="">
       {loading === true ? (
         <Loading />
       ) : (
         <div>
-          <Navbar></Navbar>
+          <Navbar />
           <div className="border-black flex m-auto">
-            <AsideBar></AsideBar>
+            <AsideBar />
             <div className="bg-[#ECEDF0] w-full">
               <div className="flex bg-[#ECEDF0] gap-[10px] h-[56px] align-middle border-b-[1px] border-black-100">
                 <Tab>Бүтээгдэхүүн</Tab>
@@ -162,10 +162,10 @@ export default function Product() {
                                 {val.tag}
                               </td>
                               <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                                {val.price.toLocaleString()}₮
+                                {val.price}₮
                               </td>
                               <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                                {val.qty}
+                                {val.productCode}
                               </td>
                               <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
                                 {val.sold}
@@ -175,12 +175,8 @@ export default function Product() {
                               </td>
                               <td className="w-[68px] p-[16px] border-b-[1px]">
                                 <div className="justify-center flex gap-2">
-                                  <button className="flex">
-                                    <Delete />
-                                  </button>
-                                  <button className="flex">
-                                    <Edit />
-                                  </button>
+                                  <DeleteBtn val={val._id}/>
+                                  <ProductPutBtn val={val._id}/>
                                 </div>
                               </td>
                             </tr>
