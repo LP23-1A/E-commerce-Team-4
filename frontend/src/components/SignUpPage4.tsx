@@ -5,21 +5,18 @@ import { AdminContext } from "./AdminContext";
 import axios, { formToJSON } from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useRouter } from "next/navigation";
+import toast, { Toaster } from "react-hot-toast";
 const BASE_URL = "http://localhost:8000/user";
 const SignUppage4 = ({ back }: any) => {
   const { formDataRef }: any = useContext(AdminContext);
-  const [error, setError] = useState("");
   const router = useRouter();
-  const userData = JSON.parse(localStorage.getItem("userData") as string);
+  const signupData = JSON.parse(localStorage.getItem("signupData") as string);
   const { user }: any = useAuth0();
-  console.log(user);
-  console.log(formDataRef);
-
   const createUser = async () => {
     try {
       const createUser = await axios.post(BASE_URL, {
-        email: user?.email ?? userData?.email,
-        name: user?.nickname ?? userData?.name,
+        email: user?.email ?? signupData.current.email,
+        name: user?.nickname ?? signupData.current.name,
         shopInformation: formDataRef.current.shopInformation,
         city: formDataRef.current.city,
         district: formDataRef.current.district,
@@ -27,14 +24,14 @@ const SignUppage4 = ({ back }: any) => {
         exprience: formDataRef.current.exprience,
         product: formDataRef.current.product,
       });
-      console.log(createUser);
-
       if (createUser) {
+        toast.success("Амжилттай бүртгэгдлээ. 👏");
         localStorage.removeItem("userData");
-        router.push(`/adminDashboard/${createUser.data._id}`);
+        setTimeout(() => {
+          router.push(`/dashboard`);
+        }, 1000);
       }
     } catch (error) {
-      setError("not unique email");
       console.log(error);
     }
   };
@@ -46,15 +43,6 @@ const SignUppage4 = ({ back }: any) => {
       <div className="flex justify-start items-start text-start w-[100%]">
         <Pineconelogo />
       </div>
-      {error && (
-        <div className="border px-6 py-1 bg-red-600 text-white rounded-xl flex gap-2 items-center">
-          <p className="border w-6 h-6 flex justify-center items-center  rounded-3xl bg-red-800">
-            x
-          </p>
-          <p>not unique email</p>
-        </div>
-      )}
-
       <ul className="steps w-[900px]">
         <li className="step step-neutral">Дэлгүүрийн нэр</li>
         <li className="step step-neutral">Бүс нутаг</li>
@@ -95,11 +83,12 @@ const SignUppage4 = ({ back }: any) => {
             <ToLeft />
           </button>
           <button
-            className=" p-3 rounded-lg text-white hover:scale-90 bg-black"
+            className=" p-3 rounded-lg text-white hover:scale-90 bg-gray-400  hover:bg-black"
             onClick={createUser}
           >
             Дараах
           </button>
+          <Toaster position="top-right" />
         </div>
       </div>
     </div>

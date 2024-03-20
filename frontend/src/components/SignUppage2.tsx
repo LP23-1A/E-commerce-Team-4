@@ -10,7 +10,6 @@ const SignUppage2 = ({ next, back }: any) => {
   const handleOnChange = (field: string, value: string | number) => {
     formDataRef.current = { ...formDataRef.current, [field]: value };
   };
-
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
@@ -55,7 +54,7 @@ const SignUppage2 = ({ next, back }: any) => {
                 <ToLeft />
               </button>
               <button
-                className=" p-3 rounded-lg text-white hover:scale-90 bg-black"
+                className=" p-3 rounded-lg text-white bg-gray-400  hover:bg-black"
                 onClick={next}
               >
                 Дараах
