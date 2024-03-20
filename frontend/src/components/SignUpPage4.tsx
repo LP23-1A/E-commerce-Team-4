@@ -31,7 +31,7 @@ const SignUppage4 = ({ back }: any) => {
 
       if (createUser) {
         localStorage.removeItem("userData");
-        router.push("/adminDashboard");
+        router.push(`/adminDashboard/${createUser.data._id}`);
       }
     } catch (error) {
       setError("not unique email");
