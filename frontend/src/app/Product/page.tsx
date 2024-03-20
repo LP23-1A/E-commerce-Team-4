@@ -37,18 +37,26 @@ export default function Product() {
   let filterData = data?.filter((e: any) => {
     if (filter === "") {
       return e
+    } else if (filter === "reset") {
+      return data
     } else if (filter === "эмэгтэй"){
       return e.mainCate.includes(filter)
     } else if (filter === "эрэгтэй"){
       return e.mainCate.includes(filter)
     } else if (filter === "high"){
-      console.log(e.price)
-      amount.push(e.price)
-      amount.sort((a:number, b:number) => b-a)
-      return e.price === amount[0]
+      // console.log(e.price)
+      const ascending = e.slice().sort((a:any, b:any) => a.id - b.id);
+      console.log(ascending)
 
+      // console.log(e.sort((a: any, b: any) => a.price - b.price))
+      // amount.push(e.price)
+      // amount.sort((a:number, b:number) => b-a)
+      // return e.price === amount[0]
+
+    } else if (filter === "low"){
+      return [].slice.call(e).sort((a,b)=> a - b);  
     }
-  })
+    })
 
  
   // filterData = filterData.sort((a, b) => a + b)
@@ -101,14 +109,14 @@ export default function Product() {
                       </div>
                     </button> */}
                     <select className="bg-white h-[40px] rounded-lg border-[1px]" onChange={(e) => setFilter(e.target.value)}>
-                      <option value={" "} selected>Ангилал</option>
+                      <option value={"reset"} selected>Ангилал</option>
                       <option value={"эмэгтэй"}>Эмэгтэй</option>
                       <option value={"эрэгтэй"}>Эрэгтэй</option>
                     </select>
                     <select className="bg-white h-[40px] rounded-lg border-[1px] justify-center" onChange={(e) => setFilter(e.target.value)} >
                       <option value={""} selected>Үнэ</option>
                       <option value={"high"}>Highest to Lowest</option>
-                      <option value={"lo2hi"}>Lowest to Highest</option>
+                      <option value={"low"}>Lowest to Highest</option>
                     </select>
                     <select className="bg-white h-[40px] rounded-lg border-[1px]">
                       <option className="flex mx-[11px] gap-[4px] w-[150px]"><Calendar/>Сараар</option>
