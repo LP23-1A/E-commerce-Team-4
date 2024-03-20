@@ -1,9 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { AdminOrderContext } from "./AdminOrderContext";
-import { orderStatus } from "@/utils/OrderStatus";
 import Right from "@/images/Right";
 import { orderHandleStatus } from "@/utils/OrderhandleStatus";
+import FormatCurrency from "@/utils/FormatCurrency";
 
 const AdminOrderTable = ({ filterData, handler }: any) => {
   const [color, setColor] = useState("");
@@ -12,7 +11,6 @@ const AdminOrderTable = ({ filterData, handler }: any) => {
       const update = await axios.put(`http://localhost:8000/order/${id}`, {
         status: orderStatus,
       });
-      console.log(update);
     } catch (error) {
       console.log(error);
     }
@@ -41,11 +39,9 @@ const AdminOrderTable = ({ filterData, handler }: any) => {
         </div>
         <div className="px-6">
           {filterData &&
-            filterData?.map((el: any) => {
-              console.log(el.userId);
-
+            filterData?.map((el: any, index: number) => {
               return (
-                <div className="w-full">
+                <div className="w-full" key={index}>
                   <tr className=" w-full flex justify-between items-center bg-white">
                     <td className="w-[200px] flex justify-start">
                       #{el.orderNumber}
@@ -63,7 +59,9 @@ const AdminOrderTable = ({ filterData, handler }: any) => {
                       {el.createdAt.slice(11, 16)}
                     </td>
                     <td className="w-[200px]  text-gray font-light">
-                      {el.amountPaid}
+                      {el.amountPaid
+                        .toFixed(2)
+                        .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
                     </td>
                     <td className="w-[200px]  text-gray font-light">
                       <select
@@ -88,10 +86,8 @@ const AdminOrderTable = ({ filterData, handler }: any) => {
                         }}
                       >
                         <option value={`${el.status}`}>{el.status}</option>
-                        {orderHandleStatus.map((e: any) => {
-                          console.log(el.status);
-
-                          return <option>{e.name}</option>;
+                        {orderHandleStatus.map((e: any, index: number) => {
+                          return <option key={index}>{e.name}</option>;
                         })}
                       </select>
                     </td>

@@ -73,6 +73,7 @@ const page = () => {
                 {orderStatus.map((el, index) => {
                   return (
                     <button
+                      key={index}
                       className="p-3 border-b"
                       style={{
                         borderBottomColor:
@@ -114,20 +115,17 @@ const page = () => {
                     </button>
                     <select
                       onChange={(e) => setQuery(e.target.value)}
+                      onClick={() => handleButton(-3)}
                       style={{
-                        backgroundColor: activeButton === 30 ? "green" : "",
-                        color: activeButton === 30 ? "white" : "",
+                        backgroundColor: activeButton === -3 ? "green" : "",
+                        color: activeButton === -3 ? "white" : "",
                       }}
                       className="flex p-2 bg-white justify-center items-center rounded gap-2"
                     >
                       <option>Сараар</option>
-                      {month.map((e, ind) => {
+                      {month.map((e, index) => {
                         return (
-                          <option
-                            onClick={() => handleButton(-3)}
-                            key={ind}
-                            value={e.value}
-                          >
+                          <option key={index} value={e.value}>
                             {e.label}
                           </option>
                         );

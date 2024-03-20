@@ -8,7 +8,7 @@ type OrderType = {
   amountToBePaid: Number;
   coupon: String;
   description: String;
-  details: [];
+  details: string;
   status: String;
 };
 

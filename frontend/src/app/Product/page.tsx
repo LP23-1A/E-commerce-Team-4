@@ -34,7 +34,7 @@ export default function Product() {
     setTimeout(() => {
       setLoading(false);
     }, 500);
-  },[]);
+  }, []);
   return (
     <div className=" ">
       {loading === true ? (
@@ -53,7 +53,7 @@ export default function Product() {
                 <a href="/addProduct">
                   <button className="bg-[#121316] rounded-lg w-[280px] h-[48px] ]">
                     <div className="flex gap-[4px] justify-center align-middle items-center h-[24px]">
-                      <PlusIcon/>
+                      <PlusIcon />
                       <div className="text-white font-semibold text-base/[20px] tracking-[-0.3px]">
                         Бүтээгдэхүүн нэмэх
                       </div>
@@ -86,7 +86,7 @@ export default function Product() {
                   </div>
                   <div className="flex w-[419px] h-[40px] mr-0">
                     <div className="flex items-center z-10 mr-[-35px]">
-                      <Search/>
+                      <Search />
                     </div>
                     <input
                       className="appearance-none border-2 pl-10 border-gray-300 hover:border-gray-400 transition-colors rounded-md w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:ring-purple-600 focus:border-purple-600 focus:shadow-outline"
@@ -142,7 +142,7 @@ export default function Product() {
                       data.map((val: any, index) => {
                         return (
                           <tbody key={index}>
-                            <tr >
+                            <tr>
                               <td className="w-[68px] py-[12px] px-[24px] border-b-[1px]">
                                 <input type="checkbox" name="" id="" />
                               </td>

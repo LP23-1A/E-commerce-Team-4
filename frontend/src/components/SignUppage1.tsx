@@ -25,14 +25,14 @@ export default function SignUppage1({ next }: any) {
       if (adminLogin && adminLogin.data.getUser.role === "admin") {
         const id = adminLogin.data.getUser._id;
         localStorage.setItem("id", JSON.stringify(id));
-        toast.success("Та амжилттай нэвтэрлээ");
+        toast.success("Та амжилттай нэвтэрлээ. 👋🏻");
         setTimeout(() => {
           router.push(`/adminDashboard/${adminLogin.data.getUser._id}`);
         }, 2000);
       }
     } catch (error) {
       console.log(error);
-      toast.error("Таны имэйл хаяг буруу байна");
+      toast.error("Таны имэйл хаяг буруу байна. 🥺");
     }
   };
   const handleOnChange = (field: string, value: string | number) => {
