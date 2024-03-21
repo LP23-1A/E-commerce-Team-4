@@ -1,33 +1,30 @@
-import Income from "@/images/Income";
-import Product from "@/images/Product";
-import Settings from "@/images/Settings";
-import Order from "@/images/Order";
-import Board from "@/images/Board";
+import { Board, Income, Order, Product, Settings } from "@/images";
+
 const id = JSON.parse(localStorage.getItem("id") as string);
 export const data = [
   {
     icon: <Board />,
     name: "Хяналтын самбар",
-    slug: `/adminDashboard/${id}`,
+    slug: `/admin/dashboard/${id}`,
   },
   {
     icon: <Order />,
     name: "Захиалга",
-    slug: "/order",
+    slug: "/admin/order",
   },
   {
     icon: <Income />,
     name: "Орлого",
-    slug: "/income",
+    slug: "/admin/income",
   },
   {
     icon: <Product />,
     name: "Бүтээгдэхүүн",
-    slug: "/Product",
+    slug: "/admin/product",
   },
   {
     icon: <Settings />,
     name: "Тохиргоо",
-    slug: "/settings",
+    slug: "/admin/settings",
   },
 ];

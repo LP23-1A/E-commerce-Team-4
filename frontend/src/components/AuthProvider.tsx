@@ -1,7 +1,7 @@
 "use client";
 import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
 
-const AuthProvider = ({ children }: any) => {
+export const AuthProvider = ({ children }: any) => {
   return (
     <Auth0Provider
       domain="dev-7gtwvyczke6ra0n2.us.auth0.com"
@@ -14,5 +14,3 @@ const AuthProvider = ({ children }: any) => {
     </Auth0Provider>
   );
 };
-
-export default AuthProvider;

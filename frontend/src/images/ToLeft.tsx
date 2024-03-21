@@ -1,6 +1,6 @@
 import React from "react";
 
-const ToLeft = () => {
+export const ToLeft = () => {
   return (
     <div>
       <svg
@@ -21,5 +21,3 @@ const ToLeft = () => {
     </div>
   );
 };
-
-export default ToLeft;

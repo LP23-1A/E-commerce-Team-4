@@ -1,6 +1,6 @@
 import React from "react";
 
-const Plus = () => {
+export const Plus = () => {
   return (
     <div>
       <svg
@@ -21,5 +21,3 @@ const Plus = () => {
     </div>
   );
 };
-
-export default Plus;

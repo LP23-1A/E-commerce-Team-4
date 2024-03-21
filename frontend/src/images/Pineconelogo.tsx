@@ -1,4 +1,4 @@
-export default function Pineconelogo() {
+export const Pineconelogo = () => {
   return (
     <svg
       width="194"
@@ -51,4 +51,4 @@ export default function Pineconelogo() {
       />
     </svg>
   );
-}
+};

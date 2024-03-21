@@ -1,6 +1,6 @@
 import React, { createContext, useRef, useState } from "react";
 export const AdminContext = createContext({});
-const AdminContextProvider = ({ children }: any) => {
+export const AdminContextProvider = ({ children }: any) => {
   const formDataRef = useRef({
     shopInformation: "",
     city: "",
@@ -15,5 +15,3 @@ const AdminContextProvider = ({ children }: any) => {
     </AdminContext.Provider>
   );
 };
-
-export default AdminContextProvider;

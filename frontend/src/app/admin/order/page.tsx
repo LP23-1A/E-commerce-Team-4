@@ -1,15 +1,17 @@
 "use client";
-import AsideBar from "@/components/AsideBar";
-import Loading from "@/components/Loading";
-import Navbar from "@/components/Navbar";
-import Search from "@/images/Search";
 import { month } from "@/utils/Month";
 import { orderStatus } from "@/utils/OrderStatus";
 import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 import useSWR, { useSWRConfig } from "swr";
-import AdminOrderTable from "@/components/AdminOrderTable";
-import AdminOrderContextProvider from "@/components/AdminOrderContext";
+import { Search } from "@/images";
+import {
+  AdminOrderContextProvider,
+  AdminOrderTable,
+  AsideBar,
+  Loading,
+  Navbar,
+} from "@/components";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const API = "http://localhost:8000/order";
 const page = () => {

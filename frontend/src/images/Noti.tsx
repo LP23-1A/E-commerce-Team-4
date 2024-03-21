@@ -1,6 +1,6 @@
 import React from "react";
 
-const Noti = () => {
+export const Noti = () => {
   return (
     <svg
       width="20"
@@ -18,5 +18,3 @@ const Noti = () => {
     </svg>
   );
 };
-
-export default Noti;
