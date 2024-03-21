@@ -9,9 +9,9 @@ const Navbar = () => {
       <div className='flex justify-between mx-auto h-12 items-center'>
         <div><Logo /></div>
         <div className='flex items-center gap-8'>
-            <button><Noti /></button>
-            <button><User /></button>
-            <button className='text-white'>Username</button>
+          <button><Noti /></button>
+          <button><User /></button>
+          <button className='text-white'>Username</button>
         </div>
       </div>
     </div>
