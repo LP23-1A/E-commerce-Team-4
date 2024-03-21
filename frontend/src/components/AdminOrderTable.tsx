@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import Right from "@/images/Right";
 import { orderHandleStatus } from "@/utils/OrderhandleStatus";
 import FormatCurrency from "@/utils/FormatCurrency";
+import { Right } from "@/images";
 
-const AdminOrderTable = ({ filterData, handler }: any) => {
+export const AdminOrderTable = ({ filterData, handler }: any) => {
   const [color, setColor] = useState("");
   const handleOrderStatus = async (id: number, orderStatus: string) => {
     try {
@@ -107,5 +107,3 @@ const AdminOrderTable = ({ filterData, handler }: any) => {
     </div>
   );
 };
-
-export default AdminOrderTable;

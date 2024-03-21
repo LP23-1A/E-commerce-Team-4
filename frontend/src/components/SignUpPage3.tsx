@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
-import Pineconelogo from "@/images/Pineconelogo";
-import ToLeft from "@/images/ToLeft";
 import { AdminContext } from "./AdminContext";
+import { Pineconelogo, ToLeft } from "@/images";
 
-const SignUppage3 = ({ back, next }: any) => {
+export const SignUppage3 = ({ back, next }: any) => {
   const { formDataRef }: any = useContext(AdminContext);
 
   const handleOnChange = (field: string, value: string | number) => {
@@ -68,4 +67,3 @@ const SignUppage3 = ({ back, next }: any) => {
     </div>
   );
 };
-export default SignUppage3;

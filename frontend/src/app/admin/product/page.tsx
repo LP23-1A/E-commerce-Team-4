@@ -1,20 +1,26 @@
 "use client";
-import Navbar from "@/components/Navbar";
-import AsideBar from "@/components/AsideBar";
 import Tab from "@/components/Tab";
-import PlusIcon from "@/images/PlusIcon";
-import ExpandMore from "@/images/ExpandMore";
-import Category from "@/images/Category";
-import Dollar from "@/images/Dollar";
-import Calendar from "@/images/Calendar";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Loading from "@/components/Loading";
-import Search from "@/images/Search";
-import DeleteBtn from "@/components/DeleteBtn";
-import ProductPutBtn from "@/components/ProductPutBtn";
+import { useRouter } from "next/navigation";
+import {
+  Calendar,
+  Category,
+  Dollar,
+  ExpandMore,
+  PlusIcon,
+  Search,
+} from "@/images";
+import {
+  AsideBar,
+  DeleteBtn,
+  Loading,
+  Navbar,
+  ProductPutBtn,
+} from "@/components";
 const API = "http://localhost:8000/products/product";
 export default function Product() {
+  const router = useRouter();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const getAllData = async () => {
@@ -35,6 +41,9 @@ export default function Product() {
       setLoading(false);
     }, 500);
   }, []);
+  const handler = () => {
+    router.push("/admin/product/addProduct");
+  };
   return (
     <div className="">
       {loading === true ? (
@@ -50,16 +59,18 @@ export default function Product() {
                 <Tab>Ангилал</Tab>
               </div>
               <div className="p-[24px] gap-[24px]">
-                <a href="/addProduct">
-                  <button className="bg-[#121316] rounded-lg w-[280px] h-[48px] ]">
-                    <div className="flex gap-[4px] justify-center align-middle items-center h-[24px]">
-                      <PlusIcon />
-                      <div className="text-white font-semibold text-base/[20px] tracking-[-0.3px]">
-                        Бүтээгдэхүүн нэмэх
-                      </div>
+                <button
+                  className="bg-[#121316] rounded-lg w-[280px] h-[48px] ]"
+                  onClick={handler}
+                >
+                  <div className="flex gap-[4px] justify-center align-middle items-center h-[24px]">
+                    <PlusIcon />
+                    <div className="text-white font-semibold text-base/[20px] tracking-[-0.3px]">
+                      Бүтээгдэхүүн нэмэх
                     </div>
-                  </button>
-                </a>
+                  </div>
+                </button>
+
                 <div className="w-full h-[40px] justify-between mt-[24px] flex">
                   <div className="flex gap-[13px]">
                     <button className="bg-white h-[40px] rounded-lg border-[1px]">
@@ -175,8 +186,8 @@ export default function Product() {
                               </td>
                               <td className="w-[68px] p-[16px] border-b-[1px]">
                                 <div className="justify-center flex gap-2">
-                                  <DeleteBtn val={val._id}/>
-                                  <ProductPutBtn val={val._id}/>
+                                  <DeleteBtn val={val._id} />
+                                  <ProductPutBtn val={val._id} />
                                 </div>
                               </td>
                             </tr>

@@ -1,12 +1,10 @@
-import React from 'react'
-import img from '@/../public/settings.svg'
+import React from "react";
+import img from "@/../public/settings.svg";
 
-const Settings = () => {
+export const Settings = () => {
   return (
     <div>
       <img src={img.src} alt="" />
     </div>
-  )
-}
-
-export default Settings
+  );
+};

@@ -1,4 +1,4 @@
-export default function Edit() {
+export const Edit = () => {
   return (
     <svg
       width="20"
@@ -14,4 +14,4 @@ export default function Edit() {
       />
     </svg>
   );
-}
+};

@@ -1,6 +1,6 @@
 import React from "react";
 
-const Applelogo = () => {
+export const Applelogo = () => {
   return (
     <svg
       width="22"
@@ -18,5 +18,3 @@ const Applelogo = () => {
     </svg>
   );
 };
-
-export default Applelogo;

@@ -9,7 +9,7 @@ export type color = {
   color: String;
 };
 export const AdminOrderContext = createContext({} as adminOrderContext);
-const AdminOrderContextProvider = ({ children }: props) => {
+export const AdminOrderContextProvider = ({ children }: props) => {
   const [color, setColor] = useState<color | any>("");
   return (
     <AdminOrderContext.Provider value={{ color, setColor }}>
@@ -17,5 +17,3 @@ const AdminOrderContextProvider = ({ children }: props) => {
     </AdminOrderContext.Provider>
   );
 };
-
-export default AdminOrderContextProvider;

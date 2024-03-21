@@ -1,12 +1,10 @@
-import React from 'react'
-import img from '@/../public/zahialga.svg'
+import React from "react";
+import img from "@/../public/zahialga.svg";
 
-const Order = () => {
+export const Order = () => {
   return (
     <div>
       <img src={img.src} alt="" />
     </div>
-  )
-}
-
-export default Order
+  );
+};
