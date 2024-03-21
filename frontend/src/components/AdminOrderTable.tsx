@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import Right from "@/images/Right";
 import { orderHandleStatus } from "@/utils/OrderhandleStatus";
-import FormatCurrency from "@/utils/FormatCurrency";
+import toast, { Toaster } from "react-hot-toast";
+import { Right } from "@/images";
 
-const AdminOrderTable = ({ filterData, handler }: any) => {
+export const AdminOrderTable = ({ filterData, handler }: any) => {
   const [color, setColor] = useState("");
   const handleOrderStatus = async (id: number, orderStatus: string) => {
     try {
@@ -12,12 +12,13 @@ const AdminOrderTable = ({ filterData, handler }: any) => {
         status: orderStatus,
       });
     } catch (error) {
-      console.log(error);
+      toast.error("амжилтгүй боллоо.");
     }
   };
 
   return (
     <div>
+      <Toaster position="top-right" />
       <div className="bg-white h-fit border rounded-xl border-gray-300 w-full">
         <h1 className="text-[36px] p-4">Захиалга</h1>
         <div className="bg-gray-200 py-6 w-full flex px-6">
@@ -107,5 +108,3 @@ const AdminOrderTable = ({ filterData, handler }: any) => {
     </div>
   );
 };
-
-export default AdminOrderTable;

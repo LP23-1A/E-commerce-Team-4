@@ -1,11 +1,10 @@
 import React, { useContext, useState } from "react";
-import Pineconelogo from "@/images/Pineconelogo";
-import ToLeft from "@/images/ToLeft";
 import { AdminContext } from "./AdminContext";
 import axios, { formToJSON } from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
+import { Pineconelogo, ToLeft } from "@/images";
 const BASE_URL = "http://localhost:8000/user";
 const SignUppage4 = ({ back }: any) => {
   const { formDataRef }: any = useContext(AdminContext);

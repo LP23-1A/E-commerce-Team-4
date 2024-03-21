@@ -1,6 +1,6 @@
 import React from "react";
 
-const Board = () => {
+export const Board = () => {
   return (
     <div>
       <svg
@@ -23,5 +23,3 @@ const Board = () => {
     </div>
   );
 };
-
-export default Board;

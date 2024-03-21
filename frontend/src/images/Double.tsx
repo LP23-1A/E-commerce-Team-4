@@ -1,6 +1,6 @@
 import React from "react";
 
-const Double = () => {
+export const Double = () => {
   return (
     <div>
       <svg
@@ -71,5 +71,3 @@ const Double = () => {
     </div>
   );
 };
-
-export default Double;

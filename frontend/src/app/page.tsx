@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import SignUppage1 from "@/components/SignUppage1";
-import AdminContextProvider from "@/components/AdminContext";
+
+import { AdminContextProvider, SignUppage1 } from "@/components/index";
 
 const Home = () => {
   return (

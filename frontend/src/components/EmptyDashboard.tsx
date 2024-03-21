@@ -1,13 +1,11 @@
-import Working from "@/images/Working";
-import ToLeft from "@/images/ToLeft";
-import Navbar from "@/components/Navbar";
-import AsideBar from "@/components/AsideBar";
 import { useRouter } from "next/navigation";
+import { ToLeft, Working } from "@/images";
+import { AsideBar, Navbar } from ".";
 
-const DashboardEmpty = () => {
+export const DashboardEmpty = () => {
   const router = useRouter();
   const handler = () => {
-    router.push("/settings");
+    router.push("/admin/settings");
   };
   return (
     <div>
@@ -60,5 +58,3 @@ const DashboardEmpty = () => {
     </div>
   );
 };
-
-export default DashboardEmpty;

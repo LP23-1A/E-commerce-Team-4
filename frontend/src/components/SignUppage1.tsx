@@ -1,17 +1,21 @@
 "use client";
-import Pineconelogo from "@/images/Pineconelogo";
 import React, { useEffect, useRef } from "react";
-import Applelogo from "../images/Applelogo";
-import Googlelogo from "@/images/Googlelogo";
-import Microsoftlogo from "@/images/Microsoftlogo";
-import Arrowlogo from "@/images/Arrowlogo";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import useSWR from "swr";
+import {
+  Applelogo,
+  Arrowlogo,
+  Googlelogo,
+  Microsoftlogo,
+  Pineconelogo,
+} from "@/images";
+
 const API = "http://localhost:8000/user";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
-export default function SignUppage1({ next }: any) {
+
+export function SignUppage1({ next }: any) {
   const { data, error, isLoading } = useSWR(API, fetcher);
   const getAllUser = data?.getAll;
   const { loginWithRedirect } = useAuth0();
@@ -30,9 +34,7 @@ export default function SignUppage1({ next }: any) {
     );
     if (filter.length === 0) {
       localStorage.setItem("signupData", JSON.stringify(userRef));
-      setTimeout(() => {
-        router.push(`/signupStep`);
-      }, 1000);
+      router.push(`/admin/signupStep`);
     } else {
       toast.error("Таны имэйл бүртгэлтэй байна. 🤙");
     }

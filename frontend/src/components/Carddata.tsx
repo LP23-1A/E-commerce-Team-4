@@ -17,7 +17,7 @@ let data = [
 ];
 import React from "react";
 
-const Carddata = () => {
+export const Carddata = () => {
   return (
     <div className="flex justify-between w-full gap-10">
       {data.map((el) => {
@@ -32,5 +32,3 @@ const Carddata = () => {
     </div>
   );
 };
-
-export default Carddata;

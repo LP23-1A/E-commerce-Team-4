@@ -1,6 +1,6 @@
 import React from "react";
 
-const Right = () => {
+export const Right = () => {
   return (
     <div>
       <svg
@@ -20,5 +20,3 @@ const Right = () => {
     </div>
   );
 };
-
-export default Right;

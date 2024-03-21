@@ -1,12 +1,10 @@
-import React from 'react'
-import img from '@/../public/product.svg'
+import React from "react";
+import img from "@/../public/product.svg";
 
-const Product = () => {
+export const Product = () => {
   return (
     <div>
       <img src={img.src} alt="" />
     </div>
-  )
-}
-
-export default Product
+  );
+};

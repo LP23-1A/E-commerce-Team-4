@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
-import Pineconelogo from "@/images/Pineconelogo";
-import ToLeft from "@/images/ToLeft";
 import { AdminContext } from "./AdminContext";
+import { Pineconelogo, ToLeft } from "@/images";
 
 const SignUppage3 = ({ back, next }: any) => {
   const { formDataRef }: any = useContext(AdminContext);

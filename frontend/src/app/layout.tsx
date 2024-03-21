@@ -18,7 +18,7 @@ export default function RootLayout({
           domain="dev-7gtwvyczke6ra0n2.us.auth0.com"
           clientId="OYbhi5QRT2JMxtzT6uHZjmLqIfLLmZ16"
           authorizationParams={{
-            redirect_uri: window.location.origin + "/middleware",
+            redirect_uri: window.location.origin + "/admin/middleware",
           }}
         >
           {children}

@@ -1,41 +1,24 @@
 "use client";
-import AsideBar from "@/components/AsideBar";
-import Carddata from "@/components/Carddata";
-import Example from "@/components/Chart";
-import DashboardEmpty from "@/components/EmptyDashboard";
-import Loading from "@/components/Loading";
-import Navbar from "@/components/Navbar";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-const URL = "http://localhost:8000/products/product";
+
+import {
+  AsideBar,
+  Carddata,
+  DashboardEmpty,
+  Example,
+  Navbar,
+} from "@/components";
+import useSWR from "swr";
+
+const API = "http://localhost:8000/products/product";
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const page = () => {
-  const [data, setData] = React.useState([]);
-  const [loading, setLoading] = useState(false);
-  const handler = async () => {
-    try {
-      const { data } = await axios.get(URL);
-      const res = data.getAll;
-      setData(res);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  React.useEffect(() => {
-    handler();
-  }, []);
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  }, []);
-  if (loading) {
-    return <Loading />;
-  }
+  const { data, error, isLoading } = useSWR(API, fetcher);
+  const productData = data?.getAll;
+
   return (
     <div>
-      {data.length === 0 ? (
+      {!data ? (
         <DashboardEmpty />
       ) : (
         <div>
@@ -56,10 +39,13 @@ const page = () => {
                     <p>Үнэ</p>
                   </div>
                   <div>
-                    {data &&
-                      data.map((el: any, index) => {
+                    {productData &&
+                      productData.map((el: any, index: number) => {
                         return (
-                          <div className="flex justify-between w-[100%] px-[60px] border-b-2 border-gray-200  ">
+                          <div
+                            className="flex justify-between w-[100%] px-[60px] border-b-2 border-gray-200"
+                            key={index}
+                          >
                             <p>{index + 1}</p>
                             <div className="flex items-center w-[110px] justify-start gap-4">
                               <img

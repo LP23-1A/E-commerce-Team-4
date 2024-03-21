@@ -1,5 +1,5 @@
 "use client";
-import Loading from "@/components/Loading";
+import { Loading } from "@/components";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
@@ -18,7 +18,7 @@ const page = () => {
       if (loginUser) {
         for (const el of loginUser) {
           if (el.email == user?.email && el.role === "admin") {
-            router.push(`/adminDashboard/${el._id}`);
+            router.push(`/admin/dashboard/${el._id}`);
           } else if (el.email !== user?.email) {
             router.push("/signupStep");
           } else if (el.email == user?.email && el.role === "user") {
