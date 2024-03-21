@@ -1,43 +1,43 @@
 "use client";
 import Pineconelogo from "@/images/Pineconelogo";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Applelogo from "../images/Applelogo";
 import Googlelogo from "@/images/Googlelogo";
 import Microsoftlogo from "@/images/Microsoftlogo";
 import Arrowlogo from "@/images/Arrowlogo";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useRouter } from "next/navigation";
-import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-const API = "http://localhost:8000/user/one";
+import useSWR from "swr";
+const API = "http://localhost:8000/user";
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 export default function SignUppage1({ next }: any) {
+  const { data, error, isLoading } = useSWR(API, fetcher);
+  const getAllUser = data?.getAll;
   const { loginWithRedirect } = useAuth0();
   const router = useRouter();
-  const adminRef = useRef({
+  const userRef = useRef({
     email: "",
     name: "",
   });
+  const handleOnChange = (field: string, value: string | number) => {
+    userRef.current = { ...userRef.current, [field]: value };
+  };
+
   const handler = async () => {
-    try {
-      const adminLogin: any = await axios.post(API, {
-        email: adminRef.current.email,
-      });
-      if (adminLogin && adminLogin.data.getUser.role === "admin") {
-        const id = adminLogin.data.getUser._id;
-        localStorage.setItem("id", JSON.stringify(id));
-        toast.success("Та амжилттай нэвтэрлээ. 👋🏻");
-        setTimeout(() => {
-          router.push(`/adminDashboard/${adminLogin.data.getUser._id}`);
-        }, 2000);
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error("Таны имэйл хаяг буруу байна. 🥺");
+    const filter = getAllUser.filter(
+      (e: any) => userRef.current.email === e.email
+    );
+    if (filter.length === 0) {
+      localStorage.setItem("signupData", JSON.stringify(userRef));
+      setTimeout(() => {
+        router.push(`/signupStep`);
+      }, 1000);
+    } else {
+      toast.error("Таны имэйл бүртгэлтэй байна. 🤙");
     }
   };
-  const handleOnChange = (field: string, value: string | number) => {
-    adminRef.current = { ...adminRef.current, [field]: value };
-  };
+
   return (
     <div className="flex flex-col justify-center items-center gap-[100px] py-[30px] px-[30px]">
       <div className="flex justify-start items-start text-start w-[100%]">
@@ -71,8 +71,6 @@ export default function SignUppage1({ next }: any) {
           <Arrowlogo />
         </button>
         <Toaster position="top-right" />
-        <Toaster position="top-right" />
-
         <div className="border-t-[2px] border-b-[2px]  border-gray-200 py-[20px] flex flex-col w-[100%] gap-[20px]">
           <button
             className="bg-gray-200 h-[50px] flex justify-center items-center gap-[10px]  rounded-[5px] text-black w-[100%] hover:scale-95 "

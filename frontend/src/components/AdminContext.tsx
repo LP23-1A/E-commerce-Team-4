@@ -2,8 +2,6 @@ import React, { createContext, useRef, useState } from "react";
 export const AdminContext = createContext({});
 const AdminContextProvider = ({ children }: any) => {
   const formDataRef = useRef({
-    email: "",
-    name: "",
     shopInformation: "",
     city: "",
     district: "",

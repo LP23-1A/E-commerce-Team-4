@@ -58,7 +58,7 @@ const SignUppage3 = ({ back, next }: any) => {
             <ToLeft />
           </button>
           <button
-            className=" p-3 rounded-lg text-white hover:scale-90 bg-black"
+            className=" p-3 rounded-lg text-white hover:scale-90 bg-gray-400  hover:bg-black"
             onClick={next}
           >
             Дараах

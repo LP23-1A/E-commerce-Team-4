@@ -93,6 +93,15 @@ const updateUser = async (req: Request, res: Response) => {
   }
 };
 
+const getAllUser = async (req: Request, res: Response) => {
+  try {
+    const getAll = await UserModel.find();
+    res.status(200).send({ success: true, getAll });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const deleteUser = async (req: Request, res: Response) => {
   try {
     const deleteId = req.body.id;
@@ -102,4 +111,4 @@ const deleteUser = async (req: Request, res: Response) => {
     res.status(500).send({ success: false, error });
   }
 };
-export { createUser, getUser, updateUser, deleteUser };
+export { createUser, getUser, updateUser, deleteUser, getAllUser };
