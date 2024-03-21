@@ -15,7 +15,7 @@ const app = express();
 app.use(cors({ origin: "*" }));
 
 app.use(express.json());
-app.get("/", (req, res) => {
+app.get("/", (req: any, res: any) => {
   res.status(200).send({ success: true, message: "hello world" });
 });
 app.use("/products", product);

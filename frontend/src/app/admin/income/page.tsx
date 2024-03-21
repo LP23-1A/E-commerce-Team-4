@@ -16,10 +16,10 @@ const page = () => {
       <div className="flex m-auto">
         <AsideBar />
         <div className="bg-[#ECEDF0] w-full py-10 px-10">
-          <div className=" bg-white rounded-xl w-1/2 m-auto">
+          <div className=" bg-white rounded-xl m-auto w-[680px]">
             <div className="border-b-[1px] border-black-100">
               <div className="px-[24px] py-[20px] flex gap-4 justify-between">
-                <div className="w-[516px]">
+                <div className="w-fit">
                   <p className="w-[73px] h-[28px] font-bold text-xl tracking-tighter">
                     Орлого
                   </p>
@@ -53,7 +53,7 @@ const page = () => {
               </div>
             </div>
           </div>
-          <div className="flex mx-auto mt-[24px] w-1/2 rounded-xl border-[1px] bg-white">
+          <div className="flex mx-auto mt-[24px] w-[680px] rounded-xl border-[1px] bg-white">
             <table>
               <tbody>
                 <tr className="flex justify-between w-full px-6">

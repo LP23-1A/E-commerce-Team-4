@@ -2,9 +2,9 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { log } from "console";
 import { Img, Plus, ToLeft } from "@/images";
 import { AsideBar, Modal, Navbar } from "@/components";
+
 const page = () => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
