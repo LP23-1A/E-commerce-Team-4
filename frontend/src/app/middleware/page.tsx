@@ -11,19 +11,22 @@ const page = () => {
   const { data, error, isLoading } = useSWR(API, fetcher);
   const router = useRouter();
   const userData = data?.getAll;
-  console.log(user);
-  console.log();
 
   useEffect(() => {
-    userData?.filter((e: any) => {
-      if (e.email === user?.email && e.role === "admin") {
-        router.push(`/adminDashboard/${e._id}`);
-      } else if (e.email === user?.email && e.role === "user") {
-        router.push("/dashboard");
-      } else if (e.email !== user?.email) {
-        router.push("/signupStep");
+    const loginUser = userData?.filter((e: any) => user?.email == e.email);
+    setTimeout(() => {
+      if (loginUser) {
+        for (const el of loginUser) {
+          if (el.email == user?.email && el.role === "admin") {
+            router.push(`/adminDashboard/${el._id}`);
+          } else if (el.email !== user?.email) {
+            router.push("/signupStep");
+          } else if (el.email == user?.email && el.role === "user") {
+            router.push("/dashboard");
+          }
+        }
       }
-    });
+    }, 1000);
   }, [user?.email]);
   return (
     <div>

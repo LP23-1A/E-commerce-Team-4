@@ -7,7 +7,6 @@ import Microsoftlogo from "@/images/Microsoftlogo";
 import Arrowlogo from "@/images/Arrowlogo";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useRouter } from "next/navigation";
-import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import useSWR from "swr";
 const API = "http://localhost:8000/user";
