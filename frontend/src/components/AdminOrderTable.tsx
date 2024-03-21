@@ -3,8 +3,12 @@ import axios from "axios";
 import { orderHandleStatus } from "@/utils/OrderhandleStatus";
 import FormatCurrency from "@/utils/FormatCurrency";
 import { Right } from "@/images";
+import { AdminOrderContext } from ".";
 
 export const AdminOrderTable = ({ filterData, handler }: any) => {
+  const { orderData, dayFilter }: any = useContext(AdminOrderContext);
+  console.log(orderData);
+
   const [color, setColor] = useState("");
   const handleOrderStatus = async (id: number, orderStatus: string) => {
     try {
@@ -37,9 +41,10 @@ export const AdminOrderTable = ({ filterData, handler }: any) => {
             </tbody>
           </table>
         </div>
+        <button onClick={() => dayFilter()}>hello</button>
         <div className="px-6">
-          {filterData &&
-            filterData?.map((el: any, index: number) => {
+          {orderData &&
+            orderData?.map((el: any, index: number) => {
               return (
                 <div className="w-full" key={index}>
                   <tr className=" w-full flex justify-between items-center bg-white">
