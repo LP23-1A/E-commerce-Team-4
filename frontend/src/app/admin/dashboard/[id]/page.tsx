@@ -1,6 +1,5 @@
 "use client";
-import { AsideBar, Carddata, DashboardEmpty, Navbar } from "@/components";
-import Example from "@/components/Chart";
+import { AsideBar, DashboardEmpty, Navbar, Amountpaid, Order, User, Chart, Chartreg} from "@/components";
 import useSWR from "swr";
 
 const API = "http://localhost:8000/products/product";
@@ -9,7 +8,6 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const page = () => {
   const { data, error, isLoading } = useSWR(API, fetcher);
   const productData = data?.getAll;
-
   return (
     <div>
       {!data ? (
@@ -20,8 +18,11 @@ const page = () => {
           <div className="flex m-auto">
             <AsideBar />
             <div className=" h-[100vh] flex flex-col gap-[24px] bg-gray-200 py-[40px] px-[40px] w-full">
-              <div className="flex justify-between">
-                <Carddata />
+              <div className="flex justify-between gap-[24px]">
+                {/* <Carddata /> */}
+                <Amountpaid/>
+                <Order/>
+                <User/>
               </div>
               <div className="flex justify-between gap-[40px]">
                 <div className="w-1/2 bg-white rounded-[10px] px-[40px] flex flex-col py-[40px] gap-[30px]">
@@ -36,9 +37,9 @@ const page = () => {
                     {productData &&
                       productData?.map((el: any, index: number) => {
                         return (
-                          <div className="flex justify-between w-[100%] px-[60px] border-b-2 border-gray-200  ">
+                          <div className="flex justify-between w-[100%] px-[40px] border-b-2 border-gray-200  ">
                             <p>{index + 1}</p>
-                            <div className="flex items-center w-[110px] justify-start gap-4">
+                            <div className="flex items-center w-[150px] justify-start gap-4">
                               <img
                                 className="w-[40px] h-[40px] rounded-[50%]"
                                 src={el.images}
@@ -53,35 +54,11 @@ const page = () => {
                   </div>
                 </div>
                 <div className="flex flex-col gap-[40px] w-1/2">
-                  <div className="w-full h-[369px] bg-white rounded-[10px] py-[24px]">
-                    <Example />
+                  <div className="w-full h-[369px] bg-white rounded-[10px] px-[24px] pyt-[24px]">
+                    <Chart/>
                   </div>
-                  <div className="w-full h-[363px] bg-white rounded-[10px] px-[24px] py-[24px] flex flex-col gap-[24px]">
-                    <div>
-                      <p className="text-xl font-bold">Идэвхтэй бүс нутаг</p>
-                    </div>
-                    <div className="w-[100%] flex flex-col gap-[24px]">
-                      <div className="flex gap-2 justify-between">
-                        <p>Ulaanbator</p>
-                        <input type="range" className="w-[400px] text-black" />
-                        <p>70%</p>
-                      </div>
-                      <div className="flex gap-2 justify-between">
-                        <p>Ulaanbator</p>
-                        <input type="range" className="w-[400px]" />
-                        <p>70%</p>
-                      </div>
-                      <div className="flex gap-2 justify-between">
-                        <p>Ulaanbator</p>
-                        <input type="range" className="w-[400px]" />
-                        <p>70%</p>
-                      </div>
-                      <div className="flex gap-2 justify-between">
-                        <p>Ulaanbator</p>
-                        <input type="range" className="w-[400px]" />
-                        <p>70%</p>
-                      </div>
-                    </div>
+                  <div className="w-full h-[363px] px-[24px] bg-white rounded-[10px] flex flex-col">
+                    <Chartreg/>
                   </div>
                 </div>
               </div>
