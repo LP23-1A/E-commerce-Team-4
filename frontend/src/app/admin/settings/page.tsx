@@ -3,13 +3,14 @@ import { AsideBar, Navbar } from "@/components";
 import { Check, Search } from "@/images";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+
 const id = JSON.parse(localStorage.getItem("id") as string);
 const API = `http://localhost:8000/user/${id}`;
+
 const page = () => {
   const [check, setCheck] = useState(false);
   const [shopInformation, setShopInformation] = useState("");
-  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const handler = async () => {
     try {
@@ -22,12 +23,6 @@ const page = () => {
     }
   };
 
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  }, []);
   const handleAddProduct = () => {
     router.push("/addProduct");
   };

@@ -1,6 +1,6 @@
 "use client";
 import { AsideBar, Navbar } from "@/components";
-import { Calendar, Down, Download, ExpandMore } from "@/images";
+import { Calendar, Down, ExpandMore } from "@/images";
 import useSWR from "swr";
 
 const API = "http://localhost:8000/products/product";

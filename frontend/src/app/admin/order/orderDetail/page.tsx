@@ -1,15 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
 import { Down, ToLeft } from "@/images";
 import { AsideBar, Navbar } from "@/components";
+
 const API = "http://localhost:8000/order/one";
+
 const page = () => {
   const orderId = JSON.parse(localStorage.getItem("orderId") as string);
   const [data, setData] = useState<string[] | any>([]);
-  const [loading, setLoading] = useState(false);
-
   const getOrderData = async () => {
     try {
       const get = await axios.post(API, { _id: orderId.id });
@@ -18,18 +17,9 @@ const page = () => {
       console.log(error);
     }
   };
-  console.log(data);
-  let pr = 0;
 
   useEffect(() => {
     getOrderData();
-    // localStorage.removeItem("orderId");
-  }, []);
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
   }, []);
 
   return (

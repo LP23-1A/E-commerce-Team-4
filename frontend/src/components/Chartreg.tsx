@@ -1,14 +1,13 @@
 "use client";
-import { Chart as ChartJS, plugins } from "chart.js/auto";
 import { Bar } from "react-chartjs-2";
 
-export const  Chartreg = () =>{
+export const Chartreg = () => {
   return (
-    <div className="bg-white rounded-xl">
-      <h1 className="">Идэвхтэй бүс нутаг</h1>
-      <div>
+    <div className="bg-white rounded-xl p-4">
+      <h1 className="font-bold">Идэвхтэй бүс нутаг</h1>
+      <div style={{ height: "350px" }}>
         <Bar
-          style={{ maxWidth: "fit" ,height: "100vh" }}
+          style={{ maxWidth: "fit", height: "100vh" }}
           data={{
             labels: ["Улаанбаатар", "Дархан ", "Эрдэнэт ", "Бусад"],
             datasets: [
@@ -31,4 +30,4 @@ export const  Chartreg = () =>{
       </div>
     </div>
   );
-}
+};

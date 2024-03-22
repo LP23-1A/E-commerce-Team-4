@@ -1,15 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import axios from "axios";
 import { orderHandleStatus } from "@/utils/OrderhandleStatus";
-import FormatCurrency from "@/utils/FormatCurrency";
 import { Right } from "@/images";
 import { AdminOrderContext } from ".";
 
 export const AdminOrderTable = ({ filterData, handler }: any) => {
-  const { orderData, dayFilter }: any = useContext(AdminOrderContext);
-  console.log(orderData);
+  const { orderData }: any = useContext(AdminOrderContext);
 
-  const [color, setColor] = useState("");
   const handleOrderStatus = async (id: number, orderStatus: string) => {
     try {
       const update = await axios.put(`http://localhost:8000/order/${id}`, {
@@ -41,7 +38,6 @@ export const AdminOrderTable = ({ filterData, handler }: any) => {
             </tbody>
           </table>
         </div>
-        <button onClick={() => dayFilter()}>hello</button>
         <div className="px-6">
           {orderData &&
             orderData?.map((el: any, index: number) => {
