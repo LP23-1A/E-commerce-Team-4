@@ -1,13 +1,9 @@
 "use client";
 import React, { useContext, useState } from "react";
-import SignUppage3 from "@/components/SignUpPage3";
-import SignUppage4 from "@/components/SignUpPage4";
-import SignUppage2 from "@/components/SignUppage2";
-import AdminContextProvider, { AdminContext } from "@/components/AdminContext";
 import { useRouter } from "next/navigation";
-import Loading from "@/components/Loading";
+import { AdminContextProvider, Loading, SignUppage2, SignUppage3, SignUppage4 } from "@/components";
 
-const page = () => {
+export const page = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [loading, setLoading] = useState(false);
   const router = useRouter();

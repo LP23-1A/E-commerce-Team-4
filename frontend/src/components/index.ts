@@ -3,7 +3,7 @@ export * from "./AdminOrderContext";
 export * from "./AdminOrderTable";
 export * from "./AsideBar";
 export * from "./AuthProvider";
-export * from "./Carddata";
+export * from "./Amountpaid"
 export * from "./Chart";
 export * from "./DeleteBtn";
 export * from "./EmptyDashboard";
@@ -15,4 +15,6 @@ export * from "./SignUpPage3";
 export * from "./SignUpPage4";
 export * from "./SignUppage1";
 export * from "./SignUppage2";
-export * from "./Tab";
+export * from "./Order";
+export * from "./User";
+export * from "./Chartreg"
