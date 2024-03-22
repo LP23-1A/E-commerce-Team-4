@@ -11,8 +11,10 @@ import {
   Microsoftlogo,
   Pineconelogo,
 } from "@/images";
+
 const API = "http://localhost:8000/user";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
 export const SignUppage1 = ({ next }: any) => {
   const { data, error, isLoading } = useSWR(API, fetcher);
   const getAllUser = data?.getAll;
@@ -32,9 +34,7 @@ export const SignUppage1 = ({ next }: any) => {
     );
     if (filter.length === 0) {
       localStorage.setItem("signupData", JSON.stringify(userRef));
-      setTimeout(() => {
-        router.push(`/signupStep`);
-      }, 1000);
+      router.push("/signupstep");
     } else {
       toast.error("Таны имэйл бүртгэлтэй байна. 🤙");
     }

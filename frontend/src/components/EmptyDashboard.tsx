@@ -5,8 +5,9 @@ import { AsideBar, Navbar } from ".";
 export const DashboardEmpty = () => {
   const router = useRouter();
   const handler = () => {
-    router.push("/settings");
+    router.push("/admin/settings");
   };
+
   return (
     <div>
       <Navbar />

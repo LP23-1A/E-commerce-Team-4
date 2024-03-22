@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import axios from "axios";
 import { orderHandleStatus } from "@/utils/OrderhandleStatus";
-import FormatCurrency from "@/utils/FormatCurrency";
 import { Right } from "@/images";
+import { AdminOrderContext } from ".";
 
 export const AdminOrderTable = ({ filterData, handler }: any) => {
-  const [color, setColor] = useState("");
+  const { orderData }: any = useContext(AdminOrderContext);
   const handleOrderStatus = async (id: number, orderStatus: string) => {
     try {
       const update = await axios.put(`http://localhost:8000/order/${id}`, {
@@ -38,8 +38,8 @@ export const AdminOrderTable = ({ filterData, handler }: any) => {
           </table>
         </div>
         <div className="px-6">
-          {filterData &&
-            filterData?.map((el: any, index: number) => {
+          {orderData &&
+            orderData?.map((el: any, index: number) => {
               return (
                 <div className="w-full" key={index}>
                   <tr className=" w-full flex justify-between items-center bg-white">

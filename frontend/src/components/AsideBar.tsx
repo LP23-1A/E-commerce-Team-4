@@ -1,11 +1,9 @@
 "use client";
-import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { data } from "@/utils/Sidebar";
 import Link from "next/link";
 
 export const AsideBar = () => {
-  const router = useRouter();
   const path = window.location.pathname;
   return (
     <div className="flex flex-col pt-4 gap-3 bg-white h-screen w-96">

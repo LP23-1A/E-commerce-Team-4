@@ -21,15 +21,14 @@ const page = () => {
   const handleRef = (field: string, value: string | number) => {
     formDataRef.current = { ...formDataRef.current, [field]: value };
   };
-  console.log(formDataRef);
-  
+
   const createProduct = async () => {
     try {
       const res = await axios.post("http://localhost:8000/products/product", {
         ...formDataRef.current,
       });
       setOpen(!open);
-      router.push("/Product");
+      router.push("/admin/product");
     } catch (error) {
       console.log(error);
     }
@@ -242,4 +241,4 @@ const page = () => {
   );
 };
 
-export default page
+export default page;

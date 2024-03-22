@@ -1,6 +1,5 @@
 "use client";
-import { AdminContextProvider } from "@/components";
-import SignUppage1 from "@/components/SignUppage1";
+import { AdminContextProvider, SignUppage1 } from "@/components";
 import React from "react";
 
 const Home = () => {
