@@ -45,7 +45,10 @@ const page = () => {
                     {productData &&
                       productData?.map((el: any, index: number) => {
                         return (
-                          <div className="flex justify-between w-[100%] px-[70px] border-b-2 border-gray-200  ">
+                          <div
+                            className="flex justify-between w-[100%] px-[70px] border-b-2 border-gray-200"
+                            key={index}
+                          >
                             <p>{index + 1}</p>
                             <div className="flex items-center w-[150px] justify-start gap-4">
                               <img

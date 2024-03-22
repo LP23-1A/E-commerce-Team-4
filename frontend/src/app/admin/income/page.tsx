@@ -61,18 +61,19 @@ const page = () => {
               <p className="pr-10">Огноо</p>
             </div>
             <div className="flex flex-col gap-5 pb-5">
-              {
-                incomeData && incomeData.map((val: any, key: any) => {
+              {incomeData &&
+                incomeData.map((val: any, index: any) => {
                   return (
-                    <div className="flex justify-between border-b">
+                    <div className="flex justify-between border-b" key={index}>
                       <p className="text-center pl-24">#{val.productCode}</p>
                       <p className="text-center pl-36">{val.tag}</p>
                       <p className="text-center pl-20">{val.price}₮</p>
-                      <p className="text-center pr-10">{val.createdAt.slice(0, 10)}</p>
+                      <p className="text-center pr-10">
+                        {val.createdAt.slice(0, 10)}
+                      </p>
                     </div>
-                  )
-                })
-              }
+                  );
+                })}
             </div>
           </div>
         </div>

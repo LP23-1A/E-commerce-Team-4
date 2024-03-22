@@ -6,7 +6,6 @@ import { AdminOrderContext } from ".";
 
 export const AdminOrderTable = ({ filterData, handler }: any) => {
   const { orderData }: any = useContext(AdminOrderContext);
-
   const handleOrderStatus = async (id: number, orderStatus: string) => {
     try {
       const update = await axios.put(`http://localhost:8000/order/${id}`, {
