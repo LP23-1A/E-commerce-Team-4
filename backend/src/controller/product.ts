@@ -6,13 +6,13 @@ type ProductType = {
   categoryId: String;
   price: Number;
   qty: Number;
+  productCode: Number;
   thumbnails: String;
   images: String;
   coupon: String;
   salePercent: Number;
   description: String;
   viewsCount: Number;
-  tag: String;
   residual: Number;
   sold: Number;
   mainCate: String;
@@ -28,13 +28,13 @@ const createProduct = async (req: Request, res: Response) => {
       categoryId,
       price,
       qty,
+      productCode,
       thumbnails,
       images,
       coupon,
       salePercent,
       description,
       viewsCount,
-      tag,
       residual,
       sold,
       mainCate,
@@ -45,13 +45,13 @@ const createProduct = async (req: Request, res: Response) => {
       categoryId: categoryId,
       price: price,
       qty: qty,
+      productCode: productCode,
       thumbnails: thumbnails,
       images: images,
       coupon: coupon,
       salePercent: salePercent,
       description: description,
       viewsCount: viewsCount,
-      tag: tag,
       residual: residual,
       sold: sold,
       mainCate: mainCate,
@@ -64,12 +64,12 @@ const createProduct = async (req: Request, res: Response) => {
 };
 
 const getAllProduct = async (req: Request, res: Response) => {
-    try {
-        const getAll = await ProductModel.find()
-        res.status(200).send({ success: true, getAll })
-    } catch (error) {
-        res.status(500).send({ success: false, error })
-    }
+  try {
+    const getAll = await ProductModel.find()
+    res.status(200).send({ success: true, getAll })
+  } catch (error) {
+    res.status(500).send({ success: false, error })
+  }
 }
 
 const getProduct = async (req: Request, res: Response) => {
@@ -100,13 +100,13 @@ const updateById = async (req: Request, res: Response) => {
       categoryId,
       price,
       qty,
+      productCode,
       thumbnails,
       images,
       coupon,
       salePercent,
       description,
       viewsCount,
-      tag,
       residual,
       sold,
       mainCate,
@@ -117,13 +117,13 @@ const updateById = async (req: Request, res: Response) => {
       categoryId,
       price,
       qty,
+      productCode,
       thumbnails,
       images,
       coupon,
       salePercent,
       description,
       viewsCount,
-      tag,
       residual,
       sold,
       mainCate,

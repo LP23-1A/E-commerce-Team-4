@@ -21,6 +21,8 @@ const page = () => {
   const handleRef = (field: string, value: string | number) => {
     formDataRef.current = { ...formDataRef.current, [field]: value };
   };
+  console.log(formDataRef);
+  
   const createProduct = async () => {
     try {
       const res = await axios.post("http://localhost:8000/products/product", {
@@ -240,4 +242,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default page
