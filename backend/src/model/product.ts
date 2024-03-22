@@ -12,7 +12,6 @@ const ProductSchema = new mongoose.Schema({
     salePercent: Number,
     description: String,
     viewsCount: Number,
-    tag: String,
     residual: Number,
     sold: Number,
     mainCate: String,

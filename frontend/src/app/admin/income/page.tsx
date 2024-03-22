@@ -16,10 +16,10 @@ const page = () => {
       <div className="flex m-auto">
         <AsideBar />
         <div className="bg-[#ECEDF0] w-full py-10 px-10">
-          <div className=" bg-white rounded-xl w-1/2 m-auto">
+          <div className=" bg-white rounded-xl m-auto w-1/2">
             <div className="border-b-[1px] border-black-100">
               <div className="px-[24px] py-[20px] flex gap-4 justify-between">
-                <div className="w-[516px]">
+                <div className="w-fit">
                   <p className="w-[73px] h-[28px] font-bold text-xl tracking-tighter">
                     Орлого
                   </p>
@@ -53,63 +53,27 @@ const page = () => {
               </div>
             </div>
           </div>
-          <div className="flex mx-auto mt-[24px] w-1/2 rounded-xl border-[1px] bg-white">
-            <table>
-              <tbody>
-                <tr className="flex justify-between w-full px-6">
-                  <th className="flex items-center justify-between ">
-                    <div className="font-semibold text-sm inline-flex justify-start">
-                      Захиалгын ID дугаар
-                    </div>
-                  </th>
-                  <th className="w-[268px] py-[12px] px-[24px] border-b-[1px]">
-                    <div className="font-semibold text-sm inline-flex">
-                      Захиалагч
-                    </div>
-                  </th>
-                  <th className="w-[137px] py-[12px] px-[24px] border-b-[1px]">
-                    <div className="font-semibold text-sm inline-flex">
-                      Төлбөр
-                    </div>
-                  </th>
-                  <th className="w-[150px] py-[12px] px-[24px] border-b-[1px]">
-                    <div className="font-semibold text-sm inline-flex">
-                      Огноо
-                    </div>
-                  </th>
-                </tr>
-              </tbody>
-
-              {incomeData &&
-                incomeData.map((val: any, key: any) => {
+          <div className="flex mx-auto mt-[24px] w-1/2 rounded-xl border-[1px] bg-white h-fit flex-col">
+            <div className="flex justify-between w-full text-gray-600 text-lg border-b h-10 mb-5 p-4 pb-10">
+              <p className="pl-4">Захиалгийн ID дугаар</p>
+              <p>Захиалагч</p>
+              <p>Төлбөр</p>
+              <p className="pr-10">Огноо</p>
+            </div>
+            <div className="flex flex-col gap-5 pb-5">
+              {
+                incomeData && incomeData.map((val: any, key: any) => {
                   return (
-                    <tbody>
-                      <tr className="" key={key}>
-                        <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                          <div className="flex gap-[8px] align-items">
-                            <img
-                              src={val.images}
-                              className="w-[40px] h-[40px] rounded-[50%] mt-[3px]"
-                            />
-                            <div className="column">
-                              <p>{val.productName}</p> <p>{val.categoryId}</p>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                          {val.tag}
-                        </td>
-                        <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                          {val.price}₮
-                        </td>
-                        <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                          {val.qty}
-                        </td>
-                      </tr>
-                    </tbody>
-                  );
-                })}
-            </table>
+                    <div className="flex justify-between border-b">
+                      <p className="text-center pl-24">#{val.productCode}</p>
+                      <p className="text-center pl-36">{val.tag}</p>
+                      <p className="text-center pl-20">{val.price}₮</p>
+                      <p className="text-center pr-10">{val.createdAt.slice(0, 10)}</p>
+                    </div>
+                  )
+                })
+              }
+            </div>
           </div>
         </div>
       </div>

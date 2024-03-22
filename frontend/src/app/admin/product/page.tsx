@@ -3,22 +3,11 @@ import Tab from "@/components/Tab";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import {
-  Calendar,
-  Category,
-  Dollar,
-  ExpandMore,
-  PlusIcon,
-  Search,
-} from "@/images";
-import {
-  AsideBar,
-  DeleteBtn,
-  Loading,
-  Navbar,
-  ProductPutBtn,
-} from "@/components";
+import { Calendar, Category, Dollar, ExpandMore, PlusIcon, Search } from "@/images";
+import { AsideBar, DeleteBtn, Loading, Navbar, ProductPutBtn } from "@/components";
+
 const API = "http://localhost:8000/products/product";
+
 export default function Product() {
   const router = useRouter();
   const [data, setData] = useState([]);
