@@ -21,3 +21,5 @@ export * from "./Chartreg";
 export * from "./Tab";
 export * from "./Orderfilter";
 export * from "./OrderStatus";
+export * from "./ShopCart";
+export * from "./OrderComplete";

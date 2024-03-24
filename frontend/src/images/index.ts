@@ -29,3 +29,6 @@ export * from "./ToLeft";
 export * from "./User";
 export * from "./Working";
 export * from "./download";
+export * from "./Clock";
+export * from "./Correct";
+export * from "./CheckList";
