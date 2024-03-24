@@ -14,10 +14,12 @@ import useSWR from "swr";
 const API = "http://localhost:8000/products/product";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-export const page = () => {
+const page = () => {
   const router = useRouter();
   const { data, error, isLoading } = useSWR(API, fetcher);
   const productsData = data?.getAll;
+  console.log(productsData);
+
   const handler = () => {
     router.push("/admin/product/addProduct");
   };
@@ -132,10 +134,17 @@ export const page = () => {
                           </td>
                           <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
                             <div className="flex gap-[8px] align-items">
-                              <img
-                                src={val.images}
-                                className="w-[40px] h-[40px] rounded-[50%] mt-[3px]"
-                              />
+                              {val.images?.map((e: any) => {
+                                return (
+                                  <div>
+                                    <img
+                                      src={e}
+                                      className="w-[40px] h-[40px] rounded-[50%] mt-[3px]"
+                                    />
+                                  </div>
+                                );
+                              })}
+
                               <div className="column">
                                 <p>{val.productName}</p> <p>{val.categoryId}</p>
                               </div>

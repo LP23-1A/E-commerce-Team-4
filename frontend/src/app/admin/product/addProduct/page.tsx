@@ -3,11 +3,14 @@ import React, { useState, useRef } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Img, Plus, ToLeft } from "@/images";
-import { AsideBar, Modal, Navbar } from "@/components";
+import { AsideBar, Aws, Modal, Navbar } from "@/components";
+import { url } from "inspector";
 
+const API = "http://localhost:8000/products/product";
 const page = () => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
+  const [images, setImages] = useState<string[]>([]);
   const formDataRef = useRef({
     productName: "",
     categoryId: "",
@@ -22,13 +25,37 @@ const page = () => {
     formDataRef.current = { ...formDataRef.current, [field]: value };
   };
 
-  const createProduct = async () => {
+  const handleImageUpload = async (e: any) => {
     try {
-      const res = await axios.post("http://localhost:8000/products/product", {
-        ...formDataRef.current,
-      });
-      setOpen(!open);
-      router.push("/admin/product");
+      setImages((prev) => [...prev, e.target.files[0]]);
+    } catch (error) {
+      console.log("Error uploading image:", error);
+    }
+  };
+
+  const handleSubmit = async () => {
+    if (!images.length) {
+      return;
+    }
+    try {
+      const urls = await axios.get("/api/upload-image");
+      const imageUrl = urls.data.objectUrl;
+      console.log(urls, imageUrl);
+
+      imageUrl.data?.uploadUrls.map(
+        async (uploadUrl: string, index: number) => {
+          return await axios.put(uploadUrl, images[index], {
+            headers: {
+              "Content-Type": images[index],
+            },
+          });
+        }
+      );
+      console.log("hello");
+
+      const res = await axios.post(API, { images: urls.data?.objectUrl });
+      localStorage.setItem("product", JSON.stringify([res]));
+      console.log(res);
     } catch (error) {
       console.log(error);
     }
@@ -129,6 +156,7 @@ const page = () => {
                       </button>
                     </div>
                   </div>
+                  <Aws {...{ handleImageUpload, images }} />
                   <div className="w-full h-[163px] bg-white rounded-xl p-6 gap-2 flex justify-between">
                     <div className="flex flex-col gap-1">
                       <h1 className="font-semibold">Үндсэн үнэ</h1>
@@ -227,7 +255,7 @@ const page = () => {
                 </button>
                 <button
                   className="border p-3 px-5 text-white bg-black rounded-lg"
-                  onClick={createProduct}
+                  onClick={handleSubmit}
                 >
                   Нийтлэх
                 </button>
@@ -235,7 +263,7 @@ const page = () => {
             </div>
           </div>
         </div>
-        {open && <Modal createProduct={createProduct} />}
+        {/* {open && <Modal createProduct={createProduct} />} */}
       </div>
     </div>
   );

@@ -21,3 +21,4 @@ export * from "./Chartreg";
 export * from "./Tab";
 export * from "./Orderfilter";
 export * from "./OrderStatus";
+export * from "./Aws";
