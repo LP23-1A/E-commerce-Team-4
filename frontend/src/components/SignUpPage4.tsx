@@ -28,12 +28,10 @@ export const SignUppage4 = ({ back }: any) => {
       if (createUser) {
         toast.success("Амжилттай бүртгэгдлээ. 👏");
         localStorage.removeItem("userData");
-        setTimeout(() => {
-          router.push(`/dashboard`);
-        }, 1000);
+        router.push(`/dashboard`);
       }
     } catch (error) {
-      console.log(error);
+      toast.success("Алдаа гарлаа.");
     }
   };
   const handleOnChange = (field: string, value: string | number) => {

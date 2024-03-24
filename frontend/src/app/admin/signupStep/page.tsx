@@ -1,9 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { AdminContextProvider, SignUppage2 } from "@/components";
-import SignUppage3 from "@/components/SignUpPage3";
-import SignUppage4 from "@/components/SignUpPage4";
+import {
+  AdminContextProvider,
+  SignUppage2,
+  SignUppage3,
+  SignUppage4,
+} from "@/components";
 
 const page = () => {
   const [activeIndex, setActiveIndex] = useState(0);

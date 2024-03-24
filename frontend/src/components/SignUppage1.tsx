@@ -3,7 +3,6 @@ import React, { useEffect, useRef } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
-import useSWR from "swr";
 import {
   Applelogo,
   Arrowlogo,
@@ -11,13 +10,11 @@ import {
   Microsoftlogo,
   Pineconelogo,
 } from "@/images";
+import axios from "axios";
 
-const API = "http://localhost:8000/user";
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+const API = "http://localhost:8000/user/auth";
 
 export const SignUppage1 = ({ next }: any) => {
-  const { data, error, isLoading } = useSWR(API, fetcher);
-  const getAllUser = data?.getAll;
   const { loginWithRedirect } = useAuth0();
   const router = useRouter();
   const userRef = useRef({
@@ -29,14 +26,16 @@ export const SignUppage1 = ({ next }: any) => {
   };
 
   const handler = async () => {
-    const filter = getAllUser.filter(
-      (e: any) => userRef.current.email === e.email
-    );
-    if (filter.length === 0) {
-      localStorage.setItem("signupData", JSON.stringify(userRef));
-      router.push("/signupstep");
-    } else {
-      toast.error("Таны имэйл бүртгэлтэй байна. 🤙");
+    try {
+      const signup = await axios.post(API, { email: userRef.current.email });
+      if (signup && signup?.data.auth === null) {
+        localStorage.setItem("signupData", JSON.stringify(userRef));
+        router.push("/admin/signupStep");
+      } else {
+        toast.error("Таны имэйл бүртгэлтэй байна. 🤙");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 

@@ -44,6 +44,15 @@ const createUser = async (req: Request, res: Response) => {
   }
 };
 
+const authLogin = async (req: Request, res: Response) => {
+  try {
+    const { email }: Required<UserType> = req.body;
+    const auth = await UserModel.findOne({ email: email });
+    res.status(200).send({ success: true, auth });
+  } catch (error) {
+    res.status(500).send({ success: false, error });
+  }
+};
 // const Login = async (req: Request, res: Response) => {
 //   try {
 //     const { email, password }: Required<UserType> = req.body;
@@ -111,4 +120,4 @@ const deleteUser = async (req: Request, res: Response) => {
     res.status(500).send({ success: false, error });
   }
 };
-export { createUser, getUser, updateUser, deleteUser, getAllUser };
+export { createUser, getUser, updateUser, deleteUser, getAllUser, authLogin };
