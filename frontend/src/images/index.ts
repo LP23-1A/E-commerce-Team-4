@@ -41,3 +41,6 @@ export * from "./SearchProduct";
 export * from "./SaveProduct";
 export * from "./TrolleyProduct";
 export * from "./Star";
+export * from "./Clock";
+export * from "./Correct";
+export * from "./CheckList";
