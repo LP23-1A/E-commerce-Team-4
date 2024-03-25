@@ -44,3 +44,4 @@ export * from "./Star";
 export * from "./Clock";
 export * from "./Correct";
 export * from "./CheckList";
+export * from "./Error"

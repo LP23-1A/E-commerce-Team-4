@@ -27,3 +27,6 @@ export * from "./NavbarUser";
 export * from "./Footer";
 export * from "./PurchaseField";
 export * from "./PurchaseCart";
+export * from "./ProductUser";
+export * from "./ProductUserDetail";
+export * from "./PathUser";

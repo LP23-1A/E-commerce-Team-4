@@ -1,6 +1,6 @@
 import React from 'react'
 
-const PathUser = () => {
+export const PathUser = () => {
   return (
     <div className='h-20 bg-[#F6F5ff] w-full'>
       <div className='flex justify-between mx-auto w-[1440px] items-center h-full'>
@@ -12,5 +12,3 @@ const PathUser = () => {
     </div>
   )
 }
-
-export default PathUser

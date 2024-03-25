@@ -1,8 +1,8 @@
 import { Length, LitFour } from '@/images'
-import ProductUserDetail from '@/components/ProductUserDetail'
 import React from 'react'
+import { ProductUserDetail } from '.'
 
-const ProductUser = () => {
+export const ProductUser = () => {
   return (
     <div className='flex flex-col bg-[#FCFCFC]'>
         <div className='flex mx-auto w-[1440px] justify-between my-20 items-center'>
@@ -35,5 +35,3 @@ const ProductUser = () => {
     </div>
   )
 }
-
-export default ProductUser
