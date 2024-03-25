@@ -1,21 +1,19 @@
 "use client";
-import { OrderComplete, ShopCart } from "@/components";
-import Footer from "@/components/Footer";
-import NavbarUser from "@/components/NavbarUser";
+import { Footer, NavbarUser, OrderComplete, ShopCart } from "@/components";
 import React from "react";
 
 const page = () => {
   return (
-    <div>
+    <div className="">
       <NavbarUser />
-      <div className="flex gap-6 mt-[60px]">
+      <div className="flex mt-[80px] justify-between w-[1440px] mx-auto">
         <div>
-          <div className="w-[650px]">
+          <div className="w-fit">
             <div className="flex font-bold text-[20px] text-[#1D3178]">
               <p className="w-[300px]">Бүрэлдэхүүн</p>
-              <p className="w-[100px]">Үнэ</p>
-              <p className="w-[150px]">Тоо ширхэг</p>
-              <p className="w-[100px]">Нийт</p>
+              <p className="w-[240px]">Үнэ</p>
+              <p className="w-[250px]">Тоо ширхэг</p>
+              <p className="w-fit">Нийт</p>
             </div>
             <div className="flex flex-col gap-[20px] mt-[40px]">
               <ShopCart />
@@ -24,13 +22,13 @@ const page = () => {
               <ShopCart />
             </div>
             <div className="flex justify-end mt-[20px]">
-              <button className="bg-[#FB2E86] w-[173px] flex justify-center  px-4 py-2 text-white font-bold text-[14px] ">
+              <button className="bg-[#FB2E86] w-[173px] flex justify-center px-4 py-2 text-white font-bold text-[14px] ">
                 Kарт цэнэглэх
               </button>
             </div>
           </div>
         </div>
-        <div className="w-[384px] flex flex-col">
+        <div className="w-[420px] flex flex-col">
           <p className="font-bold text-[20px] text-[#1D3178] flex justify-center">
             Нийт төлөх дүн
           </p>
