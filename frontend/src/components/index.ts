@@ -21,3 +21,5 @@ export * from "./Chartreg";
 export * from "./Tab";
 export * from "./Orderfilter";
 export * from "./OrderStatus";
+export * from "./NavbarUser";
+export * from "./Footer"

@@ -2,6 +2,8 @@
 import { AdminContextProvider, SignUppage1 } from "@/components";
 import Footer from "@/components/Footer";
 import NavbarUser from "@/components/NavbarUser";
+import PathUser from "@/components/PathUser";
+import ProductUser from "@/components/ProductUser";
 import React from "react";
 
 const Home = () => {
@@ -11,6 +13,8 @@ const Home = () => {
     // </AdminContextProvider>
     <div>
       <NavbarUser />
+      <PathUser />
+      <ProductUser />
       <Footer />
     </div>
   );

@@ -1,7 +1,7 @@
 import React from 'react'
-import img from "@/../public/call.svg"
+import img from "@/../public/litFour.svg"
 
-export const Call = () => {
+export const LitFour = () => {
   return (
     <div>
         <img src={img.src} alt="" />

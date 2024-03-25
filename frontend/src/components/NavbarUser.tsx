@@ -1,21 +1,16 @@
-import { Down } from '@/images';
-import Call from '@/images/Call';
-import Mail from '@/images/Mail';
-import Save from '@/images/Save';
-import SearchUser from '@/images/SearchUser';
-import Trolley from '@/images/Trolley';
-import UserNav from '@/images/UserNav';
-import Up from '@/images/Up';
+'use client'
+import { Call, Down, Mail, Save, SearchUser, Trolley, Up, UserNav } from '@/images';
 import React, { useState } from 'react';
 import HomeUser from './HomeUser';
+import { json } from 'stream/consumers';
 
 const NavbarUser = () => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ input, setInput ] = useState("")
+  fetch('http://localhost:8000/products/product', { method: 'GET' })
+    .then((response) => response.json())
+    .then((json) => console.log(json))
   const fetchApi = (value: string) => {
-    fetch('http://localhost:8000/products/product')
-      .then((response) => response.json())
-      .then((json) => console.log(json))
   }
   const handleChanging = (value: string) => {
     fetchApi(value)
@@ -39,7 +34,7 @@ const NavbarUser = () => {
           </div>
         </div>
       </div>
-      <div className='flex items-center h-16 bg-[#ffffff]'>
+      <div className='flex items-center h-[70px] bg-[#ffffff]'>
         <div className='flex w-[1440px] mx-auto justify-between items-center'>
           <div className='flex items-end gap-14'>
             <button className='text-[#0D0E43] text-3xl font-bold'>Ecommerce</button>
@@ -48,11 +43,11 @@ const NavbarUser = () => {
                 <button className='flex gap-1 items-center text-[#FB2E86]' onClick={dropdown}>Нүүр { isOpen ? (<Up />) : (<Down />) }</button>
                 { isOpen && (<HomeUser />)}
               </div>
-              <button>Ангилал</button>
+              <button className='text-[#0D0E43]'>Ангилал</button>
             </div>
           </div>
           <div className='flex'>
-            <input type="text" className='border w-[226px] h-9 p-2' value={input} onChange={(e) => handleChanging(e.target.value)}/>
+            <input type="text" className='border w-[270px] h-9 p-2' value={input} onChange={(e) => handleChanging(e.target.value)}/>
             <button className='flex justify-center items-center w-12 h-9 bg-[#FB2E86] text-white'><SearchUser /></button>
           </div>
         </div>
