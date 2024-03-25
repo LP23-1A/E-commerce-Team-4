@@ -1,11 +1,10 @@
 import { Length, LitFour } from '@/images'
 import React from 'react'
-import { ProductUserDetail } from '.'
 
 export const ProductUser = () => {
   return (
-    <div className='flex flex-col bg-[#FCFCFC]'>
-        <div className='flex mx-auto w-[1440px] justify-between my-20 items-center'>
+    <div className='flex flex-col'>
+        <div className='flex mx-auto w-[1440px] justify-between mt-20 mb-12 items-center'>
             <div className='flex flex-col gap-1'>
                 <h1 className='text-xl font-bold text-[#151875]'>Ecommerce Acceories & Fashion item</h1>
                 <p className='text-[#8A8FB9]'>About 20 results (0.62 seconds)</p>
@@ -31,7 +30,6 @@ export const ProductUser = () => {
                 <input type="text" className='border border-[#E7E6EF]'/>
             </div>
         </div>
-        <ProductUserDetail />
     </div>
   )
 }
