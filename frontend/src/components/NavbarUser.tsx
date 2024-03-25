@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import HomeUser from './HomeUser';
 import { json } from 'stream/consumers';
 
-const NavbarUser = () => {
+export const NavbarUser = () => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ input, setInput ] = useState("")
   fetch('http://localhost:8000/products/product', { method: 'GET' })
@@ -55,5 +55,3 @@ const NavbarUser = () => {
     </div>
   )
 }
-
-export default NavbarUser

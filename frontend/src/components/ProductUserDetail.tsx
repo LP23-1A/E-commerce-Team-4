@@ -4,14 +4,14 @@ import useSWR from 'swr'
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
-const ProductUserDetail = () => {
+export const ProductUserDetail = () => {
     const { data, error } = useSWR('http://localhost:8000/products/product', fetcher)
     const allProduct = data?.getAll
     if (error) return <div>Error fetching</div>
     if (!data) return <div>Loading...</div>
 
   return (
-    <div className='flex flex-col gap-10 mx-auto w-[1440px]'>
+    <div className='flex flex-col gap-10 mx-auto w-[1440px] my-32'>
         { allProduct.map((val: any) => {
             return (
                 <div className='flex gap-10'>
@@ -36,9 +36,9 @@ const ProductUserDetail = () => {
                             <p className='text-md text-[#9295AA]'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta itaque recusandae quasi, velit voluptate, sapiente optio reprehenderit saepe corrupti temporibus modi veritatis.</p>
                         </div>
                         <div className='flex items-center gap-10'>
-                            <button className='flex justify-center items-center rounded-[50%] h-9 w-9 bg-white'><TrolleyProduct /></button>
-                            <button className='flex justify-center items-center rounded-[50%] h-9 w-9 bg-white'><SaveProduct /></button>
-                            <button className='flex justify-center items-center rounded-[50%] h-9 w-9 bg-white'><SearchProduct /></button>
+                            <button className='flex justify-center items-center rounded-[50%] h-9 w-9 bg-white shadow-xl'><TrolleyProduct /></button>
+                            <button className='flex justify-center items-center rounded-[50%] h-9 w-9 bg-white shadow-xl'><SaveProduct /></button>
+                            <button className='flex justify-center items-center rounded-[50%] h-9 w-9 bg-white shadow-xl'><SearchProduct /></button>
                         </div>
                     </div>
                 </div>
@@ -49,5 +49,3 @@ const ProductUserDetail = () => {
     
   
 }
-
-export default ProductUserDetail

@@ -1,6 +1,6 @@
 "use client";
 import { AdminContextProvider, SignUppage1 } from "@/components";
-import Footer from "@/components/Footer";
+import { Footer } from "@/components/Footer";
 import NavbarUser from "@/components/NavbarUser";
 import PathUser from "@/components/PathUser";
 import ProductUser from "@/components/ProductUser";
