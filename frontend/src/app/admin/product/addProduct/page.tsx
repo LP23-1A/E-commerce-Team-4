@@ -19,7 +19,7 @@ const page = () => {
           <AsideBar />
           <div className="bg-[#FEFEFE] h-14 w-full ">
             <div className="flex gap-10 items-center">
-              <a href="/Product">
+              <a href="/admin/product">
                 <button className="flex h-14 w-14 items-center justify-center">
                   <ToLeft />
                 </button>

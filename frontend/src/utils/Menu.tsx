@@ -1,11 +1,14 @@
 export const menu = [
     {
-        name: 'page1'
+        route: '/user/gridProduct',
+        name: 'Grid Product'
     },
     {
-        name: 'page2'
+        route: '/user/shopList',
+        name: 'Shop List'
     },
     {
-        name: 'page3'
+        route: '/user/shopLeftSidebar',
+        name: 'Shop Left Sidebar'
     }
 ]

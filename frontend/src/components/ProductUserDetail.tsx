@@ -6,12 +6,14 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
 export const ProductUserDetail = () => {
     const { data, error } = useSWR('http://localhost:8000/products/product', fetcher)
+
     const allProduct = data?.getAll
+    
     if (error) return <div>Error fetching</div>
     if (!data) return <div>Loading...</div>
 
   return (
-    <div className='flex flex-col gap-10 mx-auto w-[1440px] my-32'>
+    <div className='flex flex-col gap-10 mx-auto w-[1440px] mb-32'>
         { allProduct.map((val: any) => {
             return (
                 <div className='flex gap-10'>

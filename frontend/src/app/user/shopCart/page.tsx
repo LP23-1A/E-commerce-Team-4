@@ -6,7 +6,7 @@ const page = () => {
   return (
     <div className="">
       <NavbarUser />
-      <div className="flex mt-[80px] justify-between w-[1440px] mx-auto">
+      <div className="flex my-[80px] justify-between w-[1440px] mx-auto">
         <div>
           <div className="w-fit">
             <div className="flex font-bold text-[20px] text-[#1D3178]">
@@ -49,7 +49,6 @@ const page = () => {
           </div>
         </div>
       </div>
-      <OrderComplete />
       <Footer />
     </div>
   );
