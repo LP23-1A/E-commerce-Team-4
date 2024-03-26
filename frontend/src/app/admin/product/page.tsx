@@ -8,19 +8,31 @@ import {
   PlusIcon,
   Search,
 } from "@/images";
-import { AsideBar, DeleteBtn, Navbar, ProductPutBtn, Tab } from "@/components";
+import { AsideBar, Navbar, ProductTableData } from "@/components";
 import useSWR from "swr";
+import { rate } from "@/utils/Rate";
+import { month } from "@/utils/Month";
+import { useEffect, useState } from "react";
 
 const API = "http://localhost:8000/products/product";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-export const page = () => {
+const page = () => {
   const router = useRouter();
+  const [productData, setProductData] = useState([]);
+  const [filter, setFilter] = useState("");
   const { data, error, isLoading } = useSWR(API, fetcher);
   const productsData = data?.getAll;
   const handler = () => {
     router.push("/admin/product/addProduct");
   };
+  const filterdata = productsData?.filter((e: any) => {
+    if (filter === "") {
+      return e;
+    } else if (filter !== "") {
+      return e.mainCate.includes(filter) || e.createdAt.slice(5, 7) === filter;
+    }
+  });
   return (
     <div>
       <Navbar />
@@ -28,8 +40,8 @@ export const page = () => {
         <AsideBar />
         <div className="bg-[#ECEDF0] w-full">
           <div className="flex bg-[#ECEDF0] gap-[10px] h-[56px] align-middle border-b-[1px] border-black-100">
-            <Tab>Бүтээгдэхүүн</Tab>
-            <Tab>Ангилал</Tab>
+            <p>Бүтээгдэхүүн</p>
+            <p>Ангилал</p>
           </div>
           <div className="p-[24px] gap-[24px]">
             <button
@@ -43,14 +55,17 @@ export const page = () => {
                 </div>
               </div>
             </button>
-
             <div className="w-full h-[40px] justify-between mt-[24px] flex">
               <div className="flex gap-[13px]">
                 <button className="bg-white h-[40px] rounded-lg border-[1px]">
                   <div className="flex mx-[11px] gap-[4px]">
                     <Category />
-                    <div>Ангилал</div>
-                    <ExpandMore />
+                    <select onChange={(e) => setFilter(e.target.value)}>
+                      <option value="">Ангилал</option>
+                      {rate.map((e) => {
+                        return <option value={e.name}>{e.name}</option>;
+                      })}
+                    </select>
                   </div>
                 </button>
                 <button className="bg-white h-[40px] rounded-lg border-[1px]">
@@ -63,17 +78,21 @@ export const page = () => {
                 <button className="bg-white h-[40px] rounded-lg border-[1px]">
                   <div className="flex mx-[11px] gap-[4px]">
                     <Calendar />
-                    <div>Сараар</div>
-                    <ExpandMore />
+                    <select onChange={(e) => setFilter(e.target.value)}>
+                      <option value="">сараар</option>
+                      {month.map((e) => {
+                        return <option value={e.value}>{e.label}</option>;
+                      })}
+                    </select>
                   </div>
                 </button>
               </div>
-              <div className="flex w-[419px] h-[40px] mr-0">
-                <div className="flex items-center z-10 mr-[-35px]">
+              <div className="flex w-[419px] mr-0 rounded bg-white ">
+                <div className="flex items-center px-2 ">
                   <Search />
                 </div>
                 <input
-                  className="appearance-none border-2 pl-10 border-gray-300 hover:border-gray-400 transition-colors rounded-md w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:ring-purple-600 focus:border-purple-600 focus:shadow-outline"
+                  className="w-[500px] rounded"
                   type="text"
                   placeholder="Бүтээгдэхүүний нэр, SKU, UPC"
                 />
@@ -82,90 +101,33 @@ export const page = () => {
             <div className="flex mt-[24px] w-full justify-between rounded-xl border-[1px] bg-white">
               <table>
                 <tbody>
-                  <tr className="">
-                    <th className="w-[68px] py-[12px] px-[24px] border-b-[1px]">
-                      <div className="font-semibold text-sm">‎</div>
+                  <tr className="flex">
+                    <th className="w-[68px] py-[12px] px-[24px] "></th>
+                    <th className="w-[260px] py-[12px] pl-0 pr-[100px] font-semibold text-sm inline-flex">
+                      Бүтээгдэхүүн
                     </th>
-                    <th className="w-[156.8px] py-[12px] pl-0 pr-[100px] border-b-[1px]">
-                      <div className="font-semibold text-sm inline-flex">
-                        Бүтээгдэхүүн
-                      </div>
+                    <th className="w-[240px] py-[12px] pl-0 pr-[100px] font-semibold text-sm inline-flex">
+                      Ангилал
                     </th>
-                    <th className="w-[214px] py-[12px] pl-0 pr-[100px] border-b-[1px]">
-                      <div className="font-semibold text-sm inline-flex">
-                        Ангилал
-                      </div>
+                    <th className="w-[200px] py-[12px] pl-0 pr-[100px] font-semibold text-sm inline-flex">
+                      Үнэ
                     </th>
-                    <th className="w-[156.8px] py-[12px] pl-0 pr-[100px] border-b-[1px]">
-                      <div className="font-semibold text-sm inline-flex">
-                        Үнэ
-                      </div>
+                    <th className="w-[200px] py-[12px] pl-0 pr-[100px] font-semibold text-sm inline-flex">
+                      Үлдэгдэл
                     </th>
-                    <th className="w-[156.8px] py-[12px] pl-0 pr-[100px] border-b-[1px]">
-                      <div className="font-semibold text-sm inline-flex">
-                        Үлдэгдэл
-                      </div>
+                    <th className="w-[200px] py-[12px] pl-0 pr-[100px] font-semibold text-sm inline-flex">
+                      Зарагдсан
                     </th>
-                    <th className="w-[156.8px] py-[12px] pl-0 pr-[100px] border-b-[1px]">
-                      <div className="font-semibold text-sm inline-flex">
-                        Зарагдсан
-                      </div>
+                    <th className="w-[200px] py-[12px] pl-0 pr-[100px] font-semibold text-sm inline-flex">
+                      Нэмсэн огноо
                     </th>
-                    <th className="w-[180px] py-[12px] pl-0 pr-[100px] border-b-[1px]">
-                      <div className="font-semibold text-sm inline-flex">
-                        Нэмсэн огноо
-                      </div>
-                    </th>
-                    <th className="w-[104px] py-[12px] px-[24px] border-b-[1px]">
-                      <div className="font-semibold text-sm">‎</div>
-                    </th>
+                    <th className="w-[200px] py-[12px] px-[24px] font-semibold text-sm inline-flex"></th>
                   </tr>
+                  {filterdata &&
+                    filterdata.map((e: any, index: number) => {
+                      return <ProductTableData data={e} />;
+                    })}
                 </tbody>
-
-                {productsData &&
-                  productsData.map((val: any, index: number) => {
-                    return (
-                      <tbody key={index}>
-                        <tr>
-                          <td className="w-[68px] py-[12px] px-[24px] border-b-[1px]">
-                            <input type="checkbox" name="" id="" />
-                          </td>
-                          <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                            <div className="flex gap-[8px] align-items">
-                              <img
-                                src={val.images}
-                                className="w-[40px] h-[40px] rounded-[50%] mt-[3px]"
-                              />
-                              <div className="column">
-                                <p>{val.productName}</p> <p>{val.categoryId}</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                            {val.tag}
-                          </td>
-                          <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                            {val.price}₮
-                          </td>
-                          <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                            {val.productCode}
-                          </td>
-                          <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                            {val.sold}
-                          </td>
-                          <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                            <p>{val.createdAt.slice(0, 10)}</p>
-                          </td>
-                          <td className="w-[68px] p-[16px] border-b-[1px]">
-                            <div className="justify-center flex gap-2">
-                              <DeleteBtn val={val._id} />
-                              <ProductPutBtn val={val._id} />
-                            </div>
-                          </td>
-                        </tr>
-                      </tbody>
-                    );
-                  })}
               </table>
             </div>
           </div>
