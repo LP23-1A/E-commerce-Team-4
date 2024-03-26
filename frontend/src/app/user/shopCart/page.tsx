@@ -1,8 +1,26 @@
 "use client";
-import { Footer, NavbarUser, OrderComplete, ShopCart } from "@/components";
-import React from "react";
+import { Footer, NavbarUser, ShopCart, UserOrderContext } from "@/components";
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
 
+const API = "http://localhost:8000/products/one";
 const page = () => {
+  const { orderData, data, setData }: any = useContext(UserOrderContext);
+  const [data1, setData1] = useState([]);
+  const handler = async () => {
+    try {
+      const order = await axios.post(API, { id: data[0] });
+      console.log(order);
+      const a = order?.data.getData;
+      setData1((prev) => ({ ...prev }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    handler();
+  }, []);
   return (
     <div className="">
       <NavbarUser />
@@ -15,11 +33,16 @@ const page = () => {
               <p className="w-[250px]">Тоо ширхэг</p>
               <p className="w-fit">Нийт</p>
             </div>
+            {/* <p>{data.price}</p> */}
             <div className="flex flex-col gap-[20px] mt-[40px]">
-              <ShopCart />
-              <ShopCart />
-              <ShopCart />
-              <ShopCart />
+              {/* {data1 &&
+                data1.a.map((e: any) => {
+                  return (
+                    <div>
+                      <ShopCart data={e} />
+                    </div>
+                  );
+                })} */}
             </div>
             <div className="flex justify-end mt-[20px]">
               <button className="bg-[#FB2E86] w-[173px] flex justify-center px-4 py-2 text-white font-bold text-[14px] ">

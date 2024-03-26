@@ -35,7 +35,8 @@ export * from "./CreateProductProvider";
 export * from "./CreateProductField";
 export * from "./CreateProduct";
 export * from "./ProductTableData";
-export * from "./Ontsloh"
-export * from "./New"
-export * from "./Carousel"
-export * from "./Service"
+export * from "./Ontsloh";
+export * from "./New";
+export * from "./Carousel";
+export * from "./Service";
+export * from "./UserOrderProvider";

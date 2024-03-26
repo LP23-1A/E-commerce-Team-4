@@ -65,17 +65,17 @@ const createProduct = async (req: Request, res: Response) => {
 
 const getAllProduct = async (req: Request, res: Response) => {
   try {
-    const getAll = await ProductModel.find()
-    res.status(200).send({ success: true, getAll })
+    const getAll = await ProductModel.find();
+    res.status(200).send({ success: true, getAll });
   } catch (error) {
-    res.status(500).send({ success: false, error })
+    res.status(500).send({ success: false, error });
   }
-}
+};
 
 const getProduct = async (req: Request, res: Response) => {
   try {
-    const getId = req.params.id
-    const getData = await ProductModel.findOne({ _id:getId });
+    const { getId } = req.body;
+    const getData = await ProductModel.findOne({ id: getId });
     res.status(200).send({ success: true, getData });
   } catch (error) {
     res.status(500).send({ success: false, error });
