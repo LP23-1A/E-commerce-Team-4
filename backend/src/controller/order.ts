@@ -6,6 +6,7 @@ type OrderType = {
   phoneNumber: String;
   amountPaid: Number;
   amountToBePaid: Number;
+  quantity: Number;
   coupon: String;
   description: String;
   details: string;
@@ -20,6 +21,7 @@ const createOrder = async (req: Request, res: Response) => {
       userId,
       amountPaid,
       amountToBePaid,
+      quantity,
       coupon,
       description,
       details,
@@ -30,6 +32,7 @@ const createOrder = async (req: Request, res: Response) => {
       userId: userId,
       amountPaid: amountPaid,
       amountToBePaid: amountToBePaid,
+      quantity: quantity,
       coupon: coupon,
       description: description,
       details: details,

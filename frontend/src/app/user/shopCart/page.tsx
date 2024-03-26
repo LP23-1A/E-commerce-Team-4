@@ -1,26 +1,15 @@
 "use client";
 import { Footer, NavbarUser, ShopCart, UserOrderContext } from "@/components";
-import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 
-const API = "http://localhost:8000/products/one";
 const page = () => {
-  const { orderData, data, setData }: any = useContext(UserOrderContext);
-  const [data1, setData1] = useState([]);
-  const handler = async () => {
-    try {
-      const order = await axios.post(API, { id: data[0] });
-      console.log(order);
-      const a = order?.data.getData;
-      setData1((prev) => ({ ...prev }));
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { orderData, setOrderData }: any = useContext(UserOrderContext);
+  const totalPrice = orderData.reduce(
+    (price: number, item: any) => price + item.data.price * item.quantity,
+    0
+  );
+  console.log(totalPrice);
 
-  useEffect(() => {
-    handler();
-  }, []);
   return (
     <div className="">
       <NavbarUser />
@@ -33,16 +22,15 @@ const page = () => {
               <p className="w-[250px]">Тоо ширхэг</p>
               <p className="w-fit">Нийт</p>
             </div>
-            {/* <p>{data.price}</p> */}
             <div className="flex flex-col gap-[20px] mt-[40px]">
-              {/* {data1 &&
-                data1.a.map((e: any) => {
+              {orderData &&
+                orderData.map((e: any, index: number) => {
                   return (
-                    <div>
-                      <ShopCart data={e} />
+                    <div key={index}>
+                      <ShopCart data={e.data} quantity={e.quantity} />
                     </div>
                   );
-                })} */}
+                })}
             </div>
             <div className="flex justify-end mt-[20px]">
               <button className="bg-[#FB2E86] w-[173px] flex justify-center px-4 py-2 text-white font-bold text-[14px] ">
@@ -58,7 +46,9 @@ const page = () => {
           <div className="bg-[#F4F4FC] p-8 flex flex-col gap-4 mt-[40px]">
             <div className="flex justify-between">
               <p className="text-[18px] text-[#1D3178]">Нийлбэр:</p>
-              <p className="text-[#1D3178] text-[18px] font-bold">750000₮</p>
+              <p className="text-[#1D3178] text-[18px] font-bold">
+                {totalPrice}₮
+              </p>
             </div>
             <div className=" border-b-[2px] border-gray-200"></div>
             <div className="flex justify-between">

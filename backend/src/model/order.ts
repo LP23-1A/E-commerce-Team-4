@@ -24,6 +24,7 @@ const OrderSchema = new mongoose.Schema({
   },
   amountPaid: Number,
   amountToBePaid: Number,
+  quantity: Number,
   coupon: {
     type: String,
     default: 0,

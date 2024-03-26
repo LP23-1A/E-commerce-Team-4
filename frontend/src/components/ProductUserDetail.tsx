@@ -2,11 +2,13 @@ import { SaveProduct, SearchProduct, Star, TrolleyProduct } from "@/images";
 import React, { useContext } from "react";
 import useSWR from "swr";
 import { UserOrderContext } from ".";
+import toast, { Toaster } from "react-hot-toast";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export const ProductUserDetail = () => {
-  const { orderData, setData }: any = useContext(UserOrderContext);
+  const { orderData, setOrderData, addCart }: any =
+    useContext(UserOrderContext);
   const { data, error } = useSWR(
     "http://localhost:8000/products/product",
     fetcher
@@ -15,9 +17,24 @@ export const ProductUserDetail = () => {
 
   if (error) return <div>Error fetching</div>;
   if (!data) return <div>Loading...</div>;
-  const handler = (id: any) => {
-    setData((prev: any) => ({ ...prev, id }));
-  };
+  // const addCart = (id: number) => {
+  //   if (orderData.filter((item: any) => item.id === id) == null) {
+  //     setOrderData([...orderData, { id, count: 1 }]);
+  //   } else if (orderData.filter((item: any) => item.id === id) !== null) {
+  //     setOrderData([...orderData, { id, count: 1 }]);
+  //   } else {
+  //     return toast.error("ali hediin sagsalsan");
+  //   }
+
+  //   //  setOrderData((orderData)=> {
+  //   //    if (data.find((item) => item.id === id) == null) {
+  //   //      return [...data, { id, quantity: 1 }];
+  //   //    } else {
+  //   //      return toast.error("ali hediin sagsalsan");
+  //   //    }
+  //   //  });
+  // };
+
   return (
     <div className="flex flex-col gap-10 mx-auto w-[1440px] mb-32">
       {allProduct.map((val: any) => {
@@ -52,8 +69,9 @@ export const ProductUserDetail = () => {
               <div className="flex items-center gap-10">
                 <button
                   className="flex justify-center items-center rounded-[50%] h-9 w-9 bg-white shadow-xl"
-                  onClick={() => handler(val._id)}
+                  onClick={() => addCart(val)}
                 >
+                  <Toaster position="top-right" />
                   <TrolleyProduct />
                 </button>
                 <button className="flex justify-center items-center rounded-[50%] h-9 w-9 bg-white shadow-xl">
