@@ -7,8 +7,13 @@ const page = () => {
     <div>
       <NavbarUser /> 
       <PathUser />
-      <ProductUser />
-      <ProductUserDetail />
+      <div className='flex flex-col gap-10 w-[1440px] mx-auto'>
+        <div className='flex flex-col gap-1 mt-20'>
+          <h1 className='text-xl text-[#151886] font-bold'>Электрон бараа</h1>
+          <p className='text-[#8A8FB9]'>125 бүтээгдэхүүн</p>
+        </div>
+        <ProductUserDetail />
+      </div>
       <Footer />
     </div>
   )
