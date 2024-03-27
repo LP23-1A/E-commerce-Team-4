@@ -1,7 +1,20 @@
+'use client'
+import { Carousel, Footer, NavbarUser, New, Ontsloh, Service } from "@/components";
 import React from "react";
 
 const page = () => {
-  return <div>hello</div>;
+  return (
+    <div>
+      <NavbarUser/>
+      <Carousel/>
+      <div className="px-[202px] py-[100px] flex flex-col gap-[100px]">
+          <Ontsloh/>
+          <New/>
+      </div>
+      <Service/>
+      <Footer/>
+    </div>
+  )
 };
 
 export default page;
