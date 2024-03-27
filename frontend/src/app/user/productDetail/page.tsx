@@ -12,6 +12,7 @@ import { BlueDot } from "@/images/BlueDot";
 import Heart from "@/images/Heart";
 import { RightArrow } from "@/images/RightArrow";
 
+
 import React from "react";
 
 const page = () => {
