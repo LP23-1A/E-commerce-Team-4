@@ -74,8 +74,8 @@ const getAllProduct = async (req: Request, res: Response) => {
 
 const getProduct = async (req: Request, res: Response) => {
   try {
-    const { getId } = req.body;
-    const getData = await ProductModel.findOne({ id: getId });
+    const getId = req.params.id;
+    const getData = await ProductModel.findById(getId);
     res.status(200).send({ success: true, getData });
   } catch (error) {
     res.status(500).send({ success: false, error });

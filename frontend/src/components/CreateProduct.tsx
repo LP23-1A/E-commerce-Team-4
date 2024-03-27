@@ -11,14 +11,11 @@ export const CreateProduct = () => {
   const handleRef = (field: string, value: string | number) => {
     formDataRef.current = { ...formDataRef.current, [field]: value };
   };
-  console.log(formDataRef.current);
 
   const handleSubmit = async () => {
     try {
       const urls = await axios.get("/api/upload-image");
       const imageUrl = urls.data.objectUrl;
-      console.log(urls, imageUrl);
-
       imageUrl.data?.uploadUrls.map(
         async (uploadUrl: string, index: number) => {
           return await axios.put(uploadUrl, images[index], {
@@ -39,7 +36,7 @@ export const CreateProduct = () => {
         residual: formDataRef.current.residual,
         mainCate: formDataRef.current.mainCate,
         subCate: formDataRef.current.subCate,
-        images: urls.data?.uploadUrls,
+        images: imageUrl,
       });
       localStorage.setItem("product", JSON.stringify([res]));
       console.log(res);

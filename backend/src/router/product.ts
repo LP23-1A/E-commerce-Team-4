@@ -10,7 +10,6 @@ import {
 const product = express.Router();
 
 product.route("/product").post(createProduct).get(getAllProduct);
-product.route("/:id").delete(deleteById).put(updateById);
-product.route("/one").post(getProduct);
+product.route("/:id").delete(deleteById).put(updateById).get(getProduct);
 
 export { product };

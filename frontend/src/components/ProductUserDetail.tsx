@@ -69,7 +69,7 @@ export const ProductUserDetail = () => {
               <div className="flex items-center gap-10">
                 <button
                   className="flex justify-center items-center rounded-[50%] h-9 w-9 bg-white shadow-xl"
-                  onClick={() => addCart(val)}
+                  onClick={() => addCart(val._id)}
                 >
                   <Toaster position="top-right" />
                   <TrolleyProduct />

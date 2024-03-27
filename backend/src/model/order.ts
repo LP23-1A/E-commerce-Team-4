@@ -25,6 +25,11 @@ const OrderSchema = new mongoose.Schema({
   amountPaid: Number,
   amountToBePaid: Number,
   quantity: Number,
+  address: String,
+  city: String,
+  apartment: String,
+  firstName: String,
+  lastName: String,
   coupon: {
     type: String,
     default: 0,

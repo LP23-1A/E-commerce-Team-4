@@ -44,7 +44,10 @@ const page = () => {
             <p>Ангилал</p>
           </div>
           <div className="p-[24px] gap-[24px]">
-            <button className="bg-[#121316] rounded-lg w-[280px] h-[48px] ]" onClick={handler}>
+            <button
+              className="bg-[#121316] rounded-lg w-[280px] h-[48px] ]"
+              onClick={handler}
+            >
               <div className="flex gap-[4px] justify-center align-middle items-center h-[24px]">
                 <PlusIcon />
                 <div className="text-white font-semibold text-base/[20px] tracking-[-0.3px]">
@@ -88,7 +91,11 @@ const page = () => {
                 <div className="flex items-center px-2 ">
                   <Search />
                 </div>
-                <input className="w-[500px] rounded" type="text" placeholder="Бүтээгдэхүүний нэр, SKU, UPC"/>
+                <input
+                  className="w-[500px] rounded"
+                  type="text"
+                  placeholder="Бүтээгдэхүүний нэр, SKU, UPC"
+                />
               </div>
             </div>
             <div className="flex mt-[24px] w-full justify-between rounded-xl border-[1px] bg-white">
@@ -118,7 +125,7 @@ const page = () => {
                   </tr>
                   {filterdata &&
                     filterdata.map((e: any, index: number) => {
-                      return <ProductTableData data={e} />;
+                      return <ProductTableData data={e} index={index} />;
                     })}
                 </tbody>
               </table>

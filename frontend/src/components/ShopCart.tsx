@@ -11,7 +11,7 @@ export const ShopCart = ({ data, quantity }: any) => {
         <div className="w-[300px] flex gap-2 items-center">
           <div className=" relative">
             <img
-              src={data.images[0].src}
+              src={data.images[0]}
               className="w-[83px] h-[83px] relative rounded"
             />
             <p
@@ -37,8 +37,10 @@ export const ShopCart = ({ data, quantity }: any) => {
             >
               -
             </p>
-            <p className="bg-white px-2 cursor-pointer">{quantity}</p>
-            <p onClick={() => addCart(data)}>+</p>
+            <p className="bg-white px-2 ">{quantity}</p>
+            <p className=" cursor-pointer" onClick={() => addCart(data)}>
+              +
+            </p>
           </div>
         </div>
         <div className="w-fit">

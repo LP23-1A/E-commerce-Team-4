@@ -8,6 +8,7 @@ export const CreateProductProvider = ({ children }: any) => {
     categoryId: "",
     price: "",
     productCode: "",
+    images: [null as File | null],
     description: "",
     residual: "",
     mainCate: "",

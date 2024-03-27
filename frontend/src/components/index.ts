@@ -40,3 +40,4 @@ export * from "./New";
 export * from "./Carousel";
 export * from "./Service";
 export * from "./UserOrderProvider";
+export * from "./OrderFinish";

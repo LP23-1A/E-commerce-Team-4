@@ -16,7 +16,7 @@ const page = () => {
       <div className="flex m-auto">
         <AsideBar />
         <div className="bg-[#ECEDF0] w-full py-10 px-10">
-          <div className=" bg-white rounded-xl m-auto w-[680px]">
+          <div className=" bg-white rounded-xl m-auto w-1/2">
             <div className="border-b-[1px] border-black-100">
               <div className="px-[24px] py-[20px] flex gap-4 justify-between">
                 <div className="w-fit">
@@ -53,63 +53,37 @@ const page = () => {
               </div>
             </div>
           </div>
-          <div className="flex mx-auto mt-[24px] w-[680px] rounded-xl border-[1px] bg-white">
-            <table>
-              <tbody>
-                <tr className="flex justify-between w-full px-6">
-                  <th className="flex items-center justify-between ">
-                    <div className="font-semibold text-sm inline-flex justify-start">
-                      Захиалгын ID дугаар
-                    </div>
-                  </th>
-                  <th className="w-[268px] py-[12px] px-[24px] border-b-[1px]">
-                    <div className="font-semibold text-sm inline-flex">
-                      Захиалагч
-                    </div>
-                  </th>
-                  <th className="w-[137px] py-[12px] px-[24px] border-b-[1px]">
-                    <div className="font-semibold text-sm inline-flex">
-                      Төлбөр
-                    </div>
-                  </th>
-                  <th className="w-[150px] py-[12px] px-[24px] border-b-[1px]">
-                    <div className="font-semibold text-sm inline-flex">
-                      Огноо
-                    </div>
-                  </th>
-                </tr>
-              </tbody>
+
+          <table className="w-1/2 bg-white mx-auto mt-10 rounded-xl px-24">
+            <tbody className="flex flex-col gap-4 mt-4">
+              <tr className="flex justify-between w-full px-16">
+                <th className="flex w-[200px] items-center justify-between font-semibold ">
+                  Захиалгын ID дугаар
+                </th>
+                <th className="w-[100px]">Захиалагч</th>
+                <th className="w-[130px] pl-16">Төлбөр</th>
+                <th className="w-[150px] pr-5">Огноо</th>
+              </tr>
               {incomeData &&
                 incomeData.map((val: any, key: any) => {
                   return (
-                    <tbody>
-                      <tr className="" key={key}>
-                        <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                          <div className="flex gap-[8px] align-items">
-                            <img
-                              src={val.images}
-                              className="w-[40px] h-[40px] rounded-[50%] mt-[3px]"
-                            />
-                            <div className="column">
-                              <p>{val.productName}</p> <p>{val.categoryId}</p>
-                            </div>
-                          </div>
+                    <div className="flex flex-col px-12">
+                      <tr className="px-6 flex justify-between" key={key}>
+                        <td className="w-[200px]">#{val._id.slice(0, 10)}</td>
+                        <td className="w-[200px] pl-[40px]">
+                          Zoloosoko@gmail.com
                         </td>
-                        <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                          {val.tag}
-                        </td>
-                        <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                          {val.price}₮
-                        </td>
-                        <td className="w-[68px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-                          {val.qty}
+                        <td className="w-[130px] pl-[40px]">{val.price}₮</td>
+                        <td className="w-[150px] pl-[50px]">
+                          {val.createdAt.slice(0, 10)}
                         </td>
                       </tr>
-                    </tbody>
+                      <div className="border-b bg-grey mt-2"></div>
+                    </div>
                   );
                 })}
-            </table>
-          </div>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

@@ -2,15 +2,20 @@ import { Request, Response } from "express";
 import { OrderModel } from "../model/order";
 type OrderType = {
   orderNumber: String;
-  userId: string;
+  userId: String;
   phoneNumber: String;
   amountPaid: Number;
   amountToBePaid: Number;
   quantity: Number;
   coupon: String;
   description: String;
-  details: string;
+  details: String;
   status: String;
+  address: String;
+  city: String;
+  apartment: String;
+  lastName: String;
+  firstName: String;
 };
 
 const createOrder = async (req: Request, res: Response) => {
@@ -25,6 +30,11 @@ const createOrder = async (req: Request, res: Response) => {
       coupon,
       description,
       details,
+      address,
+      city,
+      apartment,
+      lastName,
+      firstName,
     }: Required<OrderType> = req.body;
     const create = await OrderModel.create({
       orderNumber: orderNumber,
@@ -36,6 +46,11 @@ const createOrder = async (req: Request, res: Response) => {
       coupon: coupon,
       description: description,
       details: details,
+      address: address,
+      city: city,
+      apartment: apartment,
+      lastName: lastName,
+      firstName: firstName,
     });
     res.status(201).send({ success: true, create });
   } catch (error) {

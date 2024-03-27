@@ -25,7 +25,7 @@ const page = () => {
   return (
     <div>
       <Navbar />
-      <div className="flex mx-auto w-[1440px]">
+      <div className="flex mx-auto ">
         <AsideBar />
         <div className="flex flex-col w-full">
           <div className="flex gap-10 items-center">
@@ -34,8 +34,8 @@ const page = () => {
             </button>
             <h1 className="text-xl">Захиалгын дэлгэрэнгүй</h1>
           </div>
-          <div className="flex bg-[#F0F0F0] w-full h-screen p-9 justify-between">
-            <div className="flex bg-white w-[540px] rounded-xl p-6">
+          <div className="flex bg-[#F0F0F0] w-full h-screen p-9 justify-between gap-20">
+            <div className="flex bg-white w-1/2 rounded-xl p-6">
               <div className="flex flex-col w-full gap-5">
                 <div className="flex justify-between w-full">
                   <div className="flex flex-col gap-1">
@@ -86,7 +86,7 @@ const page = () => {
               </div>
               <div></div>
             </div>
-            <div className="flex w-[540px] h-fit flex-col gap-5">
+            <div className="flex w-1/2 h-fit flex-col gap-5">
               <div className="rounded-xl bg-white w-full">
                 <div className="p-7 border-b-2 pb-6">
                   <h1>Хүргэлтийн мэдээлэл</h1>
