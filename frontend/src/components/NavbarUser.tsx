@@ -18,14 +18,9 @@ export const NavbarUser = () => {
   const { orderData }: any = useContext(UserOrderContext);
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
-  const [input, setInput] = useState("");
-  fetch("http://localhost:8000/products/product", { method: "GET" }).then(
-    (response) => response.json()
-  );
   const fetchApi = (value: string) => {};
   const handleChanging = (value: string) => {
     fetchApi(value);
-    setInput(value);
   };
   const dropdown = () => {
     setIsOpen(!isOpen);
@@ -42,7 +37,6 @@ export const NavbarUser = () => {
   const logIn = () => {
     router.push("/user/logIn");
   };
-  router.push("/user/shopCart");
 
   return (
     <div className="flex flex-col">
@@ -56,16 +50,19 @@ export const NavbarUser = () => {
               <Call /> 77123456
             </button>
           </div>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-6 relative">
             <button className="flex items-center gap-4" onClick={logIn}>
               Нэвтрэх <UserNav />
             </button>
             <button className="flex items-center gap-4" onClick={saveList}>
               Хадгалах <Save />
             </button>
-            <button className="flex items-center gap-4" onClick={shopCart}>
+            <button className="flex items-center gap-4 " onClick={shopCart}>
               <Trolley />
             </button>
+            <p className="absolute top-0 left-[270px] text-[12px] h-[14px] w-[14px] bg-red-700 rounded-3xl flex justify-center items-center">
+              {orderData.length}
+            </p>
           </div>
         </div>
       </div>
@@ -97,7 +94,6 @@ export const NavbarUser = () => {
             <input
               type="text"
               className="border w-[270px] h-9 p-2 outline-none"
-              value={input}
               onChange={(e) => handleChanging(e.target.value)}
             />
             <button className="flex justify-center items-center w-12 h-9 bg-[#FB2E86] text-white">

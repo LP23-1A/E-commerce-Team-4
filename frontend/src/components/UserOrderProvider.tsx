@@ -1,4 +1,3 @@
-import { log } from "console";
 import React, { createContext, useRef, useState } from "react";
 type fn = {
   removeCart: (id: string) => void;
@@ -24,38 +23,42 @@ export const UserOrderProvider = ({ children }: any) => {
     lastName: "",
   });
 
-  const addCart = (id: string) => {
-    const a: any = orderData.find((item: any) => item.id === id);
+  const addCart = (_id: string) => {
+    const a: any = orderData.find((item: any) => item._id === _id);
     if (a) {
       setOrderData(
         orderData.map((item: any) =>
-          item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+          item._id === _id ? { ...item, quantity: item.quantity + 1 } : item
         )
       );
+      console.log("k");
     } else {
-      setOrderData([...orderData, { id, quantity: 1 }]);
+      setOrderData([...orderData, { _id, quantity: 1 }]);
     }
+    console.log(_id);
   };
+  console.log(orderData);
 
-  const removeCart = (id: any) => {
-    const a = orderData.find((item: any) => item.id === id);
+  const removeCart = (_id: any) => {
+    const a = orderData.find((item: any) => item._id === _id);
     if (a) {
-      setOrderData(orderData.filter((item: any) => item.id !== id));
+      setOrderData(orderData.filter((item: any) => item._id !== _id));
     }
   };
 
-  const decreaseCart = (id: string) => {
-    const a = orderData.find((item: any) => item.id === id);
+  const decreaseCart = (_id: string) => {
+    const a = orderData.find((item: any) => item._id === _id);
     if (a?.quantity === 1) {
-      setOrderData(orderData.filter((item: any) => item.id !== id));
+      setOrderData(orderData.filter((item: any) => item._id !== _id));
     } else {
       setOrderData(
         orderData.map((item: any) =>
-          item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+          item._id === _id ? { ...item, quantity: item.quantity - 1 } : item
         )
       );
     }
   };
+  console.log(orderData);
 
   return (
     <UserOrderContext.Provider

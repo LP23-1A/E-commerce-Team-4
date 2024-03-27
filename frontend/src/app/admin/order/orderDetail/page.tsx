@@ -4,14 +4,14 @@ import axios from "axios";
 import { Down, ToLeft } from "@/images";
 import { AsideBar, Navbar } from "@/components";
 
-const API = "http://localhost:8000/order/one";
-
 const page = () => {
   const orderId = JSON.parse(localStorage.getItem("orderId") as string);
   const [data, setData] = useState<string[] | any>([]);
   const getOrderData = async () => {
     try {
-      const get = await axios.post(API, { _id: orderId.id });
+      const get = await axios.get(`http://localhost:8000/order/${orderId.id}`);
+      console.log(get);
+
       setData(get.data.getOneOrder);
     } catch (error) {
       console.log(error);
@@ -63,8 +63,7 @@ const page = () => {
                       className="flex bg-gray-100 h-40 w-full rounded-xl"
                       key={index}
                     >
-                      <img src={e.images.src} alt="" />
-                      <div className="h-full w-[185px] bg-black rounded-l-xl"></div>
+                      <img src={e.images[0]} alt="" />
                       <div className="flex flex-col p-3 justify-between w-full">
                         <h1 className="font-semibold text-xl text-black">
                           {e.productName}
@@ -74,7 +73,9 @@ const page = () => {
                           <p>Бүтээгдэхүүний ID: {e._id.slice(0, 10)}</p>
                         </div>
                         <div className="flex justify-between">
-                          <p>Тоо ширхэг:3 * ₮{data.amountPaid}</p>
+                          <p>
+                            Тоо ширхэг:{e.qty} * ₮{data.amountPaid}
+                          </p>
                           <p className="font-semibold">
                             ₮{3 * data.amountPaid}
                           </p>
@@ -84,7 +85,6 @@ const page = () => {
                   );
                 })}
               </div>
-              <div></div>
             </div>
             <div className="flex w-1/2 h-fit flex-col gap-5">
               <div className="rounded-xl bg-white w-full">
@@ -94,8 +94,8 @@ const page = () => {
                 <div className="p-7">
                   <p>Гэр:</p>
                   <p className="font-semibold">
-                    {data.userId?.city},{data.userId?.district},
-                    {data.userId?.khoroo},14-р байр,8-р орц,6 давхар
+                    {/* {data.userId?.city},{data.userId?.district},
+                    {data.userId?.khoroo},14-р байр,8-р орц,6 давхар */}
                   </p>
                 </div>
               </div>
@@ -105,11 +105,25 @@ const page = () => {
                 </div>
                 <div className="p-7">
                   <p>Бүтээгдэхүүн:</p>
+                  <div className="flex flex-col gap-3 mt-4">
+                    {data.details?.map((e: any) => {
+                      return (
+                        <div className="flex justify-between">
+                          <div className="flex gap-2">
+                            <p>{e.productName}</p>
+                            <p>*{e.qty}</p>
+                          </div>
+                          <p>{e.price * e.qty}</p>
+                        </div>
+                      );
+                    })}
+                  </div>
+
                   <div className="flex flex-col gap-3"></div>
                   <hr className="my-5" />
                   <div className="flex justify-between items-center font-semibold">
                     <p>Нийт төлсөн дүн</p>
-                    <p>₮{3 * data?.amountPaid}</p>
+                    <p>₮</p>
                   </div>
                 </div>
               </div>

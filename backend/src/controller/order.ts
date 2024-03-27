@@ -9,7 +9,7 @@ type OrderType = {
   quantity: Number;
   coupon: String;
   description: String;
-  details: String;
+  details: [{}];
   status: String;
   address: String;
   city: String;
@@ -60,8 +60,8 @@ const createOrder = async (req: Request, res: Response) => {
 
 const getOneOrder = async (req: Request, res: Response) => {
   try {
-    const { _id } = req.body;
-    const getOneOrder = await OrderModel.findOne({ _id: _id })
+    const id = req.params.id;
+    const getOneOrder = await OrderModel.findById(id)
       .populate("userId")
       .populate("details");
     res.status(200).send({ success: true, getOneOrder });
@@ -92,6 +92,7 @@ const updateOrder = async (req: Request, res: Response) => {
       coupon,
       description,
       status,
+      quantity,
     }: Required<OrderType> = req.body;
     const updateOrder = await OrderModel.findByIdAndUpdate(updateById, {
       orderNumber: orderNumber,
@@ -101,6 +102,7 @@ const updateOrder = async (req: Request, res: Response) => {
       coupon: coupon,
       description: description,
       status: status,
+      quantity: quantity,
     });
     res.status(201).send({ success: true, updateOrder });
   } catch (error) {

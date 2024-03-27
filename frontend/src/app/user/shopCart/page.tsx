@@ -7,30 +7,28 @@ import React, { useContext, useEffect, useState } from "react";
 const page = () => {
   const { orderData, setOrderData }: any = useContext(UserOrderContext);
   const [data, setData] = useState<any>([]);
-  const productsData: any = [];
   const router = useRouter();
-  // const totalPrice = orderData.reduce(
-  //   (price: number, item: any) => price + item.data.price * item.quantity,
-  //   0
-  // );
+  let totalPrice = 0;
+
   const handler = async () => {
+    const productsData: any = [];
+    let order;
     try {
-      for (let i = 0; i < orderData.length - 1; i++) {
-        const order = await axios.get(
-          `http://localhost:8000/products/${orderData[i].id}`
+      for (let i = 0; i < orderData.length; i++) {
+        order = await axios.get(
+          `http://localhost:8000/products/${orderData[i]._id}`
         );
         const productData = order?.data.getData;
-        productsData.push(productData);
+        productsData.push({ productData });
       }
-      setData(productsData);
+      setData([...productsData]);
     } catch (error) {
       console.log(error);
     }
   };
   useEffect(() => {
     handler();
-  }, []);
-  console.log(data);
+  }, [orderData]);
 
   return (
     <div className="">
@@ -49,7 +47,11 @@ const page = () => {
                 data?.map((e: any, index: number) => {
                   return (
                     <div key={index}>
-                      <ShopCart data={e} quantity={orderData[0].quantity} />
+                      <ShopCart
+                        data={e.productData}
+                        index={index}
+                        quantity={orderData[index]?.quantity}
+                      />
                     </div>
                   );
                 })}
@@ -69,14 +71,20 @@ const page = () => {
             <div className="flex justify-between">
               <p className="text-[18px] text-[#1D3178]">Нийлбэр:</p>
               <p className="text-[#1D3178] text-[18px] font-bold">
-                {/* {totalPrice}₮ */}
+                {totalPrice
+                  .toFixed(2)
+                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
+                ₮
               </p>
             </div>
             <div className=" border-b-[2px] border-gray-200"></div>
             <div className="flex justify-between">
               <p className="text-[18px] text-[#1D3178]">Төлөх дүн:</p>
               <p className="text-[#1D3178] text-[18px] font-bold">
-                {/* {totalPrice}₮ */}
+                {totalPrice
+                  .toFixed(2)
+                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
+                ₮
               </p>
             </div>
             <div className=" border-b-[2px] border-gray-200"></div>

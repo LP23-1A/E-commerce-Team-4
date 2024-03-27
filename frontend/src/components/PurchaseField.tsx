@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { userOrderContext } from ".";
+import { UserOrderContext } from ".";
 
 export const PurchaseField = () => {
-  const { formDataRef }: any = useContext(userOrderContext);
+  const { formDataRef }: any = useContext(UserOrderContext);
   const handleOnChange = (field: string, value: string | number) => {
     formDataRef.current = { ...formDataRef.current, [field]: value };
   };

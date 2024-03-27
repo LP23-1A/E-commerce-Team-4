@@ -54,7 +54,12 @@ export const ProductUserDetail = () => {
                   </div>
                 </div>
                 <div className="flex gap-2 items-center">
-                  <p className="text-[#151875] font-medium">{val.price}₮</p>
+                  <p className="text-[#151875] font-medium">
+                    {val.price
+                      .toFixed(2)
+                      .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
+                    ₮
+                  </p>
                   <Star />
                   <Star />
                   <Star />
