@@ -1,5 +1,5 @@
 'use client'
-import { Footer, NavbarUser, PathUser, ProductUser, ProductUserDetail } from '@/components'
+import { Footer, NavbarUser, PathUser, ProductUserDetail } from '@/components'
 import React from 'react'
 
 const page = () => {
