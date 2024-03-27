@@ -1,6 +1,6 @@
 import { SaveProduct, SearchProduct, Star, TrolleyProduct } from '@/images'
-import React from 'react'
 import useSWR from 'swr'
+import React from 'react'
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json())
 

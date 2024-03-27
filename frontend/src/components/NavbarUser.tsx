@@ -26,6 +26,12 @@ export const NavbarUser = () => {
   const shopCart = () => {
     router.push('/user/shopCart')
   }
+  const saveList = () => {
+    router.push('/user/saveList')
+  }
+  const logIn = () => {
+    router.push('/user/logIn')
+  }
   return (
     <div className='flex flex-col'>
       <div className='flex items-center text-white h-11 bg-[#7E33E0]'>
@@ -35,8 +41,8 @@ export const NavbarUser = () => {
             <button className='flex items-center gap-4'><Call /> 77123456</button>
           </div>
           <div className='flex items-center gap-6'>
-            <button className='flex items-center gap-4'>Нэвтрэх <UserNav /></button>
-            <button className='flex items-center gap-4'>Хадгалах <Save /></button>
+            <button className='flex items-center gap-4' onClick={logIn}>Нэвтрэх <UserNav /></button>
+            <button className='flex items-center gap-4' onClick={saveList}>Хадгалах <Save /></button>
             <button className='flex items-center gap-4' onClick={shopCart}><Trolley /></button>
           </div>
         </div>

@@ -2,12 +2,14 @@ import React from 'react'
 
 export const PathUser = () => {
   const path = window.location.pathname
+  console.log("path:", path);
+  
   return (
     <div className='h-20 bg-[#F6F5ff] w-full'>
       <div className='flex justify-between mx-auto w-[1440px] items-center h-full'>
         <div className='flex gap-2 items-center'>
-            <h1>Home</h1>
-            <p className='text-[#FB2E86]'>. Shop {path}</p>
+          <h1>Home</h1>
+          <p className='text-[#FB2E86]'>{path}</p>
         </div>
       </div>
     </div>
