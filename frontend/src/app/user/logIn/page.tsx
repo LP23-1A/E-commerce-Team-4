@@ -1,8 +1,37 @@
 'use client'
 import { Footer, NavbarUser, PathUser } from '@/components'
-import React from 'react'
+import axios from 'axios'
+import { useRouter } from 'next/navigation'
+import React, { useRef } from 'react'
 
 const page = () => {
+  const router = useRouter();
+  const formDataRef = useRef({
+    email: "",
+    password: "",
+    rePassword: "",
+  })
+  const handleRef = (field: string, value: string | number) => {
+    formDataRef.current = { ...formDataRef.current, [field]: value}
+  }
+  console.log(formDataRef);
+  if ( formDataRef.current.password !== formDataRef.current.rePassword ) {
+    alert("dont match passwords")
+    return
+  }
+  
+  const logIn = async () => {
+    try {
+      const res = await axios.post('http://localhost:8000/user/logIn', formDataRef.current)
+      console.log(res);
+      router.push('/user/dashboard')
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  const signUp = () => {
+    router.push('/user/signUp')
+  }
   return (
     <div className='flex flex-col w-full'>
       <NavbarUser />
@@ -11,11 +40,11 @@ const page = () => {
         <h1 className='font-bold text-3xl'>Нэвтрэх</h1>
         <div className='flex flex-col items-center justify-between gap-4 text-[#9096B2]'>
             <p>Доорх мэдээллийн оруулж нэвтэрнэ үү</p>
-            <input type="text" className='w-full border p-2 rounded font-light' placeholder='Имэйл хаяг'/>
-            <input type="text" className='w-full border p-2 rounded font-light' placeholder='Нууц үг'/>
+            <input type="text" className='w-full border p-2 rounded font-light outline-none' placeholder='Имэйл хаяг' onChange={(e) => handleRef('email', e.target.value)}/>
+            <input type="type" className='w-full border p-2 rounded font-light outline-none' placeholder='Нууц үг' onChange={(e) => handleRef('password', e.target.value)}/>
             <button>Нууц үгээ мартсан</button>
-            <button className='p-3 rounded text-white w-[392px] bg-[#FB2E86]'>Нэвтрэх</button>
-            <button>Шинээр бүртгүүлэх</button>
+            <button className='p-3 rounded text-white w-[392px] bg-[#FB2E86]' onClick={logIn}>Нэвтрэх</button>
+            <button onClick={signUp}>Шинээр бүртгүүлэх</button>
         </div>
       </div>
       <button className='mb-40 mt-3 mx-auto border-b-2 w-fit text-[#9096B2]'>мерчант нэвтрэх</button>

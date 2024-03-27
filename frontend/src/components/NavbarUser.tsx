@@ -15,13 +15,9 @@ import { useRouter } from "next/navigation";
 import { UserOrderContext } from ".";
 
 export const NavbarUser = () => {
-  const { orderData }: any = useContext(UserOrderContext);
-  const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
-  const fetchApi = (value: string) => {};
-  const handleChanging = (value: string) => {
-    fetchApi(value);
-  };
+  const { orderData }: any = useContext(UserOrderContext)
+  const router = useRouter()
+  const [ isOpen, setIsOpen ] = useState(false);
   const dropdown = () => {
     setIsOpen(!isOpen);
   };
@@ -90,15 +86,9 @@ export const NavbarUser = () => {
               </button>
             </div>
           </div>
-          <div className="flex">
-            <input
-              type="text"
-              className="border w-[270px] h-9 p-2 outline-none"
-              onChange={(e) => handleChanging(e.target.value)}
-            />
-            <button className="flex justify-center items-center w-12 h-9 bg-[#FB2E86] text-white">
-              <SearchUser />
-            </button>
+          <div className='flex'>
+            <input type="text" className='border w-[270px] h-9 p-2 outline-none'/>
+            <button className='flex justify-center items-center w-12 h-9 bg-[#FB2E86] text-white'><SearchUser /></button>
           </div>
         </div>
       </div>
