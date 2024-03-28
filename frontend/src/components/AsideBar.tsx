@@ -2,9 +2,14 @@
 import { useRouter } from "next/navigation";
 import { data } from "@/utils/Sidebar";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export const AsideBar = () => {
-  const path = window.location.pathname;
+  const [path, setPath] = useState("");
+
+  useEffect(() => {
+    setPath(window.location.pathname);
+  }, [path]);
   return (
     <div className="flex flex-col pt-4 gap-3 bg-white h-screen w-96">
       {data.map((e, index) => {

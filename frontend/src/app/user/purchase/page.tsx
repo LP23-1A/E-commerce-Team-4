@@ -1,9 +1,43 @@
 "use client";
-import { Footer, NavbarUser, PurchaseCart, PurchaseField } from "@/components";
-
-import React from "react";
+import {
+  Footer,
+  NavbarUser,
+  OrderFinish,
+  PurchaseCart,
+  PurchaseField,
+  UserOrderContext,
+} from "@/components";
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
 
 const page = () => {
+  const { orderData }: any = useContext(UserOrderContext);
+  const [data, setData] = useState<[] | any>([]);
+  const handler = async () => {
+    const productsData: any = [];
+    let order;
+    try {
+      for (let i = 0; i < orderData.length; i++) {
+        order = await axios.get(
+          `http://localhost:8000/products/${orderData[i]._id}`
+        );
+        const productData = order?.data.getData;
+        productsData.push({ productData });
+      }
+      setData([...productsData]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  let totalPrice = 0;
+  for (let i = 0; i < data.length; i++) {
+    totalPrice =
+      totalPrice + data[i].productData.price * orderData[i]?.quantity;
+  }
+  useEffect(() => {
+    handler();
+  }, []);
+
   return (
     <div>
       <NavbarUser />
@@ -11,26 +45,12 @@ const page = () => {
         <PurchaseField />
         <div className="my-[200px] flex flex-col">
           <div className="flex flex-col gap-[20px]">
-            <PurchaseCart />
-            <PurchaseCart />
-            <PurchaseCart />
-            <PurchaseCart />
+            {data &&
+              data.map((e: any) => {
+                return <PurchaseCart data={e.productData} />;
+              })}
           </div>
-          <div className="bg-[#F4F4FC] p-8 mt-[20px] flex flex-col ">
-            <div className="flex justify-between  ">
-              <p className="text-[#1D3178] ">Нийлбэр:</p>
-              <p className="text-[#151878] text-[18px] font-bold">750’000₮</p>
-            </div>
-            <div className=" border-b-[2px] mt-[10px] border-[#E1E1E4]"></div>
-            <div className="flex justify-between mt-4">
-              <p className="text-[#1D3178] ">Төлөх дүн:</p>
-              <p className="text-[#151878] text-[18px] font-bold">750’000₮</p>
-            </div>
-            <div className=" border-b-[2px] mt-[10px] border-[#E1E1E4]"></div>
-            <button className="text-white bg-[#19D16F] w-full py-3 rounded mt-5">
-              Худалдан авах
-            </button>
-          </div>
+          <OrderFinish price={totalPrice} />
         </div>
       </div>
 

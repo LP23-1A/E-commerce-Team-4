@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserOrderContext } from ".";
 
 export const PurchaseField = () => {
+  const { formDataRef }: any = useContext(UserOrderContext);
+  const handleOnChange = (field: string, value: string | number) => {
+    formDataRef.current = { ...formDataRef.current, [field]: value };
+  };
+
   return (
     <div className="w-[1040px] mx-auto my-20">
       <div>
@@ -18,6 +24,7 @@ export const PurchaseField = () => {
                 type="text"
                 className=" border-none bg-[#F8F8FD] outline-none w-full text-[14px]"
                 placeholder="Email or mobile phone number"
+                onChange={(e) => handleOnChange("phoneNumber", e.target.value)}
               />
               <div className="border-b-2 border-[#BFC6E0]"></div>
             </div>
@@ -40,6 +47,9 @@ export const PurchaseField = () => {
                     type="text"
                     className="border-none bg-[#F8F8FD] outline-none w-full text-[14px]"
                     placeholder="First name (optional)"
+                    onChange={(e) =>
+                      handleOnChange("firstName", e.target.value)
+                    }
                   />
                   <div className="border-b-2 border-[#BFC6E0] "></div>
                 </div>
@@ -48,6 +58,7 @@ export const PurchaseField = () => {
                     type="text"
                     className="border-none bg-[#F8F8FD] outline-none w-full text-[14px]"
                     placeholder="Last name"
+                    onChange={(e) => handleOnChange("lastName", e.target.value)}
                   />
                   <div className="border-b-2 border-[#BFC6E0] "></div>
                 </div>
@@ -57,6 +68,7 @@ export const PurchaseField = () => {
                   type="text"
                   className="border-none bg-[#F8F8FD] outline-none w-full text-[14px]"
                   placeholder="Address"
+                  onChange={(e) => handleOnChange("address", e.target.value)}
                 />
                 <div className="border-b-2 border-[#BFC6E0] "></div>
               </div>
@@ -65,6 +77,7 @@ export const PurchaseField = () => {
                   type="text"
                   placeholder="Appaetnentment,suit,e.t.c (optinal)"
                   className="border-none bg-[#F8F8FD] outline-none w-full text-[14px]"
+                  onChange={(e) => handleOnChange("apartment", e.target.value)}
                 />
                 <div className="border-b-2 border-[#BFC6E0] "></div>
               </div>
@@ -73,6 +86,7 @@ export const PurchaseField = () => {
                   type="text"
                   placeholder="city"
                   className="border-none bg-[#F8F8FD] outline-none w-full text-[14px]"
+                  onChange={(e) => handleOnChange("city", e.target.value)}
                 />
                 <div className="border-b-2 border-[#BFC6E0] "></div>
               </div>

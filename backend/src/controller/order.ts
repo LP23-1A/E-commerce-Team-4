@@ -2,14 +2,20 @@ import { Request, Response } from "express";
 import { OrderModel } from "../model/order";
 type OrderType = {
   orderNumber: String;
-  userId: string;
+  userId: String;
   phoneNumber: String;
   amountPaid: Number;
   amountToBePaid: Number;
+  quantity: Number;
   coupon: String;
   description: String;
-  details: string;
+  details: [{}];
   status: String;
+  address: String;
+  city: String;
+  apartment: String;
+  lastName: String;
+  firstName: String;
 };
 
 const createOrder = async (req: Request, res: Response) => {
@@ -20,9 +26,15 @@ const createOrder = async (req: Request, res: Response) => {
       userId,
       amountPaid,
       amountToBePaid,
+      quantity,
       coupon,
       description,
       details,
+      address,
+      city,
+      apartment,
+      lastName,
+      firstName,
     }: Required<OrderType> = req.body;
     const create = await OrderModel.create({
       orderNumber: orderNumber,
@@ -30,9 +42,15 @@ const createOrder = async (req: Request, res: Response) => {
       userId: userId,
       amountPaid: amountPaid,
       amountToBePaid: amountToBePaid,
+      quantity: quantity,
       coupon: coupon,
       description: description,
       details: details,
+      address: address,
+      city: city,
+      apartment: apartment,
+      lastName: lastName,
+      firstName: firstName,
     });
     res.status(201).send({ success: true, create });
   } catch (error) {
@@ -42,8 +60,8 @@ const createOrder = async (req: Request, res: Response) => {
 
 const getOneOrder = async (req: Request, res: Response) => {
   try {
-    const { _id } = req.body;
-    const getOneOrder = await OrderModel.findOne({ _id: _id })
+    const id = req.params.id;
+    const getOneOrder = await OrderModel.findById(id)
       .populate("userId")
       .populate("details");
     res.status(200).send({ success: true, getOneOrder });
@@ -74,6 +92,7 @@ const updateOrder = async (req: Request, res: Response) => {
       coupon,
       description,
       status,
+      quantity,
     }: Required<OrderType> = req.body;
     const updateOrder = await OrderModel.findByIdAndUpdate(updateById, {
       orderNumber: orderNumber,
@@ -83,6 +102,7 @@ const updateOrder = async (req: Request, res: Response) => {
       coupon: coupon,
       description: description,
       status: status,
+      quantity: quantity,
     });
     res.status(201).send({ success: true, updateOrder });
   } catch (error) {

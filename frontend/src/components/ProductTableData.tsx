@@ -1,7 +1,7 @@
 import React from "react";
 import { DeleteBtn, ProductPutBtn } from ".";
 
-export const ProductTableData = ({ data }: any) => {
+export const ProductTableData = ({ data, index }: any) => {
   return (
     <tbody>
       <tr>
@@ -15,12 +15,12 @@ export const ProductTableData = ({ data }: any) => {
               className="w-[40px] h-[40px] rounded-[50%] mt-[3px]"
             />
             <div className="column">
-              <p>{data.productName}</p> <p>{data.categoryId}</p>
+              <p>{data.productName}</p> <p>#000{1 + index}</p>
             </div>
           </div>
         </td>
         <td className="w-[240px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
-          {data.tag}
+          {data.subCate},{data.mainCate}
         </td>
         <td className="w-[200px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
           {data.price}₮
