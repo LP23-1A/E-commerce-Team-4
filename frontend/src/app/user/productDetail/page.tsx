@@ -67,8 +67,8 @@ const page = () => {
       <div className="w-full h-[649px] bg-[#F9F8FE] mt-[24px]">
         <div className="w-[1440px] mx-auto flex flex-col gap-[40px] text-[#151875] pt-[120px]">
           <div className="flex gap-[30px]">
-            <h1 className="font-extrabold text-2xl">Нэмэлт мэдээлэл</h1>
-            <h1 className="font-extrabold text-2xl">Үнэлгээ</h1>
+            <button><h1 className="font-extrabold text-2xl">Нэмэлт мэдээлэл</h1></button>
+            <button><h1 className="font-extrabold text-2xl">Үнэлгээ</h1></button>
           </div>
           <div className="flex flex-col gap-[10px]">
             <h1 className="font-extrabold text-2xl">Varius tempor.</h1>
