@@ -5,8 +5,10 @@ import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 
 const API = "http://localhost:8000/order";
+
 export const OrderFinish = ({ price }: any) => {
-  const { orderData, formDataRef }: any = useContext(UserOrderContext);
+  const { orderData, formDataRef, setOrderData }: any =
+    useContext(UserOrderContext);
   const router = useRouter();
   const handler = async () => {
     try {
@@ -30,6 +32,7 @@ export const OrderFinish = ({ price }: any) => {
         details: orderData,
       });
       router.push("/user/orderComplete");
+      setOrderData([]);
     } catch (error) {
       toast.error("aldaa garlaa dahin oroldono uu.");
     }

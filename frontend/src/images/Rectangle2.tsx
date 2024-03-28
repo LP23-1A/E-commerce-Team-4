@@ -1,12 +1,10 @@
-import React from 'react'
-import img from "@/../public/Rectangle 136.png"
+import React from "react";
+import img from "@/../public/Rectangle 136.png";
 
-const Rectangle2 = () => {
+export const Rectangle2 = () => {
   return (
     <div>
-        <img src={img.src} alt="" />
+      <img src={img.src} alt="" />
     </div>
-  )
-}
-
-export default Rectangle2
+  );
+};

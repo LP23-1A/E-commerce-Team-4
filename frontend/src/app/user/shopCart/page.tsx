@@ -8,6 +8,7 @@ const page = () => {
   const { orderData, setOrderData }: any = useContext(UserOrderContext);
   const [data, setData] = useState<any>([]);
   const router = useRouter();
+  console.log(orderData);
 
   const handler = async () => {
     const productsData: any = [];
@@ -21,8 +22,7 @@ const page = () => {
         productsData.push({ productData });
       }
       setData([...productsData]);
-    } catch (error) {
-    }
+    } catch (error) {}
   };
   let totalPrice = 0;
   for (let i = 0; i < data.length; i++) {
@@ -35,7 +35,7 @@ const page = () => {
   }, [orderData]);
 
   return (
-    <div className="">
+    <div className="flex flex-col justify-between h-screen">
       <NavbarUser />
       <div className="flex my-[80px] justify-between w-[1440px] mx-auto">
         <div>
@@ -101,7 +101,9 @@ const page = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      <div className="items-end">
+        <Footer />
+      </div>
     </div>
   );
 };
