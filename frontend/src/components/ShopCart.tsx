@@ -47,7 +47,7 @@ export const ShopCart = ({ data, quantity, index }: any) => {
         </div>
         <div className="w-fit">
           <p className="text-[#1D3178] text-[14px]">
-            {(data.price * orderData[index].quantity)
+            {(data.price * orderData[index]?.quantity)
               .toFixed(2)
               .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
             ₮

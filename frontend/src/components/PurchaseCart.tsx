@@ -1,9 +1,6 @@
 import React, { useContext } from "react";
-import { UserOrderContext } from ".";
 
 export const PurchaseCart = ({ data }: any) => {
-  console.log(data);
-
   return (
     <div>
       <div className="flex w-[400px] justify-between items-center ">

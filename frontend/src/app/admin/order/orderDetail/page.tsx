@@ -10,8 +10,6 @@ const page = () => {
   const getOrderData = async () => {
     try {
       const get = await axios.get(`http://localhost:8000/order/${orderId.id}`);
-      console.log(get);
-
       setData(get.data.getOneOrder);
     } catch (error) {
       console.log(error);
@@ -51,19 +49,24 @@ const page = () => {
                 <div className="flex flex-col gap-1">
                   <h1 className="text-gray-700">Захиалагч: Хувь хүн</h1>
                   <div className="flex gap-1">
-                    <p className="font-semibold">{data.userId?.name}-</p>
+                    <p className="font-semibold">{data.firstName}</p>
                     <p>
-                      {data.userId?.email}, {data.userId?.phoneNumber}
+                      {data.userId?.email}, {data.phoneNumber}
                     </p>
                   </div>
                 </div>
                 {data.details?.map((e: any, index: number) => {
                   return (
                     <div
-                      className="flex bg-gray-100 h-40 w-full rounded-xl"
+                      className="flex bg-gray-100 h-fit w-full rounded-xl"
                       key={index}
                     >
-                      <img src={e.images[0]} alt="" />
+                      <img
+                        src={e.images[0]}
+                        className="bg-grey"
+                        width={"180px"}
+                        height={"180px"}
+                      />
                       <div className="flex flex-col p-3 justify-between w-full">
                         <h1 className="font-semibold text-xl text-black">
                           {e.productName}
@@ -74,10 +77,16 @@ const page = () => {
                         </div>
                         <div className="flex justify-between">
                           <p>
-                            Тоо ширхэг:{e.qty} * ₮{data.amountPaid}
+                            Тоо ширхэг:{e.qty} * ₮
+                            {e.price
+                              .toFixed(2)
+                              .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
                           </p>
                           <p className="font-semibold">
-                            ₮{3 * data.amountPaid}
+                            ₮
+                            {(e.qty * e.price)
+                              .toFixed(2)
+                              .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
                           </p>
                         </div>
                       </div>
@@ -94,8 +103,8 @@ const page = () => {
                 <div className="p-7">
                   <p>Гэр:</p>
                   <p className="font-semibold">
-                    {/* {data.userId?.city},{data.userId?.district},
-                    {data.userId?.khoroo},14-р байр,8-р орц,6 давхар */}
+                    {data.city},{data.address},{data.apartment},байр,8-р орц,6
+                    давхар
                   </p>
                 </div>
               </div>
@@ -111,19 +120,28 @@ const page = () => {
                         <div className="flex justify-between">
                           <div className="flex gap-2">
                             <p>{e.productName}</p>
-                            <p>*{e.qty}</p>
+                            <p className="pl-2 font-bold"> * {e.qty}</p>
                           </div>
-                          <p>{e.price * e.qty}</p>
+                          <p>
+                            ₮
+                            {(e.price * e.qty)
+                              .toFixed(2)
+                              .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
+                          </p>
                         </div>
                       );
                     })}
                   </div>
-
                   <div className="flex flex-col gap-3"></div>
                   <hr className="my-5" />
                   <div className="flex justify-between items-center font-semibold">
                     <p>Нийт төлсөн дүн</p>
-                    <p>₮</p>
+                    <p>
+                      ₮
+                      {(data?.amountPaid * 1)
+                        .toFixed(2)
+                        .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
+                    </p>
                   </div>
                 </div>
               </div>

@@ -31,11 +31,9 @@ export const UserOrderProvider = ({ children }: any) => {
           item._id === _id ? { ...item, quantity: item.quantity + 1 } : item
         )
       );
-      console.log("k");
     } else {
       setOrderData([...orderData, { _id, quantity: 1 }]);
     }
-    console.log(_id);
   };
   console.log(orderData);
 
@@ -58,7 +56,6 @@ export const UserOrderProvider = ({ children }: any) => {
       );
     }
   };
-  console.log(orderData);
 
   return (
     <UserOrderContext.Provider

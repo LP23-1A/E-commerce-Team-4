@@ -8,7 +8,6 @@ const page = () => {
   const { orderData, setOrderData }: any = useContext(UserOrderContext);
   const [data, setData] = useState<any>([]);
   const router = useRouter();
-  let totalPrice = 0;
 
   const handler = async () => {
     const productsData: any = [];
@@ -26,6 +25,12 @@ const page = () => {
       console.log(error);
     }
   };
+  let totalPrice = 0;
+  for (let i = 0; i < data.length; i++) {
+    totalPrice =
+      totalPrice + data[i].productData.price * orderData[i]?.quantity;
+  }
+
   useEffect(() => {
     handler();
   }, [orderData]);

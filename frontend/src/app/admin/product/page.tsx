@@ -19,7 +19,6 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const page = () => {
   const router = useRouter();
-  const [productData, setProductData] = useState([]);
   const [filter, setFilter] = useState("");
   const { data, error, isLoading } = useSWR(API, fetcher);
   const productsData = data?.getAll;
@@ -30,7 +29,7 @@ const page = () => {
     if (filter === "") {
       return e;
     } else if (filter !== "") {
-      return e.mainCate.includes(filter) || e.createdAt.slice(5, 7) === filter;
+      return e.subCate.includes(filter) || e.createdAt.slice(5, 7) === filter;
     }
   });
   return (

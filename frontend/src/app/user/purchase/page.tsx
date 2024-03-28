@@ -29,10 +29,14 @@ const page = () => {
       console.log(error);
     }
   };
+  let totalPrice = 0;
+  for (let i = 0; i < data.length; i++) {
+    totalPrice =
+      totalPrice + data[i].productData.price * orderData[i]?.quantity;
+  }
   useEffect(() => {
     handler();
   }, []);
-  console.log(data);
 
   return (
     <div>
@@ -46,7 +50,7 @@ const page = () => {
                 return <PurchaseCart data={e.productData} />;
               })}
           </div>
-          <OrderFinish />
+          <OrderFinish price={totalPrice} />
         </div>
       </div>
 
