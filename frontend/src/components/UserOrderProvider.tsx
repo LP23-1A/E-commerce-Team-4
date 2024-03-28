@@ -35,7 +35,6 @@ export const UserOrderProvider = ({ children }: any) => {
       setOrderData([...orderData, { _id, quantity: 1 }]);
     }
   };
-  console.log(orderData);
 
   const removeCart = (_id: any) => {
     const a = orderData.find((item: any) => item._id === _id);
