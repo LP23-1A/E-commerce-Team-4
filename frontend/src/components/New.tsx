@@ -23,7 +23,7 @@ export const New = () => {
                       <div className='h-2 w-2 bg-red-500 rounded-3xl'></div>
                       <div className='h-2 w-2 bg-blue-500 rounded-3xl'></div>
                     </div>
-                    <p className="text-[#151875] text-xl">{el.price}</p>
+                    <p className="text-[#151875] text-xl">{el.price.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1'")}₮</p>
                   </div>
               </div>
           )

@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { UserModel } from "../model/auth";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+
 type UserType = {
   email: String;
   name: String;
@@ -14,11 +15,13 @@ type UserType = {
   product: String;
   role: string;
 };
+
 const createUser = async (req: Request, res: Response) => {
   try {
     const {
       email,
       name,
+      password,
       shopInformation,
       city,
       district,
@@ -30,6 +33,7 @@ const createUser = async (req: Request, res: Response) => {
     const createUser = await UserModel.create({
       email: email,
       name: name,
+      password: password,
       shopInformation: shopInformation,
       city: city,
       district: district,
@@ -44,30 +48,32 @@ const createUser = async (req: Request, res: Response) => {
   }
 };
 
-// const Login = async (req: Request, res: Response) => {
-//   try {
-//     const { email, password }: Required<UserType> = req.body;
-//     const user = await UserModel.findOne({
-//       email: email,
-//     }).select("+password");
+const logIn = async (req: Request, res: Response) => {
+  try {
+    const { email, password }: Required<UserType> = req.body;
+    const user = await UserModel.findOne({
+      email: email,
+      password:password
+    }).select("+password");
 
-//     if (!user) {
-//       return res.status(404).send({ msg: "user not found" });
-//     }
+    if (!user) {
+      return res.status(404).send({ msg: "user not found" });
+    }
 
-//     const isValid = bcrypt.compare(password, user.password as string);
+    const isValid = bcrypt.compare(password, user.password as string);
 
-//     if (!isValid) {
-//       return res.status(400).send({ msg: "Email or password incorrect" });
-//     }
+    if (!isValid) {
+      return res.status(400).send({ msg: "Email or password incorrect" });
+    }
 
-//     const token = jwt.sign({ user }, "MY_SECRET_KEY");
+    const token = jwt.sign({ user }, "MY_SECRET_KEY");
 
-//     return res.status(200).send({ success: true, token, user });
-//   } catch (error) {
-//     res.status(500).send(error);
-//   }
-// };
+    return res.status(200).send({ success: true, token, email});
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
 const getUser = async (req: Request, res: Response) => {
   try {
     const { email } = req.body;
@@ -111,4 +117,5 @@ const deleteUser = async (req: Request, res: Response) => {
     res.status(500).send({ success: false, error });
   }
 };
-export { createUser, getUser, updateUser, deleteUser, getAllUser };
+
+export { createUser, getUser, updateUser, deleteUser, getAllUser, logIn };

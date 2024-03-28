@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+
 const OrderSchema = new mongoose.Schema({
   orderNumber: String,
   status: {
@@ -52,5 +53,7 @@ const OrderSchema = new mongoose.Schema({
     default: () => Date.now(),
   },
 });
+
 const OrderModel = mongoose.model("order", OrderSchema);
+
 export { OrderModel };
