@@ -37,7 +37,7 @@ const page = () => {
                   <h1 className="text-xl font-bold">Шилдэг бүтээгдэхүүн</h1>
                   <div className="flex w-[100%] justify-around bg-gray-200 h-[50px] items-center">
                     <p>№</p>
-                    <p>бүтээгдэхүүн</p>
+                    <p>Бүтээгдэхүүн</p>
                     <p>Зарагдсан</p>
                     <p>Үнэ</p>
                   </div>
@@ -45,20 +45,14 @@ const page = () => {
                     {productData &&
                       productData?.map((el: any, index: number) => {
                         return (
-                          <div
-                            className="flex justify-between w-[100%] px-[70px] border-b-2 border-gray-200"
-                            key={index}
-                          >
-                            <p>{index + 1}</p>
-                            <div className="flex items-center w-[150px] justify-start gap-4">
-                              <img
-                                className="w-[40px] h-[40px] rounded-[50%]"
-                                src={el.images}
-                              />
-                              <p className="text-black">{el.productName}</p>
+                          <div className="flex justify-between w-[100%] border-b-2 border-gray-200" key={index}>
+                            <p className="w-1/5 flex ml-[50px] items-center">{index + 1}</p>
+                            <div className="flex w-1/4 items-center  justify-start gap-4">
+                              <img className="w-1/4 h-[40px] rounded-[50%] flex justify-center" src={el.images} />
+                              <p className="text-black  flex justify-center">{el.productName}</p>
                             </div>
-                            <p>{el.sold}</p>
-                            <p>{el.price}₮</p>
+                            <p className="w-1/4 flex justify-center items-center">{el.sold}</p>
+                            <p className="w-1/4 flex pl-[30px] items-center ">{el.price.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1'")}₮</p>
                           </div>
                         );
                       })}

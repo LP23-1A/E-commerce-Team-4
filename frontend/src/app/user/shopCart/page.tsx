@@ -22,7 +22,6 @@ const page = () => {
       }
       setData([...productsData]);
     } catch (error) {
-      console.log(error);
     }
   };
   let totalPrice = 0;
