@@ -1,5 +1,4 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { data } from "@/utils/Sidebar";
 import Link from "next/link";
 import { useEffect, useState } from "react";

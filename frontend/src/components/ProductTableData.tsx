@@ -19,22 +19,22 @@ export const ProductTableData = ({ data, index }: any) => {
             </div>
           </div>
         </td>
-        <td className="w-[240px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
+        <td className="w-[240px] py-[12px] pl-4 pr-[auto] border-b-[1px]">
           {data.subCate},{data.mainCate}
         </td>
-        <td className="w-[200px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
+        <td className="w-[200px] py-[12px] pl-4 pr-[auto] border-b-[1px]">
           {data.price}₮
         </td>
-        <td className="w-[200px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
+        <td className="w-[200px] py-[12px] pl-32 pr-[auto] border-b-[1px]">
           {data.productCode}
         </td>
-        <td className="w-[200px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
+        <td className="w-[200px] py-[12px] pl-48 pr-[auto] border-b-[1px]">
           {data.sold}
         </td>
-        <td className="w-[200px] py-[12px] pl-0 pr-[auto] border-b-[1px]">
+        <td className="w-[230px] py-[12px] pl-[230px] flex pr-[auto] border-b-[1px]">
           <p>{data.createdAt.slice(0, 10)}</p>
         </td>
-        <td className="w-[200px] p-[16px] border-b-[1px]">
+        <td className="w-[200px] p-[16px] border-b-[1px] pl-52">
           <div className="justify-center flex gap-2">
             <DeleteBtn val={data._id} />
             <ProductPutBtn val={data._id} />

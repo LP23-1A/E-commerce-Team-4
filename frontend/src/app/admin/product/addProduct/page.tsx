@@ -5,12 +5,16 @@ import {
   AsideBar,
   CreateProduct,
   CreateProductProvider,
+  Modal,
   Navbar,
 } from "@/components";
 import { CreateProductField } from "@/components/CreateProductField";
 
 const page = () => {
   const [open, setOpen] = useState(false);
+  const createProduct = () => {
+    setOpen(!open)
+  }
   return (
     <CreateProductProvider className="flex flex-col mx-auto relative">
       <Navbar />
@@ -29,12 +33,12 @@ const page = () => {
             <div className="flex bg-[#F0F0F0] w-full h-screen p-9 flex-col">
               <div className="flex w-full h-fit justify-between gap-10">
                 <CreateProductField />
-                <CreateProduct />
+                <CreateProduct createProduct={createProduct }/>
               </div>
             </div>
           </div>
         </div>
-        {/* {open && <Modal createProduct={createProduct} />} */}
+        { open && <Modal createProduct={createProduct } />}
       </div>
     </CreateProductProvider>
   );

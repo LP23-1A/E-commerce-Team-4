@@ -68,6 +68,7 @@ export const Orderfilter = () => {
           <input
             type="text"
             placeholder="Дугаар Имэйл"
+            className="w-full outline-none font-normal"
             onChange={(e) => searchFilter(e.target.value)}
           />
         </div>
