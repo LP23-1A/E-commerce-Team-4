@@ -45,3 +45,9 @@ export * from "./Clock";
 export * from "./Correct";
 export * from "./CheckList";
 export * from "./Error"
+export * from "./Mebel"
+export * from "./Sndal"
+export * from "./Premium"
+export * from "./Cashback"
+export * from "./Support"
+export * from "./Car"
