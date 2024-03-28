@@ -18,7 +18,7 @@ export const Ontsloh = () => {
               <div key={el.productId} className="w-1/5 h-[461px] shadow-xl rounded-4 flex flex-col  items-center justify-between py-[20px]">
                   <img src={el.images} className="w-[216px] h-[271px]"/>
                   <p className="text-[#FB2E86] text-xl">{el.productName}</p>
-                  <p className="text-[#151875] text-xl">{el.price}</p>
+                  <p className="text-[#151875] text-xl">{el.price.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1'")}₮</p>
               </div>
             )
           })

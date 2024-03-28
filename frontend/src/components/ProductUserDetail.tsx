@@ -17,23 +17,6 @@ export const ProductUserDetail = () => {
 
   if (error) return <div>Error fetching</div>;
   if (!data) return <div>Loading...</div>;
-  // const addCart = (id: number) => {
-  //   if (orderData.filter((item: any) => item.id === id) == null) {
-  //     setOrderData([...orderData, { id, count: 1 }]);
-  //   } else if (orderData.filter((item: any) => item.id === id) !== null) {
-  //     setOrderData([...orderData, { id, count: 1 }]);
-  //   } else {
-  //     return toast.error("ali hediin sagsalsan");
-  //   }
-
-  //   //  setOrderData((orderData)=> {
-  //   //    if (data.find((item) => item.id === id) == null) {
-  //   //      return [...data, { id, quantity: 1 }];
-  //   //    } else {
-  //   //      return toast.error("ali hediin sagsalsan");
-  //   //    }
-  //   //  });
-  // };
 
   return (
     <div className="flex flex-col gap-10 mx-auto w-[1440px] mb-32">
@@ -56,8 +39,7 @@ export const ProductUserDetail = () => {
                 <div className="flex gap-2 items-center">
                   <p className="text-[#151875] font-medium">
                     {val.price
-                      .toFixed(2)
-                      .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
+                      .toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
                     ₮
                   </p>
                   <Star />

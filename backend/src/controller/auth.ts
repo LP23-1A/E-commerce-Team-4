@@ -53,6 +53,7 @@ const logIn = async (req: Request, res: Response) => {
     const { email, password }: Required<UserType> = req.body;
     const user = await UserModel.findOne({
       email: email,
+      password:password
     }).select("+password");
 
     if (!user) {
@@ -67,7 +68,7 @@ const logIn = async (req: Request, res: Response) => {
 
     const token = jwt.sign({ user }, "MY_SECRET_KEY");
 
-    return res.status(200).send({ success: true, token, user });
+    return res.status(200).send({ success: true, token, email});
   } catch (error) {
     res.status(500).send(error);
   }

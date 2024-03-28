@@ -3,6 +3,7 @@ import { Footer, NavbarUser, PathUser } from '@/components'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import React, { useRef } from 'react'
+import toast, { Toaster } from 'react-hot-toast'
 
 const page = () => {
   const router = useRouter();
@@ -24,9 +25,14 @@ const page = () => {
     try {
       const res = await axios.post('http://localhost:8000/user/logIn', formDataRef.current)
       console.log(res);
+      
+      if (res) {
       router.push('/user/dashboard')
+      localStorage.setItem("userEmail", JSON.stringify(res.data.email) as string)
+      toast.success('Амжилттай нэвтэрлээ <3')
+      }
     } catch (error) {
-      console.log(error);
+     toast.error("email or password burru baina .")
     }
   }
   const signUp = () => {
@@ -36,6 +42,8 @@ const page = () => {
     <div className='flex flex-col w-full'>
       <NavbarUser />
       <PathUser />
+      <Toaster position='top-right'/>
+      <Toaster position='top-right'/>
       <div className='flex flex-col p-6 h-96 w-[440px] mt-40 mx-auto shadow-xl items-center justify-between'>
         <h1 className='font-bold text-3xl'>Нэвтрэх</h1>
         <div className='flex flex-col items-center justify-between gap-4 text-[#9096B2]'>

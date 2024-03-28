@@ -18,6 +18,7 @@ export const NavbarUser = () => {
   const { orderData }: any = useContext(UserOrderContext)
   const router = useRouter()
   const [ isOpen, setIsOpen ] = useState(false);
+  const userEmail = JSON.parse(localStorage.getItem("userEmail") as string)
   const dropdown = () => {
     setIsOpen(!isOpen);
   };
@@ -46,19 +47,20 @@ export const NavbarUser = () => {
               <Call /> 77123456
             </button>
           </div>
-          <div className="flex items-center gap-6 relative">
+          <div className="flex items-center gap-6">
             <button className="flex items-center gap-4" onClick={logIn}>
-              Нэвтрэх <UserNav />
+              { userEmail ? userEmail : "Нэвтрэх" }
+              <UserNav />
             </button>
             <button className="flex items-center gap-4" onClick={saveList}>
               Хадгалах <Save />
             </button>
-            <button className="flex items-center gap-4 " onClick={shopCart}>
+            <button className="flex items-center gap-4 relative" onClick={shopCart}>
               <Trolley />
+              <p className="absolute bottom-2 left-3 text-[12px] h-[14px] w-[14px] bg-red-700 rounded-3xl flex justify-center items-center">
+                {orderData.length}
+              </p>
             </button>
-            <p className="absolute top-0 left-[270px] text-[12px] h-[14px] w-[14px] bg-red-700 rounded-3xl flex justify-center items-center">
-              {orderData.length}
-            </p>
           </div>
         </div>
       </div>
