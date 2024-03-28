@@ -12,7 +12,6 @@ export const AdminOrderTable = ({ filterData, handler }: any) => {
         status: orderStatus,
       });
     } catch (error) {
-      console.log(error);
     }
   };
 

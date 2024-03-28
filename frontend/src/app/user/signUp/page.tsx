@@ -36,7 +36,6 @@ const page = () => {
       console.log(res);
       router.push('/user/dashboard')
     } catch (error) {
-      console.log(error);
     }
   }
   const logIn = () => {

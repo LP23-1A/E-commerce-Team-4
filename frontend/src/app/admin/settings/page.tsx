@@ -19,7 +19,6 @@ const page = () => {
         setCheck(true);
       }
     } catch (error) {
-      console.log(error);
     }
   };
 
