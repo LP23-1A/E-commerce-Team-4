@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Down, ToLeft } from "@/images";
+import { Deliver, Down, ToLeft } from "@/images";
 import { AsideBar, Navbar } from "@/components";
 
 const page = () => {
@@ -26,16 +26,16 @@ const page = () => {
       <div className="flex mx-auto ">
         <AsideBar />
         <div className="flex flex-col w-full">
-          <div className="flex gap-10 items-center">
+          <div className="flex gap-5 items-center">
             <button className="flex h-14 w-14 items-center justify-center">
               <ToLeft />
             </button>
             <h1 className="text-xl">Захиалгын дэлгэрэнгүй</h1>
           </div>
-          <div className="flex bg-[#F0F0F0] w-full h-screen p-9 justify-between gap-20">
-            <div className="flex bg-white w-1/2 rounded-xl p-6">
-              <div className="flex flex-col w-full gap-5">
-                <div className="flex justify-between w-full">
+          <div className="flex bg-[#F0F0F0] w-full h-screen p-9 justify-between gap-10">
+            <div className="flex bg-white w-1/2 rounded-xl p-6 h-full">
+              <div className="flex flex-col w-full gap-5 h-fit">
+                <div className="flex justify-between w-fit">
                   <div className="flex flex-col gap-1">
                     <h1 className="text-gray-700">Захиалгын ID дугаар:</h1>
                     <p className="font-semibold">#{data.orderNumber}</p>
@@ -131,6 +131,13 @@ const page = () => {
                         </div>
                       );
                     })}
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center gap-4">
+                        <h1>Хүргэлт</h1>
+                        <Deliver />
+                      </div>
+                      <p>₮ 5,000</p>
+                    </div>
                   </div>
                   <div className="flex flex-col gap-3"></div>
                   <hr className="my-5" />
@@ -138,7 +145,7 @@ const page = () => {
                     <p>Нийт төлсөн дүн</p>
                     <p>
                       ₮
-                      {(data?.amountPaid * 1)
+                      {(data?.amountPaid + 5000)
                         .toFixed(2)
                         .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
                     </p>

@@ -2,10 +2,12 @@ import React, { useContext, useState } from "react";
 import { createProductContext } from ".";
 import { Plus } from "@/images";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const API = "http://localhost:8000/products/product";
 
-export const CreateProduct = () => {
+export const CreateProduct = ({ createProduct }: any) => {
+  const router = useRouter()
   const [images, setImages] = useState<string[]>([]);
   const { formDataRef }: any = useContext(createProductContext);
   const handleRef = (field: string, value: string | number) => {
@@ -14,17 +16,6 @@ export const CreateProduct = () => {
 
   const handleSubmit = async () => {
     try {
-      const urls = await axios.get("/api/upload-image");
-      const imageUrl = urls.data.objectUrl;
-      imageUrl.data?.uploadUrls.map(
-        async (uploadUrl: string, index: number) => {
-          return await axios.put(uploadUrl, images[index], {
-            headers: {
-              "Content-Type": images[index],
-            },
-          });
-        }
-      );
       console.log("hello");
 
       const res = await axios.post(API, {
@@ -36,9 +27,11 @@ export const CreateProduct = () => {
         residual: formDataRef.current.residual,
         mainCate: formDataRef.current.mainCate,
         subCate: formDataRef.current.subCate,
-        images: imageUrl,
+        images: formDataRef.current.images,
       });
       localStorage.setItem("product", JSON.stringify([res]));
+      createProduct()
+      router.push('/admin/product')
       console.log(res);
     } catch (error) {
       console.log(error);

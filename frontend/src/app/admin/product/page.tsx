@@ -38,7 +38,7 @@ const page = () => {
       <div className="border-black flex m-auto">
         <AsideBar />
         <div className="bg-[#ECEDF0] w-full">
-          <div className="flex bg-[#ECEDF0] gap-[10px] h-[56px] align-middle border-b-[1px] border-black-100">
+          <div className="flex bg-[#ECEDF0] gap-16 h-[56px] align-middle border-b-[1px] border-black-100 items-center pl-10">
             <p>Бүтээгдэхүүн</p>
             <p>Ангилал</p>
           </div>
@@ -98,29 +98,28 @@ const page = () => {
               </div>
             </div>
             <div className="flex mt-[24px] w-full justify-between rounded-xl border-[1px] bg-white">
-              <table>
+              <table className="mx-auto">
                 <tbody>
                   <tr className="flex">
                     <th className="w-[68px] py-[12px] px-[24px] "></th>
-                    <th className="w-[260px] py-[12px] pl-0 pr-[100px] font-semibold text-sm inline-flex">
+                    <th className="w-[300px] py-[12px] pl-0 pr-[100px] font-semibold text-sm inline-flex">
                       Бүтээгдэхүүн
                     </th>
                     <th className="w-[240px] py-[12px] pl-0 pr-[100px] font-semibold text-sm inline-flex">
                       Ангилал
                     </th>
-                    <th className="w-[200px] py-[12px] pl-0 pr-[100px] font-semibold text-sm inline-flex">
+                    <th className="w-[260px] py-[12px] pl-0 pr-[100px] font-semibold text-sm inline-flex">
                       Үнэ
                     </th>
-                    <th className="w-[200px] py-[12px] pl-0 pr-[100px] font-semibold text-sm inline-flex">
+                    <th className="w-[260px] py-[12px] pl-0 pr-[100px] font-semibold text-sm inline-flex">
                       Үлдэгдэл
                     </th>
-                    <th className="w-[200px] py-[12px] pl-0 pr-[100px] font-semibold text-sm inline-flex">
+                    <th className="w-[260px] py-[12px] pl-0 pr-[100px] font-semibold text-sm inline-flex">
                       Зарагдсан
                     </th>
-                    <th className="w-[200px] py-[12px] pl-0 pr-[100px] font-semibold text-sm inline-flex">
+                    <th className="w-[260px] py-[12px] pl-0 pr-[100px] font-semibold text-sm inline-flex">
                       Нэмсэн огноо
                     </th>
-                    <th className="w-[200px] py-[12px] px-[24px] font-semibold text-sm inline-flex"></th>
                   </tr>
                   {filterdata &&
                     filterdata.map((e: any, index: number) => {
