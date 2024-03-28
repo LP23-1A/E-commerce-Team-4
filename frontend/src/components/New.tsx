@@ -16,9 +16,12 @@ export const New = () => {
       <p className="text-3xl font-bold">Шинээр нэмэгдсэн</p>
       <div className="flex gap-[50px] justify-between w-[1440px] flex-wrap">
         {productData &&
-          productData.slice(0, 8).map((el: any) => {
+          productData.slice(0, 8).map((el: any, index: number) => {
             return (
-              <div className="w-1/5 h-[361px] shadow-xl  flex flex-col gap-[10px] py-[20px] group">
+              <div
+                className="w-1/5 h-[361px] shadow-xl  flex flex-col gap-[10px] py-[20px] group"
+                key={index}
+              >
                 <img src={el.images} className="w-[216px] h-[191px] mx-auto" />
                 <div className="flex gap-10 items-center">
                   <div className="flex flex-col gap-3 justify-start pl-4 opacity-0 group-hover:opacity-100">

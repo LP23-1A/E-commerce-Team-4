@@ -2,7 +2,6 @@ import React from "react";
 
 export const PathUser = () => {
   const path = window.location.pathname;
-  console.log("path:", path);
 
   return (
     <div className="h-20 bg-[#F6F5ff] w-full">

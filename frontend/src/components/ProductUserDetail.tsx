@@ -4,17 +4,16 @@ import useSWR from "swr";
 import { UserOrderContext } from ".";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-
+import dotenv from "dotenv";
+dotenv.config();
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export const ProductUserDetail = () => {
   const router = useRouter();
   const { orderData, setOrderData, addCart }: any =
     useContext(UserOrderContext);
-  const { data, error } = useSWR(
-    "http://localhost:8000/products/product",
-    fetcher
-  );
+  const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
+  const { data, error } = useSWR(`${URL}/products/product`, fetcher);
   const allProduct = data?.getAll;
 
   if (error) return <div>Error fetching</div>;

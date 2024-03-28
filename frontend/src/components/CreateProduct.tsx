@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 const API = "http://localhost:8000/products/product";
 
 export const CreateProduct = ({ createProduct }: any) => {
-  const router = useRouter()
+  const router = useRouter();
   const [images, setImages] = useState<string[]>([]);
   const { formDataRef }: any = useContext(createProductContext);
   const handleRef = (field: string, value: string | number) => {
@@ -16,8 +16,6 @@ export const CreateProduct = ({ createProduct }: any) => {
 
   const handleSubmit = async () => {
     try {
-      console.log("hello");
-
       const res = await axios.post(API, {
         productName: formDataRef.current.productName,
         categoryId: formDataRef.current.categoryId,
@@ -30,9 +28,8 @@ export const CreateProduct = ({ createProduct }: any) => {
         images: formDataRef.current.images,
       });
       localStorage.setItem("product", JSON.stringify([res]));
-      createProduct()
-      router.push('/admin/product')
-      console.log(res);
+      createProduct();
+      router.push("/admin/product");
     } catch (error) {
       console.log(error);
     }
