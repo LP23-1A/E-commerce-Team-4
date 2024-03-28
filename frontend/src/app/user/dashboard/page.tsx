@@ -9,6 +9,7 @@ import {
 } from "@/components";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
+import toast from "react-hot-toast";
 
 const page = () => {
   const router = useRouter();
@@ -18,13 +19,7 @@ const page = () => {
 
     if (!user) {
       router.push("/user/login");
-      return;
-    }
-
-    const { _id, email, password } = user;
-
-    if (!_id || !email || !password) {
-      router.push("/login");
+      toast.error("Та нэвтэрнэ үү.");
       return;
     }
   }, []);

@@ -1,3 +1,4 @@
+"use client";
 import { Footer, NavbarUser, PathUser } from "@/components";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -14,7 +15,6 @@ const page = () => {
   const handleRef = (field: string, value: string | number) => {
     formDataRef.current = { ...formDataRef.current, [field]: value };
   };
-  console.log(formDataRef);
   if (formDataRef.current.password !== formDataRef.current.rePassword) {
     alert("dont match passwords");
     return;

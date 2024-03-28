@@ -1,9 +1,15 @@
 "use client";
 import React, { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
-import { AdminContextProvider, Loading, SignUppage2, SignUppage3, SignUppage4 } from "@/components";
+import {
+  AdminContextProvider,
+  Loading,
+  SignUppage2,
+  SignUppage3,
+  SignUppage4,
+} from "@/components";
 
-export const page = () => {
+const page = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -18,7 +24,7 @@ export const page = () => {
     setActiveIndex(activeIndex - 1);
   };
   const backSignup = () => {
-    router.push("/");
+    router.push("/admin/signup");
   };
   return (
     <AdminContextProvider>

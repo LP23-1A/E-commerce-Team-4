@@ -1,4 +1,5 @@
 import React, { createContext, useRef, useState } from "react";
+import toast from "react-hot-toast";
 type fn = {
   removeCart: (id: string) => void;
 };
@@ -11,6 +12,7 @@ export const UserOrderContext = createContext({});
 export const UserOrderProvider = ({ children }: any) => {
   const [orderData, setOrderData] = useState<CartType[] | any>([]);
 
+  const userEmail = JSON.parse(localStorage.getItem("userEmail") as string);
   const formDataRef = useRef({
     orderNumber: "",
     phoneNumber: "",
@@ -24,15 +26,19 @@ export const UserOrderProvider = ({ children }: any) => {
   });
 
   const addCart = (_id: string) => {
-    const a: any = orderData.find((item: any) => item._id === _id);
-    if (a) {
-      setOrderData(
-        orderData.map((item: any) =>
-          item._id === _id ? { ...item, quantity: item.quantity + 1 } : item
-        )
-      );
+    if (userEmail) {
+      const a: any = orderData.find((item: any) => item._id === _id);
+      if (a) {
+        setOrderData(
+          orderData.map((item: any) =>
+            item._id === _id ? { ...item, quantity: item.quantity + 1 } : item
+          )
+        );
+      } else {
+        setOrderData([...orderData, { _id, quantity: 1 }]);
+      }
     } else {
-      setOrderData([...orderData, { _id, quantity: 1 }]);
+      toast.error("Та нэвтэрнэ үү.");
     }
   };
 

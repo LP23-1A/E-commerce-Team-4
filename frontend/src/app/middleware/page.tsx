@@ -1,33 +1,28 @@
 "use client";
 import { Loading } from "@/components";
 import { useAuth0 } from "@auth0/auth0-react";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
-import useSWR from "swr";
-const API = "http://localhost:8000/user";
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+const API = "http://localhost:8000/user/one";
+
 const page = () => {
   const { user }: any = useAuth0();
-  const { data, error, isLoading } = useSWR(API, fetcher);
   const router = useRouter();
-  const userData = data?.getAll;
 
-  useEffect(() => {
-    const loginUser = userData?.filter((e: any) => user?.email == e.email);
-    setTimeout(() => {
-      if (loginUser) {
-        for (const el of loginUser) {
-          if (el.email == user?.email && el.role === "admin") {
-            router.push(`/admin/dashboard/${el._id}`);
-          } else if (el.email !== user?.email) {
-            router.push("/signupStep");
-          } else if (el.email == user?.email && el.role === "user") {
-            router.push("/dashboard");
-          }
-        }
+  const handler = async () => {
+    try {
+      const getUser = await axios.post(API, { email: user?.email });
+      if (getUser && getUser?.data.getUser.role === "admin") {
+        router.push(`/admin/dashboard/${getUser?.data.getUser._id}`);
       }
-    }, 1000);
-  }, [user?.email]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    handler();
+  }, []);
   return (
     <div>
       <Loading />
