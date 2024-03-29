@@ -14,15 +14,15 @@ import {
 import Heart from "@/images/Heart";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-
+import dotenv from "dotenv";
+dotenv.config();
 const page = () => {
   const { addCart, productId }: any = useContext(UserOrderContext);
   const [data, setData] = useState<any>([]);
+  const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
   const handler = async () => {
     try {
-      const getProduct = await axios.get(
-        `http://localhost:8000/products/${productId}`
-      );
+      const getProduct = await axios.get(`${URL}/products/${productId}`);
       setData(getProduct?.data.getData);
     } catch (error) {
       console.log(error);

@@ -4,16 +4,17 @@ import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
-const API = "http://localhost:8000/user/one";
+import dotenv from "dotenv";
+dotenv.config();
 
 const page = () => {
   const { user }: any = useAuth0();
   const router = useRouter();
-  console.log(`${user?.email}`);
+  const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
 
   const handler = async () => {
     try {
-      const getUser = await axios.post(API, {
+      const getUser = await axios.post(`${URL}/user/one`, {
         email: "pineconeteam4@gmail.com",
       });
       console.log(getUser);

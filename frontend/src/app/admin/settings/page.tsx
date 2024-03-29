@@ -4,22 +4,25 @@ import { Check, Search } from "@/images";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import dotenv from "dotenv";
+dotenv.config();
 
 const id = JSON.parse(localStorage.getItem("id") as string);
-const API = `http://localhost:8000/user/${id}`;
 
 const page = () => {
   const [check, setCheck] = useState(false);
   const [shopInformation, setShopInformation] = useState("");
   const router = useRouter();
+  const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
   const handler = async () => {
     try {
-      const post = await axios.put(API, { shopInformation: shopInformation });
+      const post = await axios.put(`${URL}/user${id}`, {
+        shopInformation: shopInformation,
+      });
       if (post) {
         setCheck(true);
       }
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   const handleAddProduct = () => {

@@ -5,17 +5,18 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import { Pineconelogo, ToLeft } from "@/images";
-
-const BASE_URL = "http://localhost:8000/user";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const SignUppage4 = ({ back }: any) => {
   const { formDataRef }: any = useContext(AdminContext);
   const router = useRouter();
   const signupData = JSON.parse(localStorage.getItem("signupData") as string);
   const { user }: any = useAuth0();
+  const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
   const createUser = async () => {
     try {
-      const createUser = await axios.post(BASE_URL, {
+      const createUser = await axios.post(`${URL}`, {
         email: user?.email ?? signupData.current.email,
         name: user?.nickname ?? signupData.current.name,
         shopInformation: formDataRef.current.shopInformation,

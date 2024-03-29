@@ -4,6 +4,8 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useRef } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import dotenv from "dotenv";
+dotenv.config();
 
 const page = () => {
   const router = useRouter();
@@ -19,10 +21,11 @@ const page = () => {
     alert("dont match passwords");
     return;
   }
+  const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
   localStorage.removeItem("userEmail");
   const logIn = async () => {
     try {
-      const res = await axios.post("http://localhost:8000/user/logIn", {
+      const res = await axios.post(`${URL}/user/logIn`, {
         ...formDataRef.current,
       });
 

@@ -1,10 +1,14 @@
 import useSWR from "swr";
-const URL = "http://localhost:8000/order";
+import dotenv from "dotenv";
+dotenv.config();
+
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
 export const Amountpaid = () => {
+  const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
   const birthDay = new Date();
   const today: number = birthDay.getDate();
-  const { data, error, isLoading } = useSWR(URL, fetcher);
+  const { data, error, isLoading } = useSWR(`${URL}/order`, fetcher);
 
   let price = 0;
   const income = data?.getAllOrder.filter((e: any) => {

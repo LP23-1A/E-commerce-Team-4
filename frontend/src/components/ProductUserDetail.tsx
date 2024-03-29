@@ -13,10 +13,7 @@ export const ProductUserDetail = () => {
   const { orderData, setOrderData, addCart, handlerProductDetail }: any =
     useContext(UserOrderContext);
   const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
-  const { data, error } = useSWR(
-    `http://localhost:8000/products/product`,
-    fetcher
-  );
+  const { data, error } = useSWR(`${URL}/products/product`, fetcher);
   const allProduct = data?.getAll;
 
   if (error) return <div>Error fetching</div>;

@@ -11,12 +11,14 @@ import {
   Microsoftlogo,
   Pineconelogo,
 } from "@/images";
+import dotenv from "dotenv";
+dotenv.config();
 
-const API = "http://localhost:8000/user";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export const SignUppage1 = ({ next }: any) => {
-  const { data, error, isLoading } = useSWR(API, fetcher);
+  const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
+  const { data, error, isLoading } = useSWR(`${URL}`, fetcher);
   const getAllUser = data?.getAll;
   const { loginWithRedirect } = useAuth0();
   const router = useRouter();

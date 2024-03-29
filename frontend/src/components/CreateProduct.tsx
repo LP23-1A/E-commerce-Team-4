@@ -3,8 +3,8 @@ import { createProductContext } from ".";
 import { Plus } from "@/images";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-
-const API = "http://localhost:8000/products/product";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const CreateProduct = ({ createProduct }: any) => {
   const router = useRouter();
@@ -14,9 +14,10 @@ export const CreateProduct = ({ createProduct }: any) => {
     formDataRef.current = { ...formDataRef.current, [field]: value };
   };
 
+  const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
   const handleSubmit = async () => {
     try {
-      const res = await axios.post(API, {
+      const res = await axios.post(`${URL}/products/product`, {
         productName: formDataRef.current.productName,
         categoryId: formDataRef.current.categoryId,
         price: formDataRef.current.price,

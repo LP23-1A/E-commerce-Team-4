@@ -4,20 +4,21 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import dotenv from "dotenv";
+dotenv.config();
 
 const page = () => {
   const { orderData, setOrderData }: any = useContext(UserOrderContext);
   const [data, setData] = useState<any>([]);
   const router = useRouter();
+  const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
 
   const handler = async () => {
     const productsData: any = [];
     let order;
     try {
       for (let i = 0; i < orderData.length; i++) {
-        order = await axios.get(
-          `http://localhost:8000/products/${orderData[i]._id}`
-        );
+        order = await axios.get(`${URL}products/${orderData[i]._id}`);
         const productData = order?.data.getData;
         productsData.push({ productData });
       }

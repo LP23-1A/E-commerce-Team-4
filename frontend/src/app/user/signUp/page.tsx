@@ -3,8 +3,9 @@ import { Footer, NavbarUser, PathUser } from "@/components";
 import { useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
 import axios from "axios";
-import Password from "antd/es/input/Password";
 import toast from "react-hot-toast";
+import dotenv from "dotenv";
+dotenv.config();
 
 const page = () => {
   const router = useRouter();
@@ -17,11 +18,11 @@ const page = () => {
   const handleRef = (field: string, value: string | number) => {
     formDataRef.current = { ...formDataRef.current, [field]: value };
   };
-
+  const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
   const signUp = async () => {
     if (formDataRef.current.password === formDataRef.current.rePassword) {
       try {
-        const res = await axios.post("http://localhost:8000/user", {
+        const res = await axios.post(`${URL}/user`, {
           ...formDataRef.current,
         });
         localStorage.setItem(

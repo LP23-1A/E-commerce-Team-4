@@ -4,12 +4,14 @@ import { Calendar, Down, Download, ExpandMore } from "@/images";
 import { month } from "@/utils/Month";
 import { useState } from "react";
 import useSWR from "swr";
+import dotenv from "dotenv";
+dotenv.config();
 
-const API = "http://localhost:8000/order";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const page = () => {
-  const { data, error, isLoading } = useSWR(API, fetcher);
+  const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
+  const { data, error, isLoading } = useSWR(`${URL}/order`, fetcher);
   const [activeButton, setActiveButton] = useState("");
   console.log(data);
 

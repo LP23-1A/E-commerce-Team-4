@@ -1,19 +1,22 @@
 import React, { ReactNode, createContext, useState } from "react";
 import useSWR from "swr";
+import dotenv from "dotenv";
+dotenv.config();
+
 type props = {
   children: ReactNode;
 };
 
-const API = "http://localhost:8000/order";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export const AdminOrderContext = createContext({});
 export const AdminOrderContextProvider = ({ children }: props) => {
+  const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
   const birthDay = new Date();
   const today: number = birthDay.getDate();
   const [orderData, setOrderData] = React.useState<any>([]);
   const [activeButton, setActiveButton] = useState<string | any>(today);
-  const { data, error, isLoading } = useSWR(API, fetcher);
+  const { data, error, isLoading } = useSWR(`${URL}/order`, fetcher);
 
   const dayFilter = () => {
     const dayFilter = data?.getAllOrder.filter((e: any) => {

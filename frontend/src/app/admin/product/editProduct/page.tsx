@@ -4,6 +4,8 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Img, Plus, ToLeft } from "@/images";
 import { AsideBar, Navbar } from "@/components";
+import dotenv from "dotenv";
+dotenv.config();
 
 type data = {
   productName: string;
@@ -33,12 +35,11 @@ const page = () => {
   const handleRef = (field: string, value: string | number) => {
     formDataRef.current = { ...formDataRef.current, [field]: value };
   };
+  const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
   const gettingData = async () => {
     const productId = JSON.parse(localStorage.getItem("putProduct") as string);
     try {
-      const res = await axios.get(
-        `http://localhost:8000/products/${productId}`
-      );
+      const res = await axios.get(`${URL}/products/${productId}`);
       setData(res.data.getData);
     } catch (error) {
       console.log(error);

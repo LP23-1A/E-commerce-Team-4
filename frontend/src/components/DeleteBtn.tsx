@@ -1,11 +1,14 @@
 import React from "react";
 import axios from "axios";
 import { Delete } from "@/images";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const DeleteBtn = ({ val }: any) => {
+  const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
   const deleteItem = async (id: Number) => {
     try {
-      const items = await axios.delete(`http://localhost:8000/products/${id}`);
+      const items = await axios.delete(`${URL}/products/${id}`);
     } catch (error) {
       console.log(error);
     }

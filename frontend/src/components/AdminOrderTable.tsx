@@ -3,16 +3,18 @@ import axios from "axios";
 import { orderHandleStatus } from "@/utils/OrderhandleStatus";
 import { Right } from "@/images";
 import { AdminOrderContext } from ".";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const AdminOrderTable = ({ filterData, handler }: any) => {
   const { orderData }: any = useContext(AdminOrderContext);
+  const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
   const handleOrderStatus = async (id: number, orderStatus: string) => {
     try {
-      const update = await axios.put(`http://localhost:8000/order/${id}`, {
+      const update = await axios.put(`${URL}/order/${id}`, {
         status: orderStatus,
       });
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   return (

@@ -3,22 +3,22 @@ import { UserOrderContext } from ".";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
-
-const API = "http://localhost:8000/order";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const OrderFinish = ({ price }: any) => {
   const { orderData, formDataRef, setOrderData }: any =
     useContext(UserOrderContext);
   const router = useRouter();
+  const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
   const handler = async () => {
     try {
       for (let i = 0; i < orderData.length; i++) {
-        const productPut = axios.put(
-          `http://localhost:8000/products/${orderData[i]._id}`,
-          { qty: orderData[i].quantity }
-        );
+        const productPut = axios.put(`${URL}/${orderData[i]._id}`, {
+          qty: orderData[i].quantity,
+        });
       }
-      const order = await axios.post(API, {
+      const order = await axios.post(`${URL}/order`, {
         orderNumber: "#988999",
         phoneNumber: formDataRef.current.phoneNumber,
         userId: "65f9523ea6a0bd0f2af96b58",

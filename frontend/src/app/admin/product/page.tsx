@@ -13,14 +13,17 @@ import useSWR from "swr";
 import { rate } from "@/utils/Rate";
 import { month } from "@/utils/Month";
 import { useEffect, useState } from "react";
+import dotenv from "dotenv";
+dotenv.config();
 
 const API = "http://localhost:8000/products/product";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const page = () => {
+  const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
   const router = useRouter();
   const [filter, setFilter] = useState("");
-  const { data, error, isLoading } = useSWR(API, fetcher);
+  const { data, error, isLoading } = useSWR(`${URL}/products/product`, fetcher);
   const productsData = data?.getAll;
   const handler = () => {
     router.push("/admin/product/addProduct");
@@ -61,8 +64,12 @@ const page = () => {
                     <Category />
                     <select onChange={(e) => setFilter(e.target.value)}>
                       <option value="">Ангилал</option>
-                      {rate.map((e) => {
-                        return <option value={e.name}>{e.name}</option>;
+                      {rate.map((e, index: number) => {
+                        return (
+                          <option value={e.name} key={index}>
+                            {e.name}
+                          </option>
+                        );
                       })}
                     </select>
                   </div>
@@ -79,8 +86,12 @@ const page = () => {
                     <Calendar />
                     <select onChange={(e) => setFilter(e.target.value)}>
                       <option value="">сараар</option>
-                      {month.map((e) => {
-                        return <option value={e.value}>{e.label}</option>;
+                      {month.map((e, index: number) => {
+                        return (
+                          <option key={index} value={e.value}>
+                            {e.label}
+                          </option>
+                        );
                       })}
                     </select>
                   </div>
@@ -97,7 +108,7 @@ const page = () => {
                 />
               </div>
             </div>
-            <div className="flex mt-[24px] w-full justify-between rounded-xl border-[1px] bg-white">
+            <div className=" mt-[24px] w-full justify-between rounded-xl border-[1px] bg-white">
               <table className="mx-auto">
                 <tbody>
                   <tr className="flex">
@@ -123,7 +134,9 @@ const page = () => {
                   </tr>
                   {filterdata &&
                     filterdata.map((e: any, index: number) => {
-                      return <ProductTableData data={e} index={index} />;
+                      return (
+                        <ProductTableData data={e} index={index} key={index} />
+                      );
                     })}
                 </tbody>
               </table>
