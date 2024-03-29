@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import dotenv from "dotenv";
 dotenv.config();
 
-const id = JSON.parse(localStorage.getItem("id") as string);
+const id = JSON.parse(window.localStorage.getItem("id") as string);
 
 const page = () => {
   const [check, setCheck] = useState(false);

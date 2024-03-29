@@ -17,7 +17,6 @@ const page = () => {
       const getUser = await axios.post(`${URL}/user/one`, {
         email: "pineconeteam4@gmail.com",
       });
-      console.log(getUser);
 
       if (getUser && getUser?.data.getUser.role === "admin") {
         router.push(`/admin/dashboard/${getUser?.data.getUser._id}`);
