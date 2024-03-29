@@ -1,5 +1,5 @@
 "use client";
-import { Footer, NavbarUser } from "@/components";
+import { Footer, NavbarUser, UserOrderContext } from "@/components";
 import {
   BlueDot,
   EmptyStar,
@@ -13,15 +13,15 @@ import {
 } from "@/images";
 import Heart from "@/images/Heart";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
-const id = JSON.parse(localStorage.getItem("productId") as string);
 const page = () => {
+  const { addCart, productId }: any = useContext(UserOrderContext);
   const [data, setData] = useState<any>([]);
   const handler = async () => {
     try {
       const getProduct = await axios.get(
-        `http://localhost:8000/products/${id}`
+        `http://localhost:8000/products/${productId}`
       );
       setData(getProduct?.data.getData);
     } catch (error) {
@@ -30,7 +30,7 @@ const page = () => {
   };
   useEffect(() => {
     handler();
-  }, []);
+  }, [productId]);
 
   return (
     <div>
@@ -83,7 +83,12 @@ const page = () => {
             </div>
             <button className="w-[140px]">
               <div className="float-left flex items-center gap-[20px]">
-                <p>Add to Cart</p>
+                <button
+                  className="p-2 bg-[#FB2E86] text-white rounded-xl"
+                  onClick={() => addCart(data?._id)}
+                >
+                  Сагслах
+                </button>
                 <Heart />
               </div>
             </button>
@@ -93,8 +98,12 @@ const page = () => {
       <div className="w-full h-[649px] bg-[#F9F8FE] mt-[24px]">
         <div className="w-[1440px] mx-auto flex flex-col gap-[40px] text-[#151875] pt-[120px]">
           <div className="flex gap-[30px]">
-            <button><h1 className="font-extrabold text-2xl">Нэмэлт мэдээлэл</h1></button>
-            <button><h1 className="font-extrabold text-2xl">Үнэлгээ</h1></button>
+            <button>
+              <h1 className="font-extrabold text-2xl">Нэмэлт мэдээлэл</h1>
+            </button>
+            <button>
+              <h1 className="font-extrabold text-2xl">Үнэлгээ</h1>
+            </button>
           </div>
           <div className="flex flex-col gap-[10px]">
             <h1 className="font-extrabold text-2xl">More details</h1>

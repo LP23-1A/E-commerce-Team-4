@@ -9,10 +9,15 @@ const API = "http://localhost:8000/user/one";
 const page = () => {
   const { user }: any = useAuth0();
   const router = useRouter();
+  console.log(`${user?.email}`);
 
   const handler = async () => {
     try {
-      const getUser = await axios.post(API, { email: user?.email });
+      const getUser = await axios.post(API, {
+        email: "pineconeteam4@gmail.com",
+      });
+      console.log(getUser);
+
       if (getUser && getUser?.data.getUser.role === "admin") {
         router.push(`/admin/dashboard/${getUser?.data.getUser._id}`);
       }

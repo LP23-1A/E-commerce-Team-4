@@ -39,9 +39,9 @@ const page = () => {
           <p className="text-[#8A8FB9]">125 бүтээгдэхүүн</p>
         </div>
         <div className="flex flex-wrap justify-between gap-10s">
-          {allProduct.map((val: any) => {
+          {allProduct.map((val: any, index: number) => {
             return (
-              <div className="flex flex-col gap-2 items-center">
+              <div className="flex flex-col gap-2 items-center" key={index}>
                 <img src={val.images} alt="" className="w-[290px] h-[290px]" />
                 <div className="flex flex-col items-center">
                   <h1 className="font-semibold text-[#151875]">

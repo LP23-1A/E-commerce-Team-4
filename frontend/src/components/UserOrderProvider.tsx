@@ -1,4 +1,5 @@
-import React, { createContext, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import React, { createContext, useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 type fn = {
   removeCart: (id: string) => void;
@@ -11,8 +12,8 @@ type CartType = {
 export const UserOrderContext = createContext({});
 export const UserOrderProvider = ({ children }: any) => {
   const [orderData, setOrderData] = useState<CartType[] | any>([]);
-
-  const userEmail = JSON.parse(localStorage.getItem("userEmail") as string);
+  const [productId, setProductId] = useState("");
+  const router = useRouter();
   const formDataRef = useRef({
     orderNumber: "",
     phoneNumber: "",
@@ -26,19 +27,15 @@ export const UserOrderProvider = ({ children }: any) => {
   });
 
   const addCart = (_id: string) => {
-    if (userEmail) {
-      const a: any = orderData.find((item: any) => item._id === _id);
-      if (a) {
-        setOrderData(
-          orderData.map((item: any) =>
-            item._id === _id ? { ...item, quantity: item.quantity + 1 } : item
-          )
-        );
-      } else {
-        setOrderData([...orderData, { _id, quantity: 1 }]);
-      }
+    const a: any = orderData.find((item: any) => item._id === _id);
+    if (a) {
+      setOrderData(
+        orderData.map((item: any) =>
+          item._id === _id ? { ...item, quantity: item.quantity + 1 } : item
+        )
+      );
     } else {
-      toast.error("Та нэвтэрнэ үү.");
+      setOrderData([...orderData, { _id, quantity: 1 }]);
     }
   };
 
@@ -62,6 +59,10 @@ export const UserOrderProvider = ({ children }: any) => {
     }
   };
 
+  const handlerProductDetail = (id: string) => {
+    router.push("/user/productDetail");
+    setProductId(id);
+  };
   return (
     <UserOrderContext.Provider
       value={{
@@ -71,6 +72,8 @@ export const UserOrderProvider = ({ children }: any) => {
         removeCart,
         decreaseCart,
         formDataRef,
+        handlerProductDetail,
+        productId,
       }}
     >
       {children}

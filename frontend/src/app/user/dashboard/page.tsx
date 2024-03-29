@@ -27,7 +27,7 @@ const page = () => {
     <div>
       <NavbarUser />
       <Carousel />
-      <div className="px-[202px] py-[100px] flex flex-col gap-[100px]">
+      <div className="flex flex-col gap-[100px]">
         <Ontsloh />
         <New />
       </div>

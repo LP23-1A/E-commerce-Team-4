@@ -22,11 +22,9 @@ const page = () => {
   localStorage.removeItem("userEmail");
   const logIn = async () => {
     try {
-      const res = await axios.post(
-        "http://localhost:8000/user/logIn",
-        formDataRef.current
-      );
-      console.log(res);
+      const res = await axios.post("http://localhost:8000/user/logIn", {
+        ...formDataRef.current,
+      });
 
       if (res) {
         router.push("/user/dashboard");
@@ -37,7 +35,7 @@ const page = () => {
         toast.success("Амжилттай нэвтэрлээ <3");
       }
     } catch (error) {
-      toast.error("email or password burru baina .");
+      toast.error("email esvel password buruu baina .");
     }
   };
   const signUp = () => {
