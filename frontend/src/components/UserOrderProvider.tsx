@@ -1,4 +1,6 @@
-import React, { createContext, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import React, { createContext, useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
 type fn = {
   removeCart: (id: string) => void;
 };
@@ -10,7 +12,8 @@ type CartType = {
 export const UserOrderContext = createContext({});
 export const UserOrderProvider = ({ children }: any) => {
   const [orderData, setOrderData] = useState<CartType[] | any>([]);
-
+  const [productId, setProductId] = useState("");
+  const router = useRouter();
   const formDataRef = useRef({
     orderNumber: "",
     phoneNumber: "",
@@ -56,6 +59,10 @@ export const UserOrderProvider = ({ children }: any) => {
     }
   };
 
+  const handlerProductDetail = (id: string) => {
+    router.push("/user/productDetail");
+    setProductId(id);
+  };
   return (
     <UserOrderContext.Provider
       value={{
@@ -65,6 +72,8 @@ export const UserOrderProvider = ({ children }: any) => {
         removeCart,
         decreaseCart,
         formDataRef,
+        handlerProductDetail,
+        productId,
       }}
     >
       {children}

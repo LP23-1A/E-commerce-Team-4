@@ -1,14 +1,32 @@
 "use client";
 import { AsideBar, Navbar } from "@/components";
 import { Calendar, Down, Download, ExpandMore } from "@/images";
+import { month } from "@/utils/Month";
+import { useState } from "react";
 import useSWR from "swr";
 
-const API = "http://localhost:8000/products/product";
+const API = "http://localhost:8000/order";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const page = () => {
   const { data, error, isLoading } = useSWR(API, fetcher);
-  const incomeData = data?.getAll;
+  const [activeButton, setActiveButton] = useState("");
+  console.log(data);
+
+  const orderData = data?.getAllOrder;
+  const birthDay = new Date();
+  const today: number = birthDay.getDate();
+  const filterData = orderData?.filter((e: any) => {
+    if (activeButton === "") {
+      return e.createdAt.slice(8, 10) == today;
+    } else if (activeButton === "week") {
+      return e.createdAt.slice(8, 10) > today - 7;
+    } else if (activeButton === "сараар") {
+      return e;
+    } else {
+      return e.createdAt.slice(5, 7) === activeButton;
+    }
+  });
 
   return (
     <div>
@@ -36,19 +54,42 @@ const page = () => {
               <div className="flex justify-between ">
                 <p className="font-bold text-3xl tracking-tighter">235,000₮</p>
                 <div className="flex gap-[8px]">
-                  <button className="rounded-lg border-1 bg-[#18BA51] px-[10px] py-[6px] ">
-                    <p className="font-semibold text-sm text-white">Өнөөдөр</p>
+                  <button
+                    className="rounded-lg border-1 px-[10px] py-[6px] "
+                    style={{
+                      backgroundColor: activeButton === "" ? "#18BA51" : "",
+                    }}
+                    onClick={() => setActiveButton("")}
+                  >
+                    <p className="font-semibold text-sm ">Өнөөдөр</p>
                   </button>
-                  <button className="rounded-lg border-1 bg-[#18BA51] px-[10px] py-[6px] ">
-                    <p className="font-semibold text-sm text-white">7 хоног</p>
+                  <button
+                    className="rounded-lg border-1 px-[10px] py-[6px] "
+                    onClick={(e) => setActiveButton("week")}
+                    style={{
+                      backgroundColor: activeButton === "week" ? "#18BA51" : "",
+                    }}
+                  >
+                    <p className="font-semibold text-sm ">7 хоног</p>
                   </button>
-                  <button className="bg-white rounded-lg border-[1px]">
-                    <div className="flex gap-[4px]">
-                      <Calendar />
-                      <div>Сараар</div>
-                      <ExpandMore />
-                    </div>
-                  </button>
+                  <div className="bg-white rounded-lg border-[1px] p-2">
+                    <select onChange={(e) => setActiveButton(e.target.value)}>
+                      <option value="сараар">сараар</option>
+                      {month.map((el) => {
+                        return (
+                          <option
+                            style={{
+                              backgroundColor:
+                                activeButton === el.value ? "#18BA51" : "",
+                            }}
+                            value={el.value}
+                          >
+                            {el.label}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
@@ -64,16 +105,21 @@ const page = () => {
                 <th className="w-[130px] pl-16">Төлбөр</th>
                 <th className="w-[150px] pr-5">Огноо</th>
               </tr>
-              {incomeData &&
-                incomeData.map((val: any, key: any) => {
+              {filterData &&
+                filterData.map((val: any, key: any) => {
                   return (
                     <div className="flex flex-col px-12">
                       <tr className="px-6 flex justify-between" key={key}>
                         <td className="w-[200px]">#{val._id.slice(0, 10)}</td>
                         <td className="w-[200px] pl-[40px]">
-                          Zoloosoko@gmail.com
+                          {val.phoneNumber}
                         </td>
-                        <td className="w-[130px] pl-[40px]">{val.price}₮</td>
+                        <td className="w-[130px] pl-[40px]">
+                          {val.amountPaid
+                            .toFixed(2)
+                            .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
+                          ₮
+                        </td>
                         <td className="w-[150px] pl-[50px]">
                           {val.createdAt.slice(0, 10)}
                         </td>

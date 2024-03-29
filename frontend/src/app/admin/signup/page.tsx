@@ -1,3 +1,4 @@
+"use client";
 import { AdminContextProvider, SignUppage1 } from "@/components";
 import React from "react";
 

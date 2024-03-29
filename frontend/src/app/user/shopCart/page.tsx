@@ -3,12 +3,12 @@ import { Footer, NavbarUser, ShopCart, UserOrderContext } from "@/components";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const page = () => {
   const { orderData, setOrderData }: any = useContext(UserOrderContext);
   const [data, setData] = useState<any>([]);
   const router = useRouter();
-  console.log(orderData);
 
   const handler = async () => {
     const productsData: any = [];
@@ -31,6 +31,14 @@ const page = () => {
   }
 
   useEffect(() => {
+    const rawJson: string | null = localStorage.getItem("userEmail");
+    const user = rawJson && JSON.parse(rawJson);
+
+    if (!user) {
+      router.push("/user/login");
+      toast.error("Та нэвтэрнэ үү.");
+      return;
+    }
     handler();
   }, [orderData]);
 

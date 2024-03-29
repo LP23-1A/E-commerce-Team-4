@@ -9,17 +9,24 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export const New = () => {
   const { data, error } = useSWR(API, fetcher);
-  const { addCart }: any = useContext(UserOrderContext);
+  const { addCart, handlerProductDetail }: any = useContext(UserOrderContext);
   const productData = data?.getAll;
   return (
-    <div className="flex flex-col justify-center items-center gap-[20px] w-[1440px] m-auto">
+    <div className="flex flex-col justify-center items-center gap-[20px] w-[1440px] mx-auto">
       <p className="text-3xl font-bold">Шинээр нэмэгдсэн</p>
       <div className="flex gap-[50px] justify-between w-[1440px] flex-wrap">
         {productData &&
-          productData.slice(0, 8).map((el: any) => {
+          productData.slice(0, 8).map((el: any, index: number) => {
             return (
-              <div className="w-1/5 h-[361px] shadow-xl  flex flex-col gap-[10px] py-[20px] group">
-                <img src={el.images} className="w-[216px] h-[191px] mx-auto" />
+              <div
+                className="w-1/5 h-[361px] shadow-xl  flex flex-col gap-[10px] py-[20px] group"
+                key={index + el._id}
+              >
+                <img
+                  src={el.images}
+                  className="w-[216px] h-[191px] mx-auto cursor-pointer"
+                  onClick={() => handlerProductDetail(el._id)}
+                />
                 <div className="flex gap-10 items-center">
                   <div className="flex flex-col gap-3 justify-start pl-4 opacity-0 group-hover:opacity-100">
                     <div

@@ -4,35 +4,33 @@ import useSWR from "swr";
 import { UserOrderContext } from ".";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-
+import dotenv from "dotenv";
+dotenv.config();
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export const ProductUserDetail = () => {
   const router = useRouter();
-  const { orderData, setOrderData, addCart }: any =
+  const { orderData, setOrderData, addCart, handlerProductDetail }: any =
     useContext(UserOrderContext);
+  const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
   const { data, error } = useSWR(
-    "http://localhost:8000/products/product",
+    `http://localhost:8000/products/product`,
     fetcher
   );
   const allProduct = data?.getAll;
 
   if (error) return <div>Error fetching</div>;
   if (!data) return <div>Loading...</div>;
-  const handlerProductDetail = (id: string) => {
-    router.push("/user/productDetail");
-    localStorage.setItem("productId", JSON.stringify(id));
-  };
-  localStorage.removeItem("productId");
+
   return (
     <div className="flex flex-col gap-10 mx-auto w-[1440px] mb-32">
-      {allProduct.map((val: any) => {
+      {allProduct.map((val: any, index: number) => {
         return (
-          <div className="flex gap-10">
+          <div className="flex gap-10" key={index}>
             <img
               src={val.images}
               alt=""
-              className="w-[240px] h-[240px]"
+              className="w-[240px] h-[240px] cursor-pointer"
               onClick={() => handlerProductDetail(val._id)}
             />
             <div className="flex flex-col justify-between my-4">
