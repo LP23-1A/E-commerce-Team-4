@@ -1,4 +1,5 @@
 "use client";
+
 import { AsideBar, Navbar } from "@/components";
 import { Check, Search } from "@/images";
 import axios from "axios";
@@ -7,8 +8,6 @@ import React, { useState } from "react";
 import dotenv from "dotenv";
 dotenv.config();
 
-const id = JSON.parse(window.localStorage.getItem("id") as string);
-
 const page = () => {
   const [check, setCheck] = useState(false);
   const [shopInformation, setShopInformation] = useState("");
@@ -16,13 +15,16 @@ const page = () => {
   const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
   const handler = async () => {
     try {
-      const post = await axios.put(`${URL}/user${id}`, {
-        shopInformation: shopInformation,
-      });
-      if (post) {
+      if (typeof window != undefined) {
+        const id = JSON.parse(window.localStorage.getItem("id") as string);
+        const post = await axios.put(`${URL}/user${id}`, {
+          shopInformation: shopInformation,
+        });
         setCheck(true);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleAddProduct = () => {
