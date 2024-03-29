@@ -5,13 +5,17 @@ import { useContext, useEffect } from "react";
 import useSWR from "swr";
 import { UserOrderContext } from ".";
 import { useRouter } from "next/navigation";
+import dotenv from "dotenv";
+dotenv.config();
 
 const API = "http://localhost:8000/products/product";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export const Ontsloh = () => {
+  const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
+
   const router = useRouter();
-  const { data, error } = useSWR(API, fetcher);
+  const { data, error } = useSWR(`${URL}/products/product`, fetcher);
   const { addCart, handlerProductDetail }: any = useContext(UserOrderContext);
   const productData = data?.getAll;
   useEffect(() => {

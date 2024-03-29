@@ -3,12 +3,14 @@ import Heart from "@/images/Heart";
 import React, { useContext, useState } from "react";
 import useSWR from "swr";
 import { UserOrderContext } from ".";
+import dotenv from "dotenv";
+dotenv.config();
 
-const API = "http://localhost:8000/products/product";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export const New = () => {
-  const { data, error } = useSWR(API, fetcher);
+  const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
+  const { data, error } = useSWR(`${URL}/products/product`, fetcher);
   const { addCart, handlerProductDetail }: any = useContext(UserOrderContext);
   const productData = data?.getAll;
   return (
