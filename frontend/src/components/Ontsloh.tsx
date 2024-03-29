@@ -18,7 +18,7 @@ export const Ontsloh = () => {
     localStorage.removeItem("productId");
   }, []);
   return (
-    <div className="flex flex-col justify-center items-center gap-[20px] w-[1140px] m-auto ">
+    <div className="flex flex-col justify-center items-center gap-[20px] w-[1440px] m-auto ">
       <p className="text-3xl font-bold">Онцлох бүтээгдэхүүн</p>
       <div className="flex gap-[50px] w-[1440px] justify-between">
         {productData &&
@@ -26,9 +26,9 @@ export const Ontsloh = () => {
             return (
               <div
                 key={index + el._id}
-                className="w-1/5 h-[461px] shadow-xl rounded-4 flex flex-col   py-[20px] group cursor-pointer"
+                className="w-1/5 h-[461px] shadow-xl rounded-4 flex flex-col py-[20px] group cursor-pointer"
               >
-                <div className=" opacity-0 group-hover:opacity-100 flex  justify-between  p-3">
+                <div className=" opacity-0 group-hover:opacity-100 flex justify-between p-3">
                   <div className="flex gap-3">
                     <div
                       className="bg-grey cursor-pointer"
