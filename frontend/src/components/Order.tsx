@@ -10,9 +10,11 @@ export const Order = () => {
   const today: number = birthDay.getDate();
   const { data, error, isLoading } = useSWR(`${URL}/order`, fetcher);
 
-  const oCount: any = data?.getAllOrder.filter((e: any) => {
-    return e.createdAt.slice(8, 10) == today;
-  });
+  const oCount = data?.getAllOrder.filter(
+    (e: { createdAt: { slice: (arg0: number, arg1: number) => number } }) => {
+      return e.createdAt.slice(8, 10) == today;
+    }
+  );
 
   const count = oCount?.length;
   return (

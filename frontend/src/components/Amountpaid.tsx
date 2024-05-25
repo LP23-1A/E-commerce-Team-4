@@ -12,9 +12,11 @@ export const Amountpaid = () => {
   const { data, error, isLoading } = useSWR(`${URL}/order`, fetcher);
 
   let price = 0;
-  const income = data?.getAllOrder.filter((e: any) => {
-    return e.createdAt.slice(8, 10) == today;
-  });
+  const income = data?.getAllOrder.filter(
+    (e: { createdAt: { slice: (arg0: number, arg1: number) => number } }) => {
+      return e.createdAt.slice(8, 10) == today;
+    }
+  );
   income?.map((e: any) => {
     return (price = price + e.amountPaid);
   });

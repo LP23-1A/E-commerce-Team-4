@@ -11,6 +11,13 @@ import {
 } from "@/components";
 import useSWR from "swr";
 import dotenv from "dotenv";
+import {
+  ReactElement,
+  JSXElementConstructor,
+  ReactNode,
+  ReactPortal,
+  PromiseLikeOfReactNode,
+} from "react";
 dotenv.config();
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
@@ -47,36 +54,70 @@ const Page = () => {
                   </div>
                   <div>
                     {productData &&
-                      productData?.map((el: any, index: number) => {
-                        return (
-                          <div
-                            className="flex justify-between w-[100%] border-b-2 border-gray-200"
-                            key={index}
-                          >
-                            <p className="w-1/5 flex ml-[50px] items-center">
-                              {index + 1}
-                            </p>
-                            <div className="flex w-1/4 items-center  justify-start gap-4">
-                              <img
-                                className="w-1/4 h-[40px] rounded-[50%] flex justify-center"
-                                src={el.images}
-                              />
-                              <p className="text-black  flex justify-center">
-                                {el.productName}
+                      productData?.map(
+                        (
+                          el: {
+                            images: string | undefined;
+                            productName:
+                              | string
+                              | number
+                              | boolean
+                              | ReactElement<
+                                  any,
+                                  string | JSXElementConstructor<any>
+                                >
+                              | Iterable<ReactNode>
+                              | ReactPortal
+                              | PromiseLikeOfReactNode
+                              | null
+                              | undefined;
+                            sold:
+                              | string
+                              | number
+                              | boolean
+                              | ReactElement<
+                                  any,
+                                  string | JSXElementConstructor<any>
+                                >
+                              | Iterable<ReactNode>
+                              | ReactPortal
+                              | PromiseLikeOfReactNode
+                              | null
+                              | undefined;
+                            price: number;
+                          },
+                          index: number
+                        ) => {
+                          return (
+                            <div
+                              className="flex justify-between w-[100%] border-b-2 border-gray-200"
+                              key={index}
+                            >
+                              <p className="w-1/5 flex ml-[50px] items-center">
+                                {index + 1}
+                              </p>
+                              <div className="flex w-1/4 items-center  justify-start gap-4">
+                                <img
+                                  className="w-1/4 h-[40px] rounded-[50%] flex justify-center"
+                                  src={el.images}
+                                />
+                                <p className="text-black  flex justify-center">
+                                  {el.productName}
+                                </p>
+                              </div>
+                              <p className="w-1/4 flex justify-center items-center">
+                                {el.sold}
+                              </p>
+                              <p className="w-1/4 flex pl-[30px] items-center ">
+                                {el.price
+                                  .toFixed(2)
+                                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1'")}
+                                ₮
                               </p>
                             </div>
-                            <p className="w-1/4 flex justify-center items-center">
-                              {el.sold}
-                            </p>
-                            <p className="w-1/4 flex pl-[30px] items-center ">
-                              {el.price
-                                .toFixed(2)
-                                .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1'")}
-                              ₮
-                            </p>
-                          </div>
-                        );
-                      })}
+                          );
+                        }
+                      )}
                   </div>
                 </div>
                 <div className="flex flex-col gap-[40px]  w-1/2">
