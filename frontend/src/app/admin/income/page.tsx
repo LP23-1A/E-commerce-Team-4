@@ -10,7 +10,7 @@ const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-const page = () => {
+const Page = () => {
   const { data, error, isLoading } = useSWR(`${URL}/order`, fetcher);
   const [activeButton, setActiveButton] = useState("");
   const orderData = data?.getAllOrder;
@@ -135,4 +135,4 @@ const page = () => {
     </div>
   );
 };
-export default page;
+export default Page;
