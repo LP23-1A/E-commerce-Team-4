@@ -1,4 +1,3 @@
-// "use client";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
