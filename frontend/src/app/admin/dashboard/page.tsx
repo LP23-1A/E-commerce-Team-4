@@ -14,9 +14,9 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
+const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
 
 const page = () => {
-  const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
   const { data, error, isLoading } = useSWR(`${URL}/products/product`, fetcher);
   const productData = data?.getAll;
   return (
