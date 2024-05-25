@@ -19,6 +19,8 @@ const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
 const Page = () => {
   const { data, error, isLoading } = useSWR(`${URL}/products/product`, fetcher);
   const productData = data?.getAll;
+  console.log(data);
+
   return (
     <div>
       {!data ? (
@@ -44,8 +46,8 @@ const Page = () => {
                     <p>Үнэ</p>
                   </div>
                   <div>
-                    {/* {productData &&
-                      productData?.map((el:{string}, index: number) => {
+                    {productData &&
+                      productData?.map((el: any, index: number) => {
                         return (
                           <div
                             className="flex justify-between w-[100%] border-b-2 border-gray-200"
@@ -74,7 +76,7 @@ const Page = () => {
                             </p>
                           </div>
                         );
-                      })} */}
+                      })}
                   </div>
                 </div>
                 <div className="flex flex-col gap-[40px]  w-1/2">
