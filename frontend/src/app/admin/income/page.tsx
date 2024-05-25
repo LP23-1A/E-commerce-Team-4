@@ -1,20 +1,18 @@
 "use client";
 import { AsideBar, Navbar } from "@/components";
-import { Calendar, Down, Download, ExpandMore } from "@/images";
+import { Down } from "@/images";
 import { month } from "@/utils/Month";
 import { useState } from "react";
 import useSWR from "swr";
 import dotenv from "dotenv";
 dotenv.config();
+const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const page = () => {
-  const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
   const { data, error, isLoading } = useSWR(`${URL}/order`, fetcher);
   const [activeButton, setActiveButton] = useState("");
-  console.log(data);
-
   const orderData = data?.getAllOrder;
   const birthDay = new Date();
   const today: number = birthDay.getDate();
