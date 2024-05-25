@@ -26,7 +26,6 @@ const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
 const Page = () => {
   const { data, error, isLoading } = useSWR(`${URL}/products/product`, fetcher);
   const productData = data?.getAll;
-  console.log(data);
 
   return (
     <div>

@@ -17,7 +17,7 @@ export const Amountpaid = () => {
       return e.createdAt.slice(8, 10) == today;
     }
   );
-  income?.map((e: any) => {
+  income?.map((e: { amountPaid: number }) => {
     return (price = price + e.amountPaid);
   });
 
