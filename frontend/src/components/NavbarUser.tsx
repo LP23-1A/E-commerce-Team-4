@@ -34,7 +34,7 @@ export const NavbarUser = ({ a }: any) => {
     router.push("/user/saveList");
   };
   const logIn = () => {
-    router.push("/user/logIn");
+    router.push("/user/login");
   };
 
   return (
