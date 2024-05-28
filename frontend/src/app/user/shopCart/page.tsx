@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import dotenv from "dotenv";
+import { parseCookies } from "nookies";
 dotenv.config();
 
 const page = () => {
@@ -31,11 +32,10 @@ const page = () => {
       totalPrice + data[i].productData.price * orderData[i]?.quantity;
   }
 
+  const cookies = parseCookies();
+  const email = cookies.email;
   useEffect(() => {
-    const rawJson: string | null = localStorage.getItem("userEmail");
-    const user = rawJson && JSON.parse(rawJson);
-
-    if (!user) {
+    if (!email) {
       router.push("/user/login");
       toast.error("Та нэвтэрнэ үү.");
       return;
