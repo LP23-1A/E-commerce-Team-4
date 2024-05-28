@@ -10,6 +10,8 @@ dotenv.config();
 
 const page = () => {
   const { orderData, setOrderData }: any = useContext(UserOrderContext);
+  console.log(orderData);
+
   const [data, setData] = useState<any>([]);
   const router = useRouter();
   const URL = process.env.NEXT_PUBLIC_MONGO_CONNECTION;
@@ -19,7 +21,7 @@ const page = () => {
     let order;
     try {
       for (let i = 0; i < orderData.length; i++) {
-        order = await axios.get(`${URL}products/${orderData[i]._id}`);
+        order = await axios.get(`${URL}/products/${orderData[i]._id}`);
         const productData = order?.data.getData;
         productsData.push({ productData });
       }

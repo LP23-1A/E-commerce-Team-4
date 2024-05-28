@@ -9,6 +9,7 @@ export const Order = () => {
   const birthDay = new Date();
   const today: number = birthDay.getDate();
   const { data, error, isLoading } = useSWR(`${URL}/order`, fetcher);
+  console.log(data);
 
   const oCount = data?.getAllOrder.filter(
     (e: { createdAt: { slice: (arg0: number, arg1: number) => number } }) => {
